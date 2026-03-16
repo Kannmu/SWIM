@@ -1,0 +1,1113 @@
+{
+  "version": 1,
+  "lastUpdated": 1773373649379,
+  "plugins": [
+    {
+      "filename": "data-analysis",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skills\\data-analysis",
+        "filename": "data-analysis",
+        "name": "data-analysis",
+        "description": "Perform data analysis tasks including data cleaning, statistical analysis, visualization, and insight generation. Use when the user asks to analyze data, perform statistical analysis, create visualizations, or extract insights from datasets.",
+        "category": "skills",
+        "type": "skill",
+        "size": 3293,
+        "contentHash": "fcafa721ce54ab7a3e42954c29ef9764682e43c666c0e2ecfaa65feefd3cf0bc",
+        "installedAt": 1773373242648,
+        "updatedAt": 1773373242648
+      }
+    },
+    {
+      "filename": "deep-research",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skills\\deep-research",
+        "filename": "deep-research",
+        "name": "deep-research",
+        "description": "Conduct comprehensive, multi-source research on any topic using web search, documentation lookup, and critical analysis. This skill should be used when users request thorough investigation, deep research, or comprehensive analysis of topics including but not limited to AI systems, technology trends, academic subjects, business strategies, or current events. | 任意のトピックに対して、Web検索、ドキュメント参照、批判的分析を用いた包括的な調査を実施。徹底的な調査、詳細なリサーチ、包括的な分析が必要な場合や、AIシステム、技術トレンド、学術的テーマ、ビジネス戦略、時事問題などについて深く知りたい場合に使用。",
+        "category": "skills",
+        "type": "skill",
+        "size": 8834,
+        "contentHash": "e0bf29cdbc0fbba06890ffc50c976089c5cddfc91b8b8cdae79693b3107408da",
+        "installedAt": 1773373258217,
+        "updatedAt": 1773373258217
+      }
+    },
+    {
+      "filename": "scientific-critical-thinking",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skills\\scientific-critical-thinking",
+        "filename": "scientific-critical-thinking",
+        "name": "scientific-critical-thinking",
+        "description": "Evaluate research rigor. Assess methodology, experimental design, statistical validity, biases, confounding, evidence quality (GRADE, Cochrane ROB), for critical analysis of scientific claims.",
+        "category": "skills",
+        "type": "skill",
+        "size": 103946,
+        "contentHash": "ff731dfbd9c5976e5c9de627f5f26a3b5a9ae418f9918cff96e547cb0da02336",
+        "installedAt": 1773373354894,
+        "updatedAt": 1773373354894
+      }
+    },
+    {
+      "filename": "research-lookup",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skills\\research-lookup",
+        "filename": "research-lookup",
+        "name": "research-lookup",
+        "description": "Look up current research information using Perplexity's Sonar Pro Search or Sonar Reasoning Pro models through OpenRouter. Automatically selects the best model based on query complexity. Search academic papers, recent studies, technical documentation, and general research information with citations.",
+        "category": "skills",
+        "type": "skill",
+        "size": 65275,
+        "contentHash": "0ddc7e623dcb440913c142aeed9347a3544844473952f845ef6d3fe64c290ab0",
+        "installedAt": 1773373365122,
+        "updatedAt": 1773373365122
+      }
+    },
+    {
+      "filename": "plugin-1773373396780",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skills\\plugin-1773373396780",
+        "filename": "plugin-1773373396780",
+        "name": "academic-humanizer-nature-tier",
+        "description": "Remove signs of AI-generated writing from high-level academic manuscripts (Nature/Science tier). \nEnforces extreme precision, high information density, objective yet engaging scientific narrative, \nand eliminates LLM-specific academic tropes (e.g., transitional crutches, hollow grandiosity, \nover-explanation, and \"intricate interplay\" clichés).",
+        "category": "skills",
+        "type": "skill",
+        "version": "1.0.0",
+        "size": 7805,
+        "contentHash": "fd19405bb0ba1f78be27d4a76d25dca34dbd1d2294e29bfd451d43c0738d3cc5",
+        "installedAt": 1773373396824,
+        "updatedAt": 1773373396824
+      }
+    },
+    {
+      "filename": "agent-browser",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "agent-browser",
+        "filename": "agent-browser",
+        "name": "agent-browser",
+        "description": "Browser automation using Vercel's agent-browser CLI. Use when you need to interact with web pages, fill forms, take screenshots, or scrape data. Alternative to Playwright MCP - uses Bash commands with ref-based element selection. Triggers on \"browse website\", \"fill form\", \"click button\", \"take screenshot\", \"scrape page\", \"web automation\".",
+        "category": "plugins",
+        "type": "skill",
+        "size": 10791,
+        "contentHash": "ccd89a427ce7250c5135783a04616b05e625462c469b7c8b0df70826c02bf640",
+        "installedAt": 1773373547555,
+        "updatedAt": 1773373547555,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "agent-native-architecture",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "agent-native-architecture",
+        "filename": "agent-native-architecture",
+        "name": "agent-native-architecture",
+        "description": "Build applications where agents are first-class citizens. Use this skill when designing autonomous agents, creating MCP tools, implementing self-modifying systems, or building apps where features are outcomes achieved by agents operating in a loop.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 217970,
+        "contentHash": "588962636b9400e9dd1bc4bb07e406132b130f1c49c708860d9d15d8e7cf4cda",
+        "installedAt": 1773373547560,
+        "updatedAt": 1773373547560,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "agent-native-audit",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "agent-native-audit",
+        "filename": "agent-native-audit",
+        "name": "agent-native-audit",
+        "description": "Run comprehensive agent-native architecture review with scored principles",
+        "category": "plugins",
+        "type": "skill",
+        "size": 8515,
+        "contentHash": "d3073e98c6cc0b1eadfc6337415fdfc4b5b0c0784cea40ede8e153f81fa3189f",
+        "installedAt": 1773373547563,
+        "updatedAt": 1773373547563,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "andrew-kane-gem-writer",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "andrew-kane-gem-writer",
+        "filename": "andrew-kane-gem-writer",
+        "name": "andrew-kane-gem-writer",
+        "description": "This skill should be used when writing Ruby gems following Andrew Kane's proven patterns and philosophy. It applies when creating new Ruby gems, refactoring existing gems, designing gem APIs, or when clean, minimal, production-ready Ruby library code is needed. Triggers on requests like \"create a gem\", \"write a Ruby library\", \"design a gem API\", or mentions of Andrew Kane's style.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 26504,
+        "contentHash": "9153599612b2b416983dbb61c510033608a0c7375e366d16e36633e6a2731f69",
+        "installedAt": 1773373547567,
+        "updatedAt": 1773373547567,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "brainstorming",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "brainstorming",
+        "filename": "brainstorming",
+        "name": "brainstorming",
+        "description": "This skill should be used before implementing features, building components, or making changes. It guides exploring user intent, approaches, and design decisions before planning. Triggers on \"let's brainstorm\", \"help me think through\", \"what should we build\", \"explore approaches\", ambiguous feature requests, or when the user's request has multiple valid interpretations that need clarification.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 6275,
+        "contentHash": "c90800b34cf2402371ced642fa7264d8281b44f55fefb3f4845a01def15d20f1",
+        "installedAt": 1773373547569,
+        "updatedAt": 1773373547569,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "ce-brainstorm",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "ce-brainstorm",
+        "filename": "ce-brainstorm",
+        "name": "ce:brainstorm",
+        "description": "Explore requirements and approaches through collaborative dialogue before planning implementation",
+        "category": "plugins",
+        "type": "skill",
+        "size": 5719,
+        "contentHash": "254c90847da452cba08e6792978e8f787490b69452cee52d5133e67f822dadb9",
+        "installedAt": 1773373547573,
+        "updatedAt": 1773373547573,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "ce-compound",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "ce-compound",
+        "filename": "ce-compound",
+        "name": "ce:compound",
+        "description": "Document a recently solved problem to compound your team's knowledge",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11418,
+        "contentHash": "561ab3bed317fac904046f46a97184b15c778834a2130e3147d188bd60febf2f",
+        "installedAt": 1773373547576,
+        "updatedAt": 1773373547576,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "ce-plan",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "ce-plan",
+        "filename": "ce-plan",
+        "name": "ce:plan",
+        "description": "Transform feature descriptions into well-structured project plans following conventions",
+        "category": "plugins",
+        "type": "skill",
+        "size": 22919,
+        "contentHash": "424c07db2b03c911ab5a77a074a08f763f3d5964e1b5fca0331eca238bcb2358",
+        "installedAt": 1773373547579,
+        "updatedAt": 1773373547579,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "ce-review",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "ce-review",
+        "filename": "ce-review",
+        "name": "ce:review",
+        "description": "Perform exhaustive code reviews using multi-agent analysis, ultra-thinking, and worktrees",
+        "category": "plugins",
+        "type": "skill",
+        "size": 19320,
+        "contentHash": "6ccfb33f8c232a8359d8b11890e9129a5af069a6cd8dc3b940ba617281403ad8",
+        "installedAt": 1773373547583,
+        "updatedAt": 1773373547583,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "ce-work",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "ce-work",
+        "filename": "ce-work",
+        "name": "ce:work",
+        "description": "Execute work plans efficiently while maintaining quality and finishing features",
+        "category": "plugins",
+        "type": "skill",
+        "size": 17756,
+        "contentHash": "c299d50dcd444155da026589fb87792320eae290fc9973c23b74dabcfa1d4b29",
+        "installedAt": 1773373547586,
+        "updatedAt": 1773373547586,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "changelog",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "changelog",
+        "filename": "changelog",
+        "name": "changelog",
+        "description": "Create engaging changelogs for recent merges to main branch",
+        "category": "plugins",
+        "type": "skill",
+        "size": 4840,
+        "contentHash": "f2ff66c638cd5bae47547f368f137676c73765fdd7e76b05af392573eb65e3b2",
+        "installedAt": 1773373547589,
+        "updatedAt": 1773373547589,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "compound-docs",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "compound-docs",
+        "filename": "compound-docs",
+        "name": "compound-docs",
+        "description": "Capture solved problems as categorized documentation with YAML frontmatter for fast lookup",
+        "category": "plugins",
+        "type": "skill",
+        "size": 29590,
+        "contentHash": "3bb8d0371d657d7cf854b791ef75f59ee4e14f523bb55b331ea01fef577576db",
+        "installedAt": 1773373547593,
+        "updatedAt": 1773373547593,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "create-agent-skill",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "create-agent-skill",
+        "filename": "create-agent-skill",
+        "name": "create-agent-skill",
+        "description": "Create or edit Claude Code skills with expert guidance on structure and best practices",
+        "category": "plugins",
+        "type": "skill",
+        "size": 322,
+        "contentHash": "fdefb5bd38d080cb41b949667144a52c98e6ce1cb35f1bc75ea8ad563c876700",
+        "installedAt": 1773373547596,
+        "updatedAt": 1773373547596,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "create-agent-skills",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "create-agent-skills",
+        "filename": "create-agent-skills",
+        "name": "create-agent-skills",
+        "description": "Expert guidance for creating Claude Code skills and slash commands. Use when working with SKILL.md files, authoring new skills, improving existing skills, creating slash commands, or understanding skill structure and best practices.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 171072,
+        "contentHash": "0d99e4979e1aeccbf1374dfb06a4a86691e21f5ecfbee859b3556d48afafabb1",
+        "installedAt": 1773373547602,
+        "updatedAt": 1773373547602,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "deepen-plan",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "deepen-plan",
+        "filename": "deepen-plan",
+        "name": "deepen-plan",
+        "description": "Enhance a plan with parallel research agents for each section to add depth, best practices, and implementation details",
+        "category": "plugins",
+        "type": "skill",
+        "size": 18554,
+        "contentHash": "ab4dd8cb38dbababeed4e094d7133dcecbc8bfe5f95201db9d049c6a1e4e6f4c",
+        "installedAt": 1773373547606,
+        "updatedAt": 1773373547606,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "deploy-docs",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "deploy-docs",
+        "filename": "deploy-docs",
+        "name": "deploy-docs",
+        "description": "Validate and prepare documentation for GitHub Pages deployment",
+        "category": "plugins",
+        "type": "skill",
+        "size": 2857,
+        "contentHash": "97d874b467855395223b1944c5c1dd3c88d8bd09c5fef1e167e3c94e93273f4c",
+        "installedAt": 1773373547608,
+        "updatedAt": 1773373547608,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "dhh-rails-style",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "dhh-rails-style",
+        "filename": "dhh-rails-style",
+        "name": "dhh-rails-style",
+        "description": "This skill should be used when writing Ruby and Rails code in DHH's distinctive 37signals style. It applies when writing Ruby code, Rails applications, creating models, controllers, or any Ruby file. Triggers on Ruby/Rails code generation, refactoring requests, code review, or when the user mentions DHH, 37signals, Basecamp, HEY, or Campfire style. Embodies REST purity, fat models, thin controllers, Current attributes, Hotwire patterns, and the \"clarity over cleverness\" philosophy.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 59902,
+        "contentHash": "b530258584a6c511f0cf42ebca3944e20f8f8f704268a1efb61f84edc7088da7",
+        "installedAt": 1773373547612,
+        "updatedAt": 1773373547612,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "document-review",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "document-review",
+        "filename": "document-review",
+        "name": "document-review",
+        "description": "This skill should be used to refine brainstorm or plan documents before proceeding to the next workflow step. It applies when a brainstorm or plan document exists and the user wants to improve it.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 3278,
+        "contentHash": "c772f1f191b219c75f58adcb126aaa41d78ab459090e82d1854fd4c0a4d3f85c",
+        "installedAt": 1773373547615,
+        "updatedAt": 1773373547615,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "dspy-ruby",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "dspy-ruby",
+        "filename": "dspy-ruby",
+        "name": "dspy-ruby",
+        "description": "Build type-safe LLM applications with DSPy.rb — Ruby's programmatic prompt framework with signatures, modules, agents, and optimization. Use when implementing predictable AI features, creating LLM signatures and modules, configuring language model providers, building agent systems with tools, optimizing prompts, or testing LLM-powered functionality in Ruby applications.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 129219,
+        "contentHash": "b2dfa985a8ecb655a0485da3dc23594e5285fdb59168af15d40c25c74a919b7a",
+        "installedAt": 1773373547619,
+        "updatedAt": 1773373547619,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "every-style-editor",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "every-style-editor",
+        "filename": "every-style-editor",
+        "name": "every-style-editor",
+        "description": "This skill should be used when reviewing or editing copy to ensure adherence to Every's style guide. It provides a systematic line-by-line review process for grammar, punctuation, mechanics, and style guide compliance.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 34784,
+        "contentHash": "8b4ff7611d48aa7a217d9ec1b4af7faab2499b384e2745159be1a99e1abc272b",
+        "installedAt": 1773373547623,
+        "updatedAt": 1773373547623,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "feature-video",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "feature-video",
+        "filename": "feature-video",
+        "name": "feature-video",
+        "description": "Record a video walkthrough of a feature and add it to the PR description",
+        "category": "plugins",
+        "type": "skill",
+        "size": 9053,
+        "contentHash": "b5967c0ed9fad3e0dc8a2f946ca361df866fe10810aea00adf8c566f20763333",
+        "installedAt": 1773373547626,
+        "updatedAt": 1773373547626,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "file-todos",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "file-todos",
+        "filename": "file-todos",
+        "name": "file-todos",
+        "description": "This skill should be used when managing the file-based todo tracking system in the todos/ directory. It provides workflows for creating todos, managing status and dependencies, conducting triage, and integrating with slash commands and code review processes.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11789,
+        "contentHash": "06267e9f92a35fe58b1a1d96aef7acbbd085b00799a678e2b8c2e76486276a61",
+        "installedAt": 1773373547630,
+        "updatedAt": 1773373547630,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "gemini-imagegen",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "gemini-imagegen",
+        "filename": "gemini-imagegen",
+        "name": "gemini-imagegen",
+        "description": "This skill should be used when generating and editing images using the Gemini API (Nano Banana Pro). It applies when creating images from text prompts, editing existing images, applying style transfers, generating logos with text, creating stickers, product mockups, or any image generation/manipulation task. Supports text-to-image, image editing, multi-turn refinement, and composition from multiple reference images.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 35018,
+        "contentHash": "f5e1fd4607e6a3606f67f2ef983e3d86703f54f56c7be62ab559ac2a265efef5",
+        "installedAt": 1773373547637,
+        "updatedAt": 1773373547637,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "generate_command",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "generate_command",
+        "filename": "generate_command",
+        "name": "generate_command",
+        "description": "Create a new custom slash command following conventions and best practices",
+        "category": "plugins",
+        "type": "skill",
+        "size": 4235,
+        "contentHash": "6408ee5feff09d598452aaabd5772e46d1b48a6ba89c695ee1f13fa66c794200",
+        "installedAt": 1773373547640,
+        "updatedAt": 1773373547640,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "git-worktree",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "git-worktree",
+        "filename": "git-worktree",
+        "name": "git-worktree",
+        "description": "This skill manages Git worktrees for isolated parallel development. It handles creating, listing, switching, and cleaning up worktrees with a simple interactive interface, following KISS principles.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 18109,
+        "contentHash": "d1b3dbbcbf9d5ca8632bc120501c95a63163f2996ca8f1dcc3c5a94541e062ec",
+        "installedAt": 1773373547644,
+        "updatedAt": 1773373547644,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "heal-skill",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "heal-skill",
+        "filename": "heal-skill",
+        "name": "heal-skill",
+        "description": "Fix incorrect SKILL.md files when a skill has wrong instructions or outdated API references",
+        "category": "plugins",
+        "type": "skill",
+        "size": 4142,
+        "contentHash": "8bf72de91060606778bc017b00b536899faead07a470c87596a54daa13346723",
+        "installedAt": 1773373547647,
+        "updatedAt": 1773373547647,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "lfg",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "lfg",
+        "filename": "lfg",
+        "name": "lfg",
+        "description": "Full autonomous engineering workflow",
+        "category": "plugins",
+        "type": "skill",
+        "size": 1590,
+        "contentHash": "3ecf4309520922cb2ac1ea78d007f64baf8a433890e28b69cde4d26cee1c994b",
+        "installedAt": 1773373547651,
+        "updatedAt": 1773373547651,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "orchestrating-swarms",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "orchestrating-swarms",
+        "filename": "orchestrating-swarms",
+        "name": "orchestrating-swarms",
+        "description": "This skill should be used when orchestrating multi-agent swarms using Claude Code's TeammateTool and Task system. It applies when coordinating multiple agents, running parallel code reviews, creating pipeline workflows with dependencies, building self-organizing task queues, or any task benefiting from divide-and-conquer patterns.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 49515,
+        "contentHash": "72964c1bf7517d0f81f8df95d8035c31f830327da90fb9c4c2e18d15218d7698",
+        "installedAt": 1773373547655,
+        "updatedAt": 1773373547655,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "proof",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "proof",
+        "filename": "proof",
+        "name": "proof",
+        "description": "Create, edit, comment on, and share markdown documents via Proof's web API and local bridge. Use when asked to \"proof\", \"share a doc\", \"create a proof doc\", \"comment on a document\", \"suggest edits\", \"review in proof\", or when given a proofeditor.ai URL.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 6542,
+        "contentHash": "8b3d6a00adb479282d91b4fd1d63d2744074a9c93a592a77b52f041b0b75c75d",
+        "installedAt": 1773373547658,
+        "updatedAt": 1773373547658,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "rclone",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "rclone",
+        "filename": "rclone",
+        "name": "rclone",
+        "description": "Upload, sync, and manage files across cloud storage providers using rclone. Use when uploading files (images, videos, documents) to S3, Cloudflare R2, Backblaze B2, Google Drive, Dropbox, or any S3-compatible storage. Triggers on \"upload to S3\", \"sync to cloud\", \"rclone\", \"backup files\", \"upload video/image to bucket\", or requests to transfer files to remote storage.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 5638,
+        "contentHash": "97f1acd9cb326f16ea9cdc42f2d7f383ec2ca1ab950856d39dfd6e3b51ad1221",
+        "installedAt": 1773373547661,
+        "updatedAt": 1773373547661,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "report-bug",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "report-bug",
+        "filename": "report-bug",
+        "name": "report-bug",
+        "description": "Report a bug in the compound-engineering plugin",
+        "category": "plugins",
+        "type": "skill",
+        "size": 4094,
+        "contentHash": "c5ff61ceecf4bf46899c1c3319e8dff033020255231f5077c0b763f69f51097c",
+        "installedAt": 1773373547665,
+        "updatedAt": 1773373547665,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "reproduce-bug",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "reproduce-bug",
+        "filename": "reproduce-bug",
+        "name": "reproduce-bug",
+        "description": "Reproduce and investigate a bug using logs, console inspection, and browser screenshots",
+        "category": "plugins",
+        "type": "skill",
+        "size": 3126,
+        "contentHash": "bfc9c62c7c1db4e5cf0a396945cde658b8d889f01500bc3e5436cd12658223f3",
+        "installedAt": 1773373547668,
+        "updatedAt": 1773373547668,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "resolve-pr-parallel",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "resolve-pr-parallel",
+        "filename": "resolve-pr-parallel",
+        "name": "resolve-pr-parallel",
+        "description": "Resolve all PR comments using parallel processing. Use when addressing PR review feedback, resolving review threads, or batch-fixing PR comments.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 4733,
+        "contentHash": "58a405c46e6fb7af19a9a1048b2420d74e4da8734e2aa889efd474b07bad0dcf",
+        "installedAt": 1773373547671,
+        "updatedAt": 1773373547671,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "resolve_parallel",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "resolve_parallel",
+        "filename": "resolve_parallel",
+        "name": "resolve_parallel",
+        "description": "Resolve all TODO comments using parallel processing",
+        "category": "plugins",
+        "type": "skill",
+        "size": 1274,
+        "contentHash": "b57dc15024832801ae2a02eafd9855ee95f5fb47d4745bc12c93a94e8905cf95",
+        "installedAt": 1773373547675,
+        "updatedAt": 1773373547675,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "resolve_todo_parallel",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "resolve_todo_parallel",
+        "filename": "resolve_todo_parallel",
+        "name": "resolve_todo_parallel",
+        "description": "Resolve all pending CLI todos using parallel processing",
+        "category": "plugins",
+        "type": "skill",
+        "size": 1557,
+        "contentHash": "ce5e58f55ca40002e172f8d6094b34123125f79b01e3877a49189f8342ef30b2",
+        "installedAt": 1773373547678,
+        "updatedAt": 1773373547678,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "setup",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "setup",
+        "filename": "setup",
+        "name": "setup",
+        "description": "Configure which review agents run for your project. Auto-detects stack and writes compound-engineering.local.md.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 5673,
+        "contentHash": "b4290cb1b81a5b1d0352df8da9d1c7e0422fb3296b55191429b1b81f695d2861",
+        "installedAt": 1773373547681,
+        "updatedAt": 1773373547681,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "skill-creator",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "skill-creator",
+        "filename": "skill-creator",
+        "name": "skill-creator",
+        "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 28540,
+        "contentHash": "0ac938441ba7f963185e591bbbe6539b8c9e0c05428a588c96acf5abe2824693",
+        "installedAt": 1773373547685,
+        "updatedAt": 1773373547685,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "slfg",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "slfg",
+        "filename": "slfg",
+        "name": "slfg",
+        "description": "Full autonomous engineering workflow using swarm mode for parallel execution",
+        "category": "plugins",
+        "type": "skill",
+        "size": 1359,
+        "contentHash": "d2ef40238e7868867ee68b7226c468bb7d0217bda06291fe7511bb1b99688e45",
+        "installedAt": 1773373547689,
+        "updatedAt": 1773373547689,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "test-browser",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "test-browser",
+        "filename": "test-browser",
+        "name": "test-browser",
+        "description": "Run browser tests on pages affected by current PR or branch",
+        "category": "plugins",
+        "type": "skill",
+        "size": 10492,
+        "contentHash": "b807ef0eae121d476df6136aa67e2dd3344ceee4946a30552869b899fcc8068e",
+        "installedAt": 1773373547692,
+        "updatedAt": 1773373547692,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "test-xcode",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "test-xcode",
+        "filename": "test-xcode",
+        "name": "test-xcode",
+        "description": "Build and test iOS apps on simulator using XcodeBuildMCP",
+        "category": "plugins",
+        "type": "skill",
+        "size": 6961,
+        "contentHash": "43660d8f132fbb4bf080c0383dcb4fb1d0aaebaf312a68bd4f1cfe863a091416",
+        "installedAt": 1773373547695,
+        "updatedAt": 1773373547695,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "triage",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "triage",
+        "filename": "triage",
+        "name": "triage",
+        "description": "Triage and categorize findings for the CLI todo system",
+        "category": "plugins",
+        "type": "skill",
+        "size": 8118,
+        "contentHash": "980d8e831ef3c582fa5c52ecc31f4d8e21f977657ea1c65171efa0c240d8d671",
+        "installedAt": 1773373547699,
+        "updatedAt": 1773373547699,
+        "packageName": "compound-engineering",
+        "packageVersion": "2.40.0"
+      }
+    },
+    {
+      "filename": "async-python-patterns",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "async-python-patterns",
+        "filename": "async-python-patterns",
+        "name": "async-python-patterns",
+        "description": "Master Python asyncio, concurrent programming, and async/await patterns for high-performance applications. Use when building async APIs, concurrent systems, or I/O-bound applications requiring non-blocking operations.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 20528,
+        "contentHash": "0a535cef4c19af71a33550c8208170f241192e6d25afdfcfe23fe554c24df826",
+        "installedAt": 1773373557024,
+        "updatedAt": 1773373557024,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-anti-patterns",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-anti-patterns",
+        "filename": "python-anti-patterns",
+        "name": "python-anti-patterns",
+        "description": "Common Python anti-patterns to avoid. Use as a checklist when reviewing code, before finalizing implementations, or when debugging issues that might stem from known bad practices.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 8471,
+        "contentHash": "fab7d21b8b4ee83c72c8902944cdb5b558a9ea90f42949973f131525ea250d9b",
+        "installedAt": 1773373557144,
+        "updatedAt": 1773373557144,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-background-jobs",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-background-jobs",
+        "filename": "python-background-jobs",
+        "name": "python-background-jobs",
+        "description": "Python background job patterns including task queues, workers, and event-driven architecture. Use when implementing async task processing, job queues, long-running operations, or decoupling work from request/response cycles.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 10852,
+        "contentHash": "a3c4e8bffed4ea424c55ce00f8f9b38bd195481f01823335082efb5e84ff9b3c",
+        "installedAt": 1773373557148,
+        "updatedAt": 1773373557148,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-code-style",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-code-style",
+        "filename": "python-code-style",
+        "name": "python-code-style",
+        "description": "Python code style, linting, formatting, naming conventions, and documentation standards. Use when writing new code, reviewing style, configuring linters, writing docstrings, or establishing project standards.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 8330,
+        "contentHash": "10d398b884fe285dfeb098c6e2ed563e1083ea4522c3c4ef34e5e725129b493b",
+        "installedAt": 1773373557152,
+        "updatedAt": 1773373557152,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-configuration",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-configuration",
+        "filename": "python-configuration",
+        "name": "python-configuration",
+        "description": "Python configuration management via environment variables and typed settings. Use when externalizing config, setting up pydantic-settings, managing secrets, or implementing environment-specific behavior.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 10347,
+        "contentHash": "da322a384ae23bb38eaf29a7b2a9cbc02ab9f723831a53324323642ebd529be8",
+        "installedAt": 1773373557156,
+        "updatedAt": 1773373557156,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-design-patterns",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-design-patterns",
+        "filename": "python-design-patterns",
+        "name": "python-design-patterns",
+        "description": "Python design patterns including KISS, Separation of Concerns, Single Responsibility, and composition over inheritance. Use when making architecture decisions, refactoring code structure, or evaluating when abstractions are appropriate.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 13480,
+        "contentHash": "79b07fc5a409020d4318d9c65b6eb669929ee192be46fd2a2a5f04a552c3dd6b",
+        "installedAt": 1773373557159,
+        "updatedAt": 1773373557159,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-error-handling",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-error-handling",
+        "filename": "python-error-handling",
+        "name": "python-error-handling",
+        "description": "Python error handling patterns including input validation, exception hierarchies, and partial failure handling. Use when implementing validation logic, designing exception strategies, handling batch processing failures, or building robust APIs.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11062,
+        "contentHash": "b0e2fe5e20bb5e002e29ef73e0272bc16138e6eac646eb8b5c0f8ec02cdebe5f",
+        "installedAt": 1773373557164,
+        "updatedAt": 1773373557164,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-observability",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-observability",
+        "filename": "python-observability",
+        "name": "python-observability",
+        "description": "Python observability patterns including structured logging, metrics, and distributed tracing. Use when adding logging, implementing metrics collection, setting up tracing, or debugging production systems.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 12280,
+        "contentHash": "44c13cd8a0ab12ad87e17c644132a56c2fb36d47387269d25c1c14d1e41cfcbb",
+        "installedAt": 1773373557169,
+        "updatedAt": 1773373557169,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-packaging",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-packaging",
+        "filename": "python-packaging",
+        "name": "python-packaging",
+        "description": "Create distributable Python packages with proper project structure, setup.py/pyproject.toml, and publishing to PyPI. Use when packaging Python libraries, creating CLI tools, or distributing Python code.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 18339,
+        "contentHash": "c0ce07dcd35737742623046678952a221ea5f226c30afcc12117769ed8ac737c",
+        "installedAt": 1773373557172,
+        "updatedAt": 1773373557172,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-performance-optimization",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-performance-optimization",
+        "filename": "python-performance-optimization",
+        "name": "python-performance-optimization",
+        "description": "Profile and optimize Python code using cProfile, memory profilers, and performance best practices. Use when debugging slow Python code, optimizing bottlenecks, or improving application performance.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 21346,
+        "contentHash": "835732902d1ce80b3fda372fd25a0ade7a6d129bc8213a57d4064590f39f0f6b",
+        "installedAt": 1773373557176,
+        "updatedAt": 1773373557176,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-project-structure",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-project-structure",
+        "filename": "python-project-structure",
+        "name": "python-project-structure",
+        "description": "Python project organization, module architecture, and public API design. Use when setting up new projects, organizing modules, defining public interfaces with __all__, or planning directory layouts.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 6979,
+        "contentHash": "75b768010a2c7cc0f636b2d36ee1212e579cea80ded30edd45eff4a34cbf8052",
+        "installedAt": 1773373557180,
+        "updatedAt": 1773373557180,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-resilience",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-resilience",
+        "filename": "python-resilience",
+        "name": "python-resilience",
+        "description": "Python resilience patterns including automatic retries, exponential backoff, timeouts, and fault-tolerant decorators. Use when adding retry logic, implementing timeouts, building fault-tolerant services, or handling transient failures.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11535,
+        "contentHash": "98e79f7c73394609bf6ddd9b8066c3bbb797fcb12ce5697e2d4fc56238135991",
+        "installedAt": 1773373557183,
+        "updatedAt": 1773373557183,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-resource-management",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-resource-management",
+        "filename": "python-resource-management",
+        "name": "python-resource-management",
+        "description": "Python resource management with context managers, cleanup patterns, and streaming. Use when managing connections, file handles, implementing cleanup logic, or building streaming responses with accumulated state.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11897,
+        "contentHash": "471c68bb3de501b32ea54b7b9a320d1f37351432b139afd5e52c1f8c724be36e",
+        "installedAt": 1773373557186,
+        "updatedAt": 1773373557186,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-testing-patterns",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-testing-patterns",
+        "filename": "python-testing-patterns",
+        "name": "python-testing-patterns",
+        "description": "Implement comprehensive testing strategies with pytest, fixtures, mocking, and test-driven development. Use when writing Python tests, setting up test suites, or implementing testing best practices.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 26134,
+        "contentHash": "a2eda8d47e8fff89246f935ff3cb41e17977b6703b88072c4e26a5d9cf19feca",
+        "installedAt": 1773373557189,
+        "updatedAt": 1773373557189,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "python-type-safety",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "python-type-safety",
+        "filename": "python-type-safety",
+        "name": "python-type-safety",
+        "description": "Python type safety with type hints, generics, protocols, and strict type checking. Use when adding type annotations, implementing generic classes, defining structural interfaces, or configuring mypy/pyright.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 11662,
+        "contentHash": "7273d66fdbdb96bedef562b71697b3b3e499eb080bff679910dc1e1f78568627",
+        "installedAt": 1773373557193,
+        "updatedAt": 1773373557193,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    },
+    {
+      "filename": "uv-package-manager",
+      "type": "skill",
+      "metadata": {
+        "sourcePath": "uv-package-manager",
+        "filename": "uv-package-manager",
+        "name": "uv-package-manager",
+        "description": "Master the uv package manager for fast Python dependency management, virtual environments, and modern Python project workflows. Use when setting up Python projects, managing dependencies, or optimizing Python development workflows with uv.",
+        "category": "plugins",
+        "type": "skill",
+        "size": 15999,
+        "contentHash": "6c2d6711f989117736b25091921d72b61431320840695de4236f62f929e9274b",
+        "installedAt": 1773373557197,
+        "updatedAt": 1773373557197,
+        "packageName": "python-development",
+        "packageVersion": "1.2.2"
+      }
+    }
+  ]
+}

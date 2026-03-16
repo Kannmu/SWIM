@@ -1,0 +1,108 @@
+{
+  "threshold_descriptive": {
+    "ULM_L": {
+      "mean": 0.2808873276084083,
+      "std": 0.22350537251232794,
+      "sem": 0.040142749934683496
+    },
+    "DLM_2": {
+      "mean": 0.3132614373845905,
+      "std": 0.22117973497455107,
+      "sem": 0.03972505310230628
+    },
+    "DLM_3": {
+      "mean": 0.3156037828993025,
+      "std": 0.21443369831480863,
+      "sem": 0.03851342915054954
+    },
+    "LM_C": {
+      "mean": 0.34731989813300895,
+      "std": 0.25938616606107323,
+      "sem": 0.04658713069696625
+    },
+    "LM_L": {
+      "mean": 0.37082018639337216,
+      "std": 0.2241917334367621,
+      "sem": 0.04026602399581587
+    }
+  },
+  "statistics": {
+    "friedman_test": {
+      "statistic": 9.093289689034405,
+      "p_value": 0.05880951413898878,
+      "significance": "n.s."
+    },
+    "pairwise_comparisons": [
+      {
+        "comparison": "ULM_L vs DLM_2",
+        "p_value": 0.27238877210766077,
+        "p_value_holm": 0.27238877210766077,
+        "significance": "n.s.",
+        "cohens_dz": -0.18300263720320636
+      },
+      {
+        "comparison": "ULM_L vs DLM_3",
+        "p_value": 0.2989572202786803,
+        "p_value_holm": 0.2989572202786803,
+        "significance": "n.s.",
+        "cohens_dz": -0.22614852158541185
+      },
+      {
+        "comparison": "ULM_L vs LM_C",
+        "p_value": 0.4677626034244895,
+        "p_value_holm": 0.4677626034244895,
+        "significance": "n.s.",
+        "cohens_dz": -0.22858199238705534
+      },
+      {
+        "comparison": "ULM_L vs LM_L",
+        "p_value": 0.003161659874246665,
+        "p_value_holm": 0.003161659874246665,
+        "significance": "**",
+        "cohens_dz": -0.5435124551849412
+      },
+      {
+        "comparison": "DLM_2 vs DLM_3",
+        "p_value": 0.3764468783964986,
+        "p_value_holm": 0.3764468783964986,
+        "significance": "n.s.",
+        "cohens_dz": -0.012100946989784504
+      },
+      {
+        "comparison": "DLM_2 vs LM_C",
+        "p_value": 0.9053327102078165,
+        "p_value_holm": 0.9053327102078165,
+        "significance": "n.s.",
+        "cohens_dz": -0.16054904437819026
+      },
+      {
+        "comparison": "DLM_2 vs LM_L",
+        "p_value": 0.03000989131308078,
+        "p_value_holm": 0.03000989131308078,
+        "significance": "*",
+        "cohens_dz": -0.2572844840823735
+      },
+      {
+        "comparison": "DLM_3 vs LM_C",
+        "p_value": 0.4491492257631178,
+        "p_value_holm": 0.4491492257631178,
+        "significance": "n.s.",
+        "cohens_dz": -0.10774580464193681
+      },
+      {
+        "comparison": "DLM_3 vs LM_L",
+        "p_value": 0.05788119416683912,
+        "p_value_holm": 0.05788119416683912,
+        "significance": "n.s.",
+        "cohens_dz": -0.3092293016992523
+      },
+      {
+        "comparison": "LM_C vs LM_L",
+        "p_value": 0.10639417319061394,
+        "p_value_holm": 0.10639417319061394,
+        "significance": "n.s.",
+        "cohens_dz": -0.07861484463508307
+      }
+    ]
+  }
+}

@@ -1,0 +1,2833 @@
+{
+  "analysis_overview": {
+    "n_total_rows": 5292,
+    "n_final_trials": 155,
+    "n_participants_complete_cases": 31,
+    "conditions": [
+      "ULM_L",
+      "DLM_2",
+      "DLM_3",
+      "LM_C",
+      "LM_L"
+    ]
+  },
+  "threshold_summary": [
+    {
+      "condition": "ULM_L",
+      "n": 31,
+      "threshold_intensity_mean": 0.2808873276084083,
+      "threshold_intensity_std": 0.22350537251232794,
+      "threshold_intensity_sem": 0.040142749934683496,
+      "threshold_intensity_median": 0.2352772288991714,
+      "threshold_intensity_iqr": 0.2249848853963733,
+      "threshold_intensity_min": 0.020426869574340627,
+      "threshold_intensity_max": 0.937343441621253,
+      "threshold_strength_mean": 34.26470322580646,
+      "threshold_strength_std": 17.315088568846225,
+      "threshold_strength_sem": 3.109881712027984,
+      "threshold_strength_median": 32.24,
+      "threshold_strength_iqr": 17.073750000000004,
+      "threshold_strength_min": 9.13,
+      "threshold_strength_max": 83.8933,
+      "final_reversal_count_mean": 5.612903225806452,
+      "final_reversal_count_min": 3.0,
+      "final_reversal_count_max": 6.0
+    },
+    {
+      "condition": "DLM_2",
+      "n": 31,
+      "threshold_intensity_mean": 0.3132614373845905,
+      "threshold_intensity_std": 0.22117973497455107,
+      "threshold_intensity_sem": 0.03972505310230628,
+      "threshold_intensity_median": 0.25558659751988283,
+      "threshold_intensity_iqr": 0.21296659394654788,
+      "threshold_intensity_min": 0.03017458593514853,
+      "threshold_intensity_max": 0.9105148305773288,
+      "threshold_strength_mean": 36.84645161290322,
+      "threshold_strength_std": 16.395013987670577,
+      "threshold_strength_sem": 2.9446314389887736,
+      "threshold_strength_median": 33.7425,
+      "threshold_strength_iqr": 15.196249999999996,
+      "threshold_strength_min": 11.115,
+      "threshold_strength_max": 80.66,
+      "final_reversal_count_mean": 5.838709677419355,
+      "final_reversal_count_min": 3.0,
+      "final_reversal_count_max": 6.0
+    },
+    {
+      "condition": "DLM_3",
+      "n": 31,
+      "threshold_intensity_mean": 0.3156037828993025,
+      "threshold_intensity_std": 0.21443369831480863,
+      "threshold_intensity_sem": 0.03851342915054954,
+      "threshold_intensity_median": 0.27911397236427865,
+      "threshold_intensity_iqr": 0.25722324302365673,
+      "threshold_intensity_min": 0.03017458593514853,
+      "threshold_intensity_max": 0.8868040057698595,
+      "threshold_strength_mean": 36.83809032258064,
+      "threshold_strength_std": 16.0040490913884,
+      "threshold_strength_sem": 2.874412070710146,
+      "threshold_strength_median": 35.435,
+      "threshold_strength_iqr": 18.25625,
+      "threshold_strength_min": 11.115,
+      "threshold_strength_max": 78.155,
+      "final_reversal_count_mean": 5.67741935483871,
+      "final_reversal_count_min": 3.0,
+      "final_reversal_count_max": 6.0
+    },
+    {
+      "condition": "LM_C",
+      "n": 31,
+      "threshold_intensity_mean": 0.34731989813300895,
+      "threshold_intensity_std": 0.25938616606107323,
+      "threshold_intensity_sem": 0.04658713069696625,
+      "threshold_intensity_median": 0.27531711259176656,
+      "threshold_intensity_iqr": 0.32536604532345303,
+      "threshold_intensity_min": 0.020426869574340627,
+      "threshold_intensity_max": 0.9861603808558479,
+      "threshold_strength_mean": 39.64682580645162,
+      "threshold_strength_std": 19.99968994337942,
+      "threshold_strength_sem": 3.5920503527225134,
+      "threshold_strength_median": 35.165,
+      "threshold_strength_iqr": 23.542500000000004,
+      "threshold_strength_min": 9.13,
+      "threshold_strength_max": 92.4933,
+      "final_reversal_count_mean": 5.451612903225806,
+      "final_reversal_count_min": 3.0,
+      "final_reversal_count_max": 6.0
+    },
+    {
+      "condition": "LM_L",
+      "n": 31,
+      "threshold_intensity_mean": 0.37082018639337216,
+      "threshold_intensity_std": 0.2241917334367621,
+      "threshold_intensity_sem": 0.04026602399581587,
+      "threshold_intensity_median": 0.3767584269785007,
+      "threshold_intensity_iqr": 0.3541447604721485,
+      "threshold_intensity_min": 0.04174878904655101,
+      "threshold_intensity_max": 0.8162242477266988,
+      "threshold_strength_mean": 40.74274193548386,
+      "threshold_strength_std": 15.933406223963832,
+      "threshold_strength_sem": 2.861724237170319,
+      "threshold_strength_median": 42.0725,
+      "threshold_strength_iqr": 24.1775,
+      "threshold_strength_min": 13.1,
+      "threshold_strength_max": 71.795,
+      "final_reversal_count_mean": 5.741935483870968,
+      "final_reversal_count_min": 2.0,
+      "final_reversal_count_max": 6.0
+    }
+  ],
+  "friedman_test_intensity_threshold": {
+    "statistic": 9.093289689034405,
+    "p_value": 0.05880951413898878
+  },
+  "pairwise_wilcoxon_intensity_threshold": [
+    {
+      "method_1": "ULM_L",
+      "method_2": "DLM_2",
+      "n": 31,
+      "statistic": 191.0,
+      "p_value": 0.27238877210766077,
+      "mean_diff": -0.03237410977618228,
+      "median_diff": -0.04029797270643614,
+      "rank_biserial": 0.22983870967741937,
+      "cohens_dz": -0.18300263720320636,
+      "significance": "n.s.",
+      "p_value_holm": 0.27238877210766077,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "ULM_L",
+      "method_2": "DLM_3",
+      "n": 31,
+      "statistic": 194.0,
+      "p_value": 0.2989572202786803,
+      "mean_diff": -0.034716455290894226,
+      "median_diff": -0.01095384656968449,
+      "rank_biserial": 0.217741935483871,
+      "cohens_dz": -0.22614852158541185,
+      "significance": "n.s.",
+      "p_value_holm": 0.2989572202786803,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "ULM_L",
+      "method_2": "LM_C",
+      "n": 31,
+      "statistic": 210.0,
+      "p_value": 0.4677626034244895,
+      "mean_diff": -0.06643257052460072,
+      "median_diff": -0.016609861254574934,
+      "rank_biserial": 0.15322580645161288,
+      "cohens_dz": -0.22858199238705534,
+      "significance": "n.s.",
+      "p_value_holm": 0.4677626034244895,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "ULM_L",
+      "method_2": "LM_L",
+      "n": 31,
+      "statistic": 81.0,
+      "p_value": 0.003161659874246665,
+      "mean_diff": -0.08993285878496399,
+      "median_diff": -0.05714595544688171,
+      "rank_biserial": 0.6733870967741935,
+      "cohens_dz": -0.5435124551849412,
+      "significance": "**",
+      "p_value_holm": 0.003161659874246665,
+      "significance_holm": "**"
+    },
+    {
+      "method_1": "DLM_2",
+      "method_2": "DLM_3",
+      "n": 31,
+      "statistic": 189.5,
+      "p_value": 0.3764468783964986,
+      "mean_diff": -0.002342345514711964,
+      "median_diff": -0.007000812666154627,
+      "rank_biserial": 0.2358870967741935,
+      "cohens_dz": -0.012100946989784504,
+      "significance": "n.s.",
+      "p_value_holm": 0.3764468783964986,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "DLM_2",
+      "method_2": "LM_C",
+      "n": 31,
+      "statistic": 212.0,
+      "p_value": 0.9053327102078165,
+      "mean_diff": -0.034058460748418444,
+      "median_diff": 0.01737564866528224,
+      "rank_biserial": 0.14516129032258063,
+      "cohens_dz": -0.16054904437819026,
+      "significance": "n.s.",
+      "p_value_holm": 0.9053327102078165,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "DLM_2",
+      "method_2": "LM_L",
+      "n": 31,
+      "statistic": 127.0,
+      "p_value": 0.03000989131308078,
+      "mean_diff": -0.057558749008781704,
+      "median_diff": -0.05861682362526484,
+      "rank_biserial": 0.4879032258064516,
+      "cohens_dz": -0.2572844840823735,
+      "significance": "*",
+      "p_value_holm": 0.03000989131308078,
+      "significance_holm": "*"
+    },
+    {
+      "method_1": "DLM_3",
+      "method_2": "LM_C",
+      "n": 31,
+      "statistic": 182.5,
+      "p_value": 0.4491492257631178,
+      "mean_diff": -0.031716115233706474,
+      "median_diff": 0.018616868962486904,
+      "rank_biserial": 0.2641129032258065,
+      "cohens_dz": -0.10774580464193681,
+      "significance": "n.s.",
+      "p_value_holm": 0.4491492257631178,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "DLM_3",
+      "method_2": "LM_L",
+      "n": 31,
+      "statistic": 150.5,
+      "p_value": 0.05788119416683912,
+      "mean_diff": -0.05521640349406975,
+      "median_diff": -0.04519211728084668,
+      "rank_biserial": 0.3931451612903226,
+      "cohens_dz": -0.3092293016992523,
+      "significance": "n.s.",
+      "p_value_holm": 0.05788119416683912,
+      "significance_holm": "n.s."
+    },
+    {
+      "method_1": "LM_C",
+      "method_2": "LM_L",
+      "n": 31,
+      "statistic": 154.0,
+      "p_value": 0.10639417319061394,
+      "mean_diff": -0.023500288260363277,
+      "median_diff": -0.04111830038594738,
+      "rank_biserial": 0.3790322580645161,
+      "cohens_dz": -0.07861484463508307,
+      "significance": "n.s.",
+      "p_value_holm": 0.10639417319061394,
+      "significance_holm": "n.s."
+    }
+  ],
+  "staircase_dynamics_summary": [
+    {
+      "condition": "ULM_L",
+      "n_trials": 1116,
+      "n_participants": 31,
+      "accuracy_mean": 0.8727598566308243,
+      "reaction_time_mean": 1.2557875202120845,
+      "reaction_time_median": 0.8400852680206299,
+      "reversal_rate": 0.15591397849462366,
+      "mean_strength_before": 45.51188172043011,
+      "mean_strength_after": 44.178763440860216,
+      "mean_intensity_before": 0.435232004400491,
+      "mean_intensity_after": 0.4171677397484956,
+      "mean_trial_index_to_finish": 36.0
+    },
+    {
+      "condition": "DLM_2",
+      "n_trials": 1038,
+      "n_participants": 31,
+      "accuracy_mean": 0.8641618497109826,
+      "reaction_time_mean": 1.2982139072895968,
+      "reaction_time_median": 0.8927258253097534,
+      "reversal_rate": 0.174373795761079,
+      "mean_strength_before": 47.237581888246645,
+      "mean_strength_after": 45.90782273603084,
+      "mean_intensity_before": 0.45598927434489417,
+      "mean_intensity_after": 0.4377239134052718,
+      "mean_trial_index_to_finish": 33.45161290322581
+    },
+    {
+      "condition": "DLM_3",
+      "n_trials": 1026,
+      "n_participants": 31,
+      "accuracy_mean": 0.8742690058479532,
+      "reaction_time_mean": 1.2435317223067404,
+      "reaction_time_median": 0.8618596792221069,
+      "reversal_rate": 0.17153996101364521,
+      "mean_strength_before": 46.95898635477583,
+      "mean_strength_after": 45.573343079922026,
+      "mean_intensity_before": 0.4568805498881528,
+      "mean_intensity_after": 0.4382451775344358,
+      "mean_trial_index_to_finish": 33.096774193548384
+    },
+    {
+      "condition": "LM_C",
+      "n_trials": 1074,
+      "n_participants": 31,
+      "accuracy_mean": 0.8752327746741154,
+      "reaction_time_mean": 1.157757943568949,
+      "reaction_time_median": 0.8464394807815552,
+      "reversal_rate": 0.15735567970204842,
+      "mean_strength_before": 47.137895716946,
+      "mean_strength_after": 45.834878957169465,
+      "mean_intensity_before": 0.457092364208267,
+      "mean_intensity_after": 0.4392903047846123,
+      "mean_trial_index_to_finish": 34.61290322580645
+    },
+    {
+      "condition": "LM_L",
+      "n_trials": 1038,
+      "n_participants": 31,
+      "accuracy_mean": 0.8631984585741811,
+      "reaction_time_mean": 1.354244178200503,
+      "reaction_time_median": 0.918491005897522,
+      "reversal_rate": 0.17148362235067438,
+      "mean_strength_before": 49.76845857418112,
+      "mean_strength_after": 48.60744701348747,
+      "mean_intensity_before": 0.4962598374870103,
+      "mean_intensity_after": 0.4800752546230646,
+      "mean_trial_index_to_finish": 33.483870967741936
+    }
+  ],
+  "psychometric_summary": [
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(-0.001, 0.08]",
+      "n": 24,
+      "accuracy": 0.375,
+      "mean_intensity": 0.0,
+      "mean_strength": 0.0,
+      "mean_reaction_time": 2.1123443444569907
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.08, 0.16]",
+      "n": 97,
+      "accuracy": 0.7010309278350515,
+      "mean_intensity": 0.08003845029493402,
+      "mean_strength": 18.26,
+      "mean_reaction_time": 2.1481944801881143
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.16, 0.24]",
+      "n": 291,
+      "accuracy": 0.8316151202749141,
+      "mean_intensity": 0.2119391044688253,
+      "mean_strength": 30.35020618556701,
+      "mean_reaction_time": 1.3116948498073722
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.32, 0.4]",
+      "n": 253,
+      "accuracy": 0.9090909090909091,
+      "mean_intensity": 0.3743922382120868,
+      "mean_strength": 41.8899604743083,
+      "mean_reaction_time": 1.0900372752087861
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.48, 0.56]",
+      "n": 48,
+      "accuracy": 0.875,
+      "mean_intensity": 0.48005617895595804,
+      "mean_strength": 48.73,
+      "mean_reaction_time": 1.0276030252377193
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.56, 0.64]",
+      "n": 133,
+      "accuracy": 0.9548872180451128,
+      "mean_intensity": 0.5714352356210728,
+      "mean_strength": 54.57285714285714,
+      "mean_reaction_time": 0.8761108315976939
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.64, 0.72]",
+      "n": 111,
+      "accuracy": 0.963963963963964,
+      "mean_intensity": 0.7199695849279575,
+      "mean_strength": 64.5,
+      "mean_reaction_time": 0.874076645653527
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.72, 0.8]",
+      "n": 8,
+      "accuracy": 0.875,
+      "mean_intensity": 0.799958825075544,
+      "mean_strength": 70.48,
+      "mean_reaction_time": 0.5349184572696686
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.8, 0.88]",
+      "n": 120,
+      "accuracy": 0.9416666666666667,
+      "mean_intensity": 0.8799988776426297,
+      "mean_strength": 77.48,
+      "mean_reaction_time": 1.5343175570170084
+    },
+    {
+      "condition": "ULM_L",
+      "intensity_bin": "(0.88, 1.0]",
+      "n": 31,
+      "accuracy": 0.9354838709677419,
+      "mean_intensity": 0.9870944771626228,
+      "mean_strength": 95.86451612903227,
+      "mean_reaction_time": 1.0850794776793449
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(-0.001, 0.08]",
+      "n": 9,
+      "accuracy": 0.3333333333333333,
+      "mean_intensity": 0.0,
+      "mean_strength": 0.0,
+      "mean_reaction_time": 2.544420215818617
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.08, 0.16]",
+      "n": 55,
+      "accuracy": 0.5636363636363636,
+      "mean_intensity": 0.08003845029493402,
+      "mean_strength": 18.26,
+      "mean_reaction_time": 2.2398420203815808
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.16, 0.24]",
+      "n": 273,
+      "accuracy": 0.8168498168498168,
+      "mean_intensity": 0.21360533612148996,
+      "mean_strength": 30.4834065934066,
+      "mean_reaction_time": 1.349417934487591
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.32, 0.4]",
+      "n": 259,
+      "accuracy": 0.8803088803088803,
+      "mean_intensity": 0.37714626031533194,
+      "mean_strength": 42.072857142857146,
+      "mean_reaction_time": 1.3049650146233989
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.48, 0.56]",
+      "n": 43,
+      "accuracy": 0.8604651162790697,
+      "mean_intensity": 0.48005617895595804,
+      "mean_strength": 48.73,
+      "mean_reaction_time": 0.8835830633030382
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.56, 0.64]",
+      "n": 140,
+      "accuracy": 0.9571428571428572,
+      "mean_intensity": 0.5697224160431898,
+      "mean_strength": 54.46142857142857,
+      "mean_reaction_time": 0.9119215982300894
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.64, 0.72]",
+      "n": 107,
+      "accuracy": 0.9532710280373832,
+      "mean_intensity": 0.7199695849279576,
+      "mean_strength": 64.5,
+      "mean_reaction_time": 0.8786842733900123
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.72, 0.8]",
+      "n": 13,
+      "accuracy": 0.7692307692307693,
+      "mean_intensity": 0.799958825075544,
+      "mean_strength": 70.48,
+      "mean_reaction_time": 1.1252952539003813
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.8, 0.88]",
+      "n": 115,
+      "accuracy": 0.9565217391304348,
+      "mean_intensity": 0.8799988776426296,
+      "mean_strength": 77.48,
+      "mean_reaction_time": 1.7134040210558021
+    },
+    {
+      "condition": "DLM_2",
+      "intensity_bin": "(0.88, 1.0]",
+      "n": 24,
+      "accuracy": 0.7916666666666666,
+      "mean_intensity": 0.9949991099005163,
+      "mean_strength": 98.3975,
+      "mean_reaction_time": 0.98855393131574
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(-0.001, 0.08]",
+      "n": 17,
+      "accuracy": 0.47058823529411764,
+      "mean_intensity": 0.0,
+      "mean_strength": 0.0,
+      "mean_reaction_time": 2.5060401523814484
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.08, 0.16]",
+      "n": 66,
+      "accuracy": 0.6818181818181818,
+      "mean_intensity": 0.08003845029493402,
+      "mean_strength": 18.26,
+      "mean_reaction_time": 2.1419898416056777
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.16, 0.24]",
+      "n": 230,
+      "accuracy": 0.8130434782608695,
+      "mean_intensity": 0.21250161514041366,
+      "mean_strength": 30.39517391304348,
+      "mean_reaction_time": 1.3044687354046365
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.32, 0.4]",
+      "n": 246,
+      "accuracy": 0.8739837398373984,
+      "mean_intensity": 0.3759390127213597,
+      "mean_strength": 41.99268292682927,
+      "mean_reaction_time": 1.268111681550499
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.48, 0.56]",
+      "n": 51,
+      "accuracy": 0.8823529411764706,
+      "mean_intensity": 0.48005617895595804,
+      "mean_strength": 48.73,
+      "mean_reaction_time": 0.881953145943436
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.56, 0.64]",
+      "n": 164,
+      "accuracy": 0.9573170731707317,
+      "mean_intensity": 0.5678146413914016,
+      "mean_strength": 54.33731707317073,
+      "mean_reaction_time": 0.8740850614338387
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.64, 0.72]",
+      "n": 114,
+      "accuracy": 0.956140350877193,
+      "mean_intensity": 0.7199695849279576,
+      "mean_strength": 64.5,
+      "mean_reaction_time": 0.9617276547247904
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.72, 0.8]",
+      "n": 7,
+      "accuracy": 0.7142857142857143,
+      "mean_intensity": 0.799958825075544,
+      "mean_strength": 70.48,
+      "mean_reaction_time": 0.4044938087463379
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.8, 0.88]",
+      "n": 116,
+      "accuracy": 0.9568965517241379,
+      "mean_intensity": 0.8799988776426297,
+      "mean_strength": 77.48,
+      "mean_reaction_time": 1.4045682097303456
+    },
+    {
+      "condition": "DLM_3",
+      "intensity_bin": "(0.88, 1.0]",
+      "n": 15,
+      "accuracy": 1.0,
+      "mean_intensity": 0.9839971516816524,
+      "mean_strength": 94.872,
+      "mean_reaction_time": 1.0785579999287924
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(-0.001, 0.08]",
+      "n": 17,
+      "accuracy": 0.5882352941176471,
+      "mean_intensity": 0.0,
+      "mean_strength": 0.0,
+      "mean_reaction_time": 1.328366672291475
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.08, 0.16]",
+      "n": 75,
+      "accuracy": 0.6533333333333333,
+      "mean_intensity": 0.08003845029493402,
+      "mean_strength": 18.26,
+      "mean_reaction_time": 1.6355194886525473
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.16, 0.24]",
+      "n": 264,
+      "accuracy": 0.821969696969697,
+      "mean_intensity": 0.2124041990624205,
+      "mean_strength": 30.387386363636367,
+      "mean_reaction_time": 1.1972793223279896
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.32, 0.4]",
+      "n": 244,
+      "accuracy": 0.8975409836065574,
+      "mean_intensity": 0.3750864797420099,
+      "mean_strength": 41.9360655737705,
+      "mean_reaction_time": 1.0755080092148703
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.48, 0.56]",
+      "n": 44,
+      "accuracy": 0.8636363636363636,
+      "mean_intensity": 0.48005617895595804,
+      "mean_strength": 48.73,
+      "mean_reaction_time": 1.087998715313998
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.56, 0.64]",
+      "n": 151,
+      "accuracy": 0.9470198675496688,
+      "mean_intensity": 0.5764262330665595,
+      "mean_strength": 54.89754966887418,
+      "mean_reaction_time": 1.0939772792209852
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.64, 0.72]",
+      "n": 112,
+      "accuracy": 0.9375,
+      "mean_intensity": 0.7199695849279576,
+      "mean_strength": 64.5,
+      "mean_reaction_time": 1.024249485560826
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.72, 0.8]",
+      "n": 18,
+      "accuracy": 0.9444444444444444,
+      "mean_intensity": 0.799958825075544,
+      "mean_strength": 70.48,
+      "mean_reaction_time": 0.7734750641716851
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.8, 0.88]",
+      "n": 122,
+      "accuracy": 0.9426229508196722,
+      "mean_intensity": 0.8799988776426297,
+      "mean_strength": 77.48,
+      "mean_reaction_time": 1.2550594904383674
+    },
+    {
+      "condition": "LM_C",
+      "intensity_bin": "(0.88, 1.0]",
+      "n": 27,
+      "accuracy": 1.0,
+      "mean_intensity": 0.9911095287120291,
+      "mean_strength": 97.1511111111111,
+      "mean_reaction_time": 0.9208102579470034
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(-0.001, 0.08]",
+      "n": 15,
+      "accuracy": 0.6666666666666666,
+      "mean_intensity": 0.0,
+      "mean_strength": 0.0,
+      "mean_reaction_time": 1.8819976170857748
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.08, 0.16]",
+      "n": 50,
+      "accuracy": 0.56,
+      "mean_intensity": 0.08003845029493402,
+      "mean_strength": 18.26,
+      "mean_reaction_time": 2.158859038352966
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.16, 0.24]",
+      "n": 188,
+      "accuracy": 0.7978723404255319,
+      "mean_intensity": 0.2135959915059541,
+      "mean_strength": 30.482659574468087,
+      "mean_reaction_time": 1.5841250115252556
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.32, 0.4]",
+      "n": 231,
+      "accuracy": 0.8658008658008658,
+      "mean_intensity": 0.37680012638978744,
+      "mean_strength": 42.04987012987013,
+      "mean_reaction_time": 1.1516082410688524
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.48, 0.56]",
+      "n": 65,
+      "accuracy": 0.8153846153846154,
+      "mean_intensity": 0.48005617895595804,
+      "mean_strength": 48.73,
+      "mean_reaction_time": 1.1780551286844108
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.56, 0.64]",
+      "n": 183,
+      "accuracy": 0.9344262295081968,
+      "mean_intensity": 0.5757406837403414,
+      "mean_strength": 54.85295081967213,
+      "mean_reaction_time": 1.0826881192421
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.64, 0.72]",
+      "n": 135,
+      "accuracy": 0.8888888888888888,
+      "mean_intensity": 0.7199695849279576,
+      "mean_strength": 64.5,
+      "mean_reaction_time": 1.1938554887418393
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.72, 0.8]",
+      "n": 25,
+      "accuracy": 0.92,
+      "mean_intensity": 0.7999588250755439,
+      "mean_strength": 70.48,
+      "mean_reaction_time": 0.6599956035614014
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.8, 0.88]",
+      "n": 132,
+      "accuracy": 0.9696969696969697,
+      "mean_intensity": 0.8799988776426297,
+      "mean_strength": 77.48,
+      "mean_reaction_time": 1.7322214625098489
+    },
+    {
+      "condition": "LM_L",
+      "intensity_bin": "(0.88, 1.0]",
+      "n": 14,
+      "accuracy": 0.9285714285714286,
+      "mean_intensity": 1.0,
+      "mean_strength": 100.0,
+      "mean_reaction_time": 1.7618865455899917
+    }
+  ],
+  "reaction_time_analysis": {
+    "summary": {
+      "rt_column": "ReactionTime",
+      "min_rt": 0.2,
+      "max_rt": 10.0,
+      "n_total": 5292,
+      "n_valid_range": 5186,
+      "n_invalid_range": 106,
+      "n_zlogrt_non_nan": 5186,
+      "participant_stats": [
+        {
+          "ParticipantID": "CHY",
+          "rt_mean": -0.23244376128323233,
+          "rt_std": 0.8749615217430339
+        },
+        {
+          "ParticipantID": "CJL",
+          "rt_mean": -0.44555998330691554,
+          "rt_std": 0.7427606394421488
+        },
+        {
+          "ParticipantID": "CX",
+          "rt_mean": 0.10391528002237528,
+          "rt_std": 0.821183200798677
+        },
+        {
+          "ParticipantID": "CYQ",
+          "rt_mean": -0.22012632868914184,
+          "rt_std": 0.7914838131003736
+        },
+        {
+          "ParticipantID": "FLH",
+          "rt_mean": -0.377968299763399,
+          "rt_std": 0.7161710640623031
+        },
+        {
+          "ParticipantID": "FY",
+          "rt_mean": -0.37163230599816655,
+          "rt_std": 0.7097270488695806
+        },
+        {
+          "ParticipantID": "GJH",
+          "rt_mean": 0.37699625383807284,
+          "rt_std": 0.5170801478902949
+        },
+        {
+          "ParticipantID": "GYX",
+          "rt_mean": -0.743125645216741,
+          "rt_std": 0.6792251633923477
+        },
+        {
+          "ParticipantID": "HH",
+          "rt_mean": -0.07929293851129449,
+          "rt_std": 0.7615466296938868
+        },
+        {
+          "ParticipantID": "HWC",
+          "rt_mean": -0.8006313951497933,
+          "rt_std": 0.5292526057990685
+        },
+        {
+          "ParticipantID": "HZQ",
+          "rt_mean": -0.1719102359179812,
+          "rt_std": 0.8515905255719807
+        },
+        {
+          "ParticipantID": "LJS",
+          "rt_mean": -0.5161286028156316,
+          "rt_std": 0.7539148050774098
+        },
+        {
+          "ParticipantID": "LJY",
+          "rt_mean": -0.37916626594606745,
+          "rt_std": 0.5989583958616814
+        },
+        {
+          "ParticipantID": "LY",
+          "rt_mean": -0.5216286387469613,
+          "rt_std": 0.7086621837193946
+        },
+        {
+          "ParticipantID": "LZ",
+          "rt_mean": 0.32123148133767665,
+          "rt_std": 0.5244361889246881
+        },
+        {
+          "ParticipantID": "MY",
+          "rt_mean": 0.6238758092454372,
+          "rt_std": 0.5014638328527531
+        },
+        {
+          "ParticipantID": "SRQ",
+          "rt_mean": -0.09161195326580124,
+          "rt_std": 0.833870881123976
+        },
+        {
+          "ParticipantID": "SWY",
+          "rt_mean": 0.056652384926695804,
+          "rt_std": 0.7940510189120955
+        },
+        {
+          "ParticipantID": "WBX",
+          "rt_mean": -0.02461201854268676,
+          "rt_std": 0.7095759598428742
+        },
+        {
+          "ParticipantID": "WJ",
+          "rt_mean": 0.31289207704524563,
+          "rt_std": 0.5288732927856871
+        },
+        {
+          "ParticipantID": "WY",
+          "rt_mean": -0.02706774998592746,
+          "rt_std": 0.921468626590784
+        },
+        {
+          "ParticipantID": "WYY1",
+          "rt_mean": -0.6586334572095414,
+          "rt_std": 0.6589301164559624
+        },
+        {
+          "ParticipantID": "WYY2",
+          "rt_mean": -0.3393133547863307,
+          "rt_std": 0.7078970249711457
+        },
+        {
+          "ParticipantID": "WZR",
+          "rt_mean": 0.17433736586475723,
+          "rt_std": 0.670966020277823
+        },
+        {
+          "ParticipantID": "WZT",
+          "rt_mean": -0.25343901020852383,
+          "rt_std": 0.7936219486440416
+        },
+        {
+          "ParticipantID": "YF",
+          "rt_mean": -0.38504933894509097,
+          "rt_std": 0.6359686437112544
+        },
+        {
+          "ParticipantID": "YJN",
+          "rt_mean": -0.12098847052845968,
+          "rt_std": 0.8174498521498376
+        },
+        {
+          "ParticipantID": "YST",
+          "rt_mean": 0.02358164035947193,
+          "rt_std": 0.8660382560896182
+        },
+        {
+          "ParticipantID": "YYX",
+          "rt_mean": 0.5328240061719856,
+          "rt_std": 0.5187763999087516
+        },
+        {
+          "ParticipantID": "YZX",
+          "rt_mean": 0.014257408997495823,
+          "rt_std": 0.7704218122600043
+        },
+        {
+          "ParticipantID": "ZYH",
+          "rt_mean": -0.11194552357337043,
+          "rt_std": 0.8556597155156476
+        }
+      ]
+    },
+    "by_condition": [
+      {
+        "condition": "ULM_L",
+        "n_valid_rt": 1093,
+        "mean_rt": 1.1837175274157021,
+        "median_rt": 0.8511409759521484,
+        "std_rt": 1.0689376468005654,
+        "mean_log_rt": -0.1548806471111036,
+        "mean_zlogrt": -0.029928101947579822,
+        "mean_rt_correct": 1.0570856595189317,
+        "mean_rt_error": 2.05283121067843,
+        "rt_correct_minus_error": -0.9957455511594984
+      },
+      {
+        "condition": "DLM_2",
+        "n_valid_rt": 1014,
+        "mean_rt": 1.1972400815294104,
+        "median_rt": 0.8998221158981323,
+        "std_rt": 1.0482483212844547,
+        "mean_log_rt": -0.12961981402119074,
+        "mean_zlogrt": 0.01396853451764902,
+        "mean_rt_correct": 1.08810764930465,
+        "mean_rt_error": 1.9139306812144037,
+        "rt_correct_minus_error": -0.8258230319097537
+      },
+      {
+        "condition": "DLM_3",
+        "n_valid_rt": 1009,
+        "mean_rt": 1.2374608358377508,
+        "median_rt": 0.8851613998413086,
+        "std_rt": 1.1329030066051855,
+        "mean_log_rt": -0.1259464230985047,
+        "mean_zlogrt": 0.004255832236792148,
+        "mean_rt_correct": 1.1308873609670291,
+        "mean_rt_error": 1.984320981161935,
+        "rt_correct_minus_error": -0.8534336201949058
+      },
+      {
+        "condition": "LM_C",
+        "n_valid_rt": 1055,
+        "mean_rt": 1.1675227468047662,
+        "median_rt": 0.8589527606964111,
+        "std_rt": 1.0023434650893874,
+        "mean_log_rt": -0.15668604904505207,
+        "mean_zlogrt": -0.033721452397115735,
+        "mean_rt_correct": 1.0727405527453402,
+        "mean_rt_error": 1.8360628026132366,
+        "rt_correct_minus_error": -0.7633222498678964
+      },
+      {
+        "condition": "LM_L",
+        "n_valid_rt": 1015,
+        "mean_rt": 1.292274324764759,
+        "median_rt": 0.9290785789489746,
+        "std_rt": 1.2357458104261956,
+        "mean_log_rt": -0.08858627790761639,
+        "mean_zlogrt": 0.049092925103293085,
+        "mean_rt_correct": 1.156587636634095,
+        "mean_rt_error": 2.147393308955131,
+        "rt_correct_minus_error": -0.9908056723210359
+      }
+    ]
+  },
+  "participant_quality": [
+    {
+      "ParticipantID": "CHY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 32.689,
+      "std_threshold_strength": 8.339572381123626,
+      "range_threshold_strength": 19.582499999999996,
+      "mean_threshold_intensity": 0.2480428442719827
+    },
+    {
+      "ParticipantID": "CJL",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 24.122999999999998,
+      "std_threshold_strength": 6.972117101354508,
+      "range_threshold_strength": 19.369999999999997,
+      "mean_threshold_intensity": 0.14350815885850582
+    },
+    {
+      "ParticipantID": "CX",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 60.11465999999999,
+      "std_threshold_strength": 15.006895709239801,
+      "range_threshold_strength": 40.3458,
+      "mean_threshold_intensity": 0.63873489876666
+    },
+    {
+      "ParticipantID": "CYQ",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 32.513999999999996,
+      "std_threshold_strength": 3.1761162407884265,
+      "range_threshold_strength": 6.602500000000003,
+      "mean_threshold_intensity": 0.2399924036604185
+    },
+    {
+      "ParticipantID": "FLH",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 53.8995,
+      "std_threshold_strength": 8.024633441784118,
+      "range_threshold_strength": 20.200000000000003,
+      "mean_threshold_intensity": 0.5583447820906189
+    },
+    {
+      "ParticipantID": "FY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 50.197,
+      "std_threshold_strength": 6.241685819952811,
+      "range_threshold_strength": 15.837499999999999,
+      "mean_threshold_intensity": 0.5028217220513344
+    },
+    {
+      "ParticipantID": "GJH",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 15.560999999999998,
+      "std_threshold_strength": 6.2476459566784035,
+      "range_threshold_strength": 13.1,
+      "mean_threshold_intensity": 0.06529257738927342
+    },
+    {
+      "ParticipantID": "GYX",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 27.3505,
+      "std_threshold_strength": 5.880308877941704,
+      "range_threshold_strength": 14.187500000000004,
+      "mean_threshold_intensity": 0.1778576523019631
+    },
+    {
+      "ParticipantID": "HH",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 47.29766,
+      "std_threshold_strength": 36.18058042656309,
+      "range_threshold_strength": 75.2158,
+      "mean_threshold_intensity": 0.4438523837984791
+    },
+    {
+      "ParticipantID": "HWC",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 28.908499999999997,
+      "std_threshold_strength": 8.925919875564645,
+      "range_threshold_strength": 24.4075,
+      "mean_threshold_intensity": 0.20163172202129126
+    },
+    {
+      "ParticipantID": "HZQ",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 32.709500000000006,
+      "std_threshold_strength": 3.7746988290458345,
+      "range_threshold_strength": 10.504999999999999,
+      "mean_threshold_intensity": 0.2430156868015428
+    },
+    {
+      "ParticipantID": "LJS",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 52.928,
+      "std_threshold_strength": 13.288193232151613,
+      "range_threshold_strength": 34.9725,
+      "mean_threshold_intensity": 0.5395815225808502
+    },
+    {
+      "ParticipantID": "LJY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 41.833000000000006,
+      "std_threshold_strength": 6.685183103326338,
+      "range_threshold_strength": 17.144999999999996,
+      "mean_threshold_intensity": 0.37488264280379935
+    },
+    {
+      "ParticipantID": "LY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 24.113,
+      "std_threshold_strength": 9.921413615256649,
+      "range_threshold_strength": 26.305,
+      "mean_threshold_intensity": 0.15124399002888028
+    },
+    {
+      "ParticipantID": "LZ",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 34.0595,
+      "std_threshold_strength": 9.52509340505383,
+      "range_threshold_strength": 21.005000000000003,
+      "mean_threshold_intensity": 0.26817359902289284
+    },
+    {
+      "ParticipantID": "MY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 37.063,
+      "std_threshold_strength": 6.526616274916122,
+      "range_threshold_strength": 16.562499999999996,
+      "mean_threshold_intensity": 0.30596055117934196
+    },
+    {
+      "ParticipantID": "SRQ",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 30.463,
+      "std_threshold_strength": 10.914291147390195,
+      "range_threshold_strength": 25.6475,
+      "mean_threshold_intensity": 0.22799383744514018
+    },
+    {
+      "ParticipantID": "SWY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 22.595,
+      "std_threshold_strength": 4.306181240379926,
+      "range_threshold_strength": 11.73,
+      "mean_threshold_intensity": 0.12360764923206946
+    },
+    {
+      "ParticipantID": "WBX",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 43.36900000000001,
+      "std_threshold_strength": 5.11096755761568,
+      "range_threshold_strength": 11.782499999999999,
+      "mean_threshold_intensity": 0.39772955336186366
+    },
+    {
+      "ParticipantID": "WJ",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 33.443,
+      "std_threshold_strength": 6.18022587572655,
+      "range_threshold_strength": 17.1075,
+      "mean_threshold_intensity": 0.2554221912081073
+    },
+    {
+      "ParticipantID": "WY",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 40.74516,
+      "std_threshold_strength": 29.80514713942879,
+      "range_threshold_strength": 76.8133,
+      "mean_threshold_intensity": 0.3474560122128543
+    },
+    {
+      "ParticipantID": "WYY1",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 23.7095,
+      "std_threshold_strength": 8.262542057381614,
+      "range_threshold_strength": 20.265,
+      "mean_threshold_intensity": 0.14315376274913333
+    },
+    {
+      "ParticipantID": "WYY2",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 40.177499999999995,
+      "std_threshold_strength": 4.1396954145202525,
+      "range_threshold_strength": 10.125,
+      "mean_threshold_intensity": 0.3493396062461298
+    },
+    {
+      "ParticipantID": "WZR",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 25.436500000000002,
+      "std_threshold_strength": 19.663879926148855,
+      "range_threshold_strength": 46.305,
+      "mean_threshold_intensity": 0.1865677491431304
+    },
+    {
+      "ParticipantID": "WZT",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 74.2685,
+      "std_threshold_strength": 8.458388883233024,
+      "range_threshold_strength": 20.417499999999997,
+      "mean_threshold_intensity": 0.8361245092679628
+    },
+    {
+      "ParticipantID": "YF",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 37.854499999999994,
+      "std_threshold_strength": 15.840660241132626,
+      "range_threshold_strength": 37.065,
+      "mean_threshold_intensity": 0.3259253309466981
+    },
+    {
+      "ParticipantID": "YJN",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 54.63516,
+      "std_threshold_strength": 13.08800486621242,
+      "range_threshold_strength": 33.4283,
+      "mean_threshold_intensity": 0.563191391196469
+    },
+    {
+      "ParticipantID": "YST",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 49.105000000000004,
+      "std_threshold_strength": 13.898368496877609,
+      "range_threshold_strength": 35.0325,
+      "mean_threshold_intensity": 0.48252458741209747
+    },
+    {
+      "ParticipantID": "YYX",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 45.20399999999999,
+      "std_threshold_strength": 7.027344048429676,
+      "range_threshold_strength": 18.557499999999997,
+      "mean_threshold_intensity": 0.4258567711559622
+    },
+    {
+      "ParticipantID": "YZX",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 31.644500000000004,
+      "std_threshold_strength": 2.8063045094928674,
+      "range_threshold_strength": 6.040000000000003,
+      "mean_threshold_intensity": 0.22821859610399953
+    },
+    {
+      "ParticipantID": "ZYH",
+      "n_conditions_completed": 5,
+      "mean_threshold_strength": 19.689500000000002,
+      "std_threshold_strength": 5.049331143824893,
+      "range_threshold_strength": 12.495,
+      "mean_threshold_intensity": 0.09688563568637992
+    }
+  ],
+  "final_trial_records": [
+    {
+      "ParticipantID": "CHY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 158,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 28.8325,
+      "IntensityThreshold": 0.19147176158000492,
+      "ReversalCount": 6,
+      "ReactionTime": 2.643029928207397
+    },
+    {
+      "ParticipantID": "CHY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 136,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 39.5125,
+      "IntensityThreshold": 0.33822706680999504,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5666203498840332
+    },
+    {
+      "ParticipantID": "CHY",
+      "Condition": "LM_C",
+      "GlobalTrial": 150,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 2.844947099685669
+    },
+    {
+      "ParticipantID": "CHY",
+      "Condition": "LM_L",
+      "GlobalTrial": 152,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 43.41,
+      "IntensityThreshold": 0.3972224158209856,
+      "ReversalCount": 6,
+      "ReactionTime": 1.2753653526306152
+    },
+    {
+      "ParticipantID": "CHY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 164,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 27.8625,
+      "IntensityThreshold": 0.17962679469918943,
+      "ReversalCount": 5,
+      "ReactionTime": 1.8111159801483157
+    },
+    {
+      "ParticipantID": "CJL",
+      "Condition": "DLM_2",
+      "GlobalTrial": 144,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2900640964508056
+    },
+    {
+      "ParticipantID": "CJL",
+      "Condition": "DLM_3",
+      "GlobalTrial": 163,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 35.05,
+      "IntensityThreshold": 0.27370482477422714,
+      "ReversalCount": 5,
+      "ReactionTime": 1.5761456489562988
+    },
+    {
+      "ParticipantID": "CJL",
+      "Condition": "LM_C",
+      "GlobalTrial": 148,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2683041095733642
+    },
+    {
+      "ParticipantID": "CJL",
+      "Condition": "LM_L",
+      "GlobalTrial": 156,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 2.779229164123535
+    },
+    {
+      "ParticipantID": "CJL",
+      "Condition": "ULM_L",
+      "GlobalTrial": 150,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 15.68,
+      "IntensityThreshold": 0.05944728342366172,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1749982833862305
+    },
+    {
+      "ParticipantID": "CX",
+      "Condition": "DLM_2",
+      "GlobalTrial": 184,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 63.0125,
+      "IntensityThreshold": 0.6987541307008253,
+      "ReversalCount": 5,
+      "ReactionTime": 1.7824795246124268
+    },
+    {
+      "ParticipantID": "CX",
+      "Condition": "DLM_3",
+      "GlobalTrial": 183,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 55.9075,
+      "IntensityThreshold": 0.5922630134931917,
+      "ReversalCount": 4,
+      "ReactionTime": 1.5405442714691162
+    },
+    {
+      "ParticipantID": "CX",
+      "Condition": "LM_C",
+      "GlobalTrial": 149,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 43.5475,
+      "IntensityThreshold": 0.3993370907509104,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6183888912200928
+    },
+    {
+      "ParticipantID": "CX",
+      "Condition": "LM_L",
+      "GlobalTrial": 164,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 54.2125,
+      "IntensityThreshold": 0.56597681726712,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4273393154144287
+    },
+    {
+      "ParticipantID": "CX",
+      "Condition": "ULM_L",
+      "GlobalTrial": 182,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 83.8933,
+      "IntensityThreshold": 0.937343441621253,
+      "ReversalCount": 3,
+      "ReactionTime": 0.4388182163238525
+    },
+    {
+      "ParticipantID": "CYQ",
+      "Condition": "DLM_2",
+      "GlobalTrial": 176,
+      "TrialInCondition": 39,
+      "ThresholdEstimate": 28.8325,
+      "IntensityThreshold": 0.19147176158000492,
+      "ReversalCount": 6,
+      "ReactionTime": 2.916761875152588
+    },
+    {
+      "ParticipantID": "CYQ",
+      "Condition": "DLM_3",
+      "GlobalTrial": 147,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 29.395,
+      "IntensityThreshold": 0.19847257424615955,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3139035701751709
+    },
+    {
+      "ParticipantID": "CYQ",
+      "Condition": "LM_C",
+      "GlobalTrial": 169,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 35.165,
+      "IntensityThreshold": 0.27531711259176656,
+      "ReversalCount": 6,
+      "ReactionTime": 2.164660215377808
+    },
+    {
+      "ParticipantID": "CYQ",
+      "Condition": "LM_L",
+      "GlobalTrial": 163,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6792547702789307
+    },
+    {
+      "ParticipantID": "CYQ",
+      "Condition": "ULM_L",
+      "GlobalTrial": 175,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 33.7425,
+      "IntensityThreshold": 0.25558659751988283,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5608479976654053
+    },
+    {
+      "ParticipantID": "FLH",
+      "Condition": "DLM_2",
+      "GlobalTrial": 149,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 51.295,
+      "IntensityThreshold": 0.5203362014130376,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6323115825653076
+    },
+    {
+      "ParticipantID": "FLH",
+      "Condition": "DLM_3",
+      "GlobalTrial": 144,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 49.995,
+      "IntensityThreshold": 0.4999214601839831,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2779333591461181
+    },
+    {
+      "ParticipantID": "FLH",
+      "Condition": "LM_C",
+      "GlobalTrial": 148,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 52.6625,
+      "IntensityThreshold": 0.5417737010027702,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3862888813018799
+    },
+    {
+      "ParticipantID": "FLH",
+      "Condition": "LM_L",
+      "GlobalTrial": 122,
+      "TrialInCondition": 25,
+      "ThresholdEstimate": 67.8725,
+      "IntensityThreshold": 0.7662202620908687,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1469447612762451
+    },
+    {
+      "ParticipantID": "FLH",
+      "Condition": "ULM_L",
+      "GlobalTrial": 158,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 47.6725,
+      "IntensityThreshold": 0.463472285762435,
+      "ReversalCount": 5,
+      "ReactionTime": 1.3848295211791992
+    },
+    {
+      "ParticipantID": "FY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 114,
+      "TrialInCondition": 23,
+      "ThresholdEstimate": 48.735,
+      "IntensityThreshold": 0.48013465651378484,
+      "ReversalCount": 6,
+      "ReactionTime": 1.4190609455108645
+    },
+    {
+      "ParticipantID": "FY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 110,
+      "TrialInCondition": 22,
+      "ThresholdEstimate": 46.16,
+      "IntensityThreshold": 0.43982762059514413,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6918771266937256
+    },
+    {
+      "ParticipantID": "FY",
+      "Condition": "LM_C",
+      "GlobalTrial": 127,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 43.5475,
+      "IntensityThreshold": 0.3993370907509104,
+      "ReversalCount": 6,
+      "ReactionTime": 1.6166892051696775
+    },
+    {
+      "ParticipantID": "FY",
+      "Condition": "LM_L",
+      "GlobalTrial": 125,
+      "TrialInCondition": 27,
+      "ThresholdEstimate": 59.385,
+      "IntensityThreshold": 0.6452926472987043,
+      "ReversalCount": 6,
+      "ReactionTime": 1.651289939880371
+    },
+    {
+      "ParticipantID": "FY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 140,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 53.1575,
+      "IntensityThreshold": 0.5495165950981281,
+      "ReversalCount": 5,
+      "ReactionTime": 1.2936842441558838
+    },
+    {
+      "ParticipantID": "GJH",
+      "Condition": "DLM_2",
+      "GlobalTrial": 134,
+      "TrialInCondition": 27,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 2.291680335998535
+    },
+    {
+      "ParticipantID": "GJH",
+      "Condition": "DLM_3",
+      "GlobalTrial": 163,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 11.115,
+      "IntensityThreshold": 0.03017458593514853,
+      "ReversalCount": 6,
+      "ReactionTime": 0.7260856628417969
+    },
+    {
+      "ParticipantID": "GJH",
+      "Condition": "LM_C",
+      "GlobalTrial": 159,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 1.119558572769165
+    },
+    {
+      "ParticipantID": "GJH",
+      "Condition": "LM_L",
+      "GlobalTrial": 168,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 13.1,
+      "IntensityThreshold": 0.04174878904655101,
+      "ReversalCount": 6,
+      "ReactionTime": 0.867966890335083
+    },
+    {
+      "ParticipantID": "GJH",
+      "Condition": "ULM_L",
+      "GlobalTrial": 153,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 9.13,
+      "IntensityThreshold": 0.020426869574340627,
+      "ReversalCount": 6,
+      "ReactionTime": 2.135218858718872
+    },
+    {
+      "ParticipantID": "GYX",
+      "Condition": "DLM_2",
+      "GlobalTrial": 168,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2885162830352783
+    },
+    {
+      "ParticipantID": "GYX",
+      "Condition": "DLM_3",
+      "GlobalTrial": 181,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 30.43,
+      "IntensityThreshold": 0.2115984673001562,
+      "ReversalCount": 6,
+      "ReactionTime": 0.26637864112854
+    },
+    {
+      "ParticipantID": "GYX",
+      "Condition": "LM_C",
+      "GlobalTrial": 182,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 21.2475,
+      "IntensityThreshold": 0.10731722400817201,
+      "ReversalCount": 5,
+      "ReactionTime": 0.3446810245513916
+    },
+    {
+      "ParticipantID": "GYX",
+      "Condition": "LM_L",
+      "GlobalTrial": 145,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 0.261974573135376
+    },
+    {
+      "ParticipantID": "GYX",
+      "Condition": "ULM_L",
+      "GlobalTrial": 176,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1913645267486572
+    },
+    {
+      "ParticipantID": "HH",
+      "Condition": "DLM_2",
+      "GlobalTrial": 191,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 80.66,
+      "IntensityThreshold": 0.9105148305773288,
+      "ReversalCount": 3,
+      "ReactionTime": 2.944031953811645
+    },
+    {
+      "ParticipantID": "HH",
+      "Condition": "DLM_3",
+      "GlobalTrial": 177,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 17.2775,
+      "IntensityThreshold": 0.07186420391431679,
+      "ReversalCount": 6,
+      "ReactionTime": 1.6757423877716064
+    },
+    {
+      "ParticipantID": "HH",
+      "Condition": "LM_C",
+      "GlobalTrial": 190,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 92.4933,
+      "IntensityThreshold": 0.9861603808558479,
+      "ReversalCount": 3,
+      "ReactionTime": 0.3071517944335937
+    },
+    {
+      "ParticipantID": "HH",
+      "Condition": "LM_L",
+      "GlobalTrial": 189,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 1.7697372436523438
+    },
+    {
+      "ParticipantID": "HH",
+      "Condition": "ULM_L",
+      "GlobalTrial": 173,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 2.9728634357452397
+    },
+    {
+      "ParticipantID": "HWC",
+      "Condition": "DLM_2",
+      "GlobalTrial": 173,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 31.5825,
+      "IntensityThreshold": 0.2265726403877365,
+      "ReversalCount": 5,
+      "ReactionTime": 1.1840028762817385
+    },
+    {
+      "ParticipantID": "HWC",
+      "Condition": "DLM_3",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 25.8125,
+      "IntensityThreshold": 0.15558540767955828,
+      "ReversalCount": 6,
+      "ReactionTime": 0.8353796005249023
+    },
+    {
+      "ParticipantID": "HWC",
+      "Condition": "LM_C",
+      "GlobalTrial": 148,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4113867282867431
+    },
+    {
+      "ParticipantID": "HWC",
+      "Condition": "LM_L",
+      "GlobalTrial": 174,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 42.0725,
+      "IntensityThreshold": 0.3767584269785007,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2548854351043701
+    },
+    {
+      "ParticipantID": "HWC",
+      "Condition": "ULM_L",
+      "GlobalTrial": 158,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 17.665,
+      "IntensityThreshold": 0.07503985841861578,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3020799160003662
+    },
+    {
+      "ParticipantID": "HZQ",
+      "Condition": "DLM_2",
+      "GlobalTrial": 164,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 37.915,
+      "IntensityThreshold": 0.3146969653218366,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2996675968170166
+    },
+    {
+      "ParticipantID": "HZQ",
+      "Condition": "DLM_3",
+      "GlobalTrial": 153,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 1.4665353298187256
+    },
+    {
+      "ParticipantID": "HZQ",
+      "Condition": "LM_C",
+      "GlobalTrial": 170,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 32.145,
+      "IntensityThreshold": 0.2340124630149964,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3716192245483398
+    },
+    {
+      "ParticipantID": "HZQ",
+      "Condition": "LM_L",
+      "GlobalTrial": 161,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 33.8375,
+      "IntensityThreshold": 0.25688950012966444,
+      "ReversalCount": 6,
+      "ReactionTime": 1.317368745803833
+    },
+    {
+      "ParticipantID": "HZQ",
+      "Condition": "ULM_L",
+      "GlobalTrial": 174,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 32.24,
+      "IntensityThreshold": 0.2352772288991714,
+      "ReversalCount": 5,
+      "ReactionTime": 0.3721935749053955
+    },
+    {
+      "ParticipantID": "LJS",
+      "Condition": "DLM_2",
+      "GlobalTrial": 170,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 44.8325,
+      "IntensityThreshold": 0.41918517156489127,
+      "ReversalCount": 6,
+      "ReactionTime": 1.913296222686768
+    },
+    {
+      "ParticipantID": "LJS",
+      "Condition": "DLM_3",
+      "GlobalTrial": 132,
+      "TrialInCondition": 27,
+      "ThresholdEstimate": 53.855,
+      "IntensityThreshold": 0.5604062797193454,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2606127262115478
+    },
+    {
+      "ParticipantID": "LJS",
+      "Condition": "LM_C",
+      "GlobalTrial": 176,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 74.1725,
+      "IntensityThreshold": 0.8442437479652574,
+      "ReversalCount": 5,
+      "ReactionTime": 0.8574180603027344
+    },
+    {
+      "ParticipantID": "LJS",
+      "Condition": "LM_L",
+      "GlobalTrial": 155,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 52.58,
+      "IntensityThreshold": 0.5404821859162509,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3315086364746094
+    },
+    {
+      "ParticipantID": "LJS",
+      "Condition": "ULM_L",
+      "GlobalTrial": 175,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 39.2,
+      "IntensityThreshold": 0.3335902277385066,
+      "ReversalCount": 5,
+      "ReactionTime": 0.3122379779815674
+    },
+    {
+      "ParticipantID": "LJY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 154,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 43.5475,
+      "IntensityThreshold": 0.3993370907509104,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1132521629333496
+    },
+    {
+      "ParticipantID": "LJY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 143,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5659079551696777
+    },
+    {
+      "ParticipantID": "LJY",
+      "Condition": "LM_C",
+      "GlobalTrial": 156,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 38.09,
+      "IntensityThreshold": 0.31725289817756197,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5008723735809326
+    },
+    {
+      "ParticipantID": "LJY",
+      "Condition": "LM_L",
+      "GlobalTrial": 128,
+      "TrialInCondition": 26,
+      "ThresholdEstimate": 52.58,
+      "IntensityThreshold": 0.5404821859162509,
+      "ReversalCount": 6,
+      "ReactionTime": 0.355438232421875
+    },
+    {
+      "ParticipantID": "LJY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 161,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 39.5125,
+      "IntensityThreshold": 0.33822706680999504,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2952778339385986
+    },
+    {
+      "ParticipantID": "LY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 165,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 30.16,
+      "IntensityThreshold": 0.2081443595337355,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3081390857696533
+    },
+    {
+      "ParticipantID": "LY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 154,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3217556476593017
+    },
+    {
+      "ParticipantID": "LY",
+      "Condition": "LM_C",
+      "GlobalTrial": 170,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 22.0125,
+      "IntensityThreshold": 0.1148685662223083,
+      "ReversalCount": 4,
+      "ReactionTime": 0.4606602191925049
+    },
+    {
+      "ParticipantID": "LY",
+      "Condition": "LM_L",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3081502914428711
+    },
+    {
+      "ParticipantID": "LY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 155,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 9.13,
+      "IntensityThreshold": 0.020426869574340627,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2989182472229004
+    },
+    {
+      "ParticipantID": "LZ",
+      "Condition": "DLM_2",
+      "GlobalTrial": 168,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 0.8596742153167725
+    },
+    {
+      "ParticipantID": "LZ",
+      "Condition": "DLM_3",
+      "GlobalTrial": 163,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 43.41,
+      "IntensityThreshold": 0.3972224158209856,
+      "ReversalCount": 6,
+      "ReactionTime": 1.6357479095458984
+    },
+    {
+      "ParticipantID": "LZ",
+      "Condition": "LM_C",
+      "GlobalTrial": 178,
+      "TrialInCondition": 39,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5190744400024414
+    },
+    {
+      "ParticipantID": "LZ",
+      "Condition": "LM_L",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 44.8325,
+      "IntensityThreshold": 0.41918517156489127,
+      "ReversalCount": 6,
+      "ReactionTime": 2.514688730239868
+    },
+    {
+      "ParticipantID": "LZ",
+      "Condition": "ULM_L",
+      "GlobalTrial": 179,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 30.8175,
+      "IntensityThreshold": 0.2165919486368037,
+      "ReversalCount": 6,
+      "ReactionTime": 0.7810595035552979
+    },
+    {
+      "ParticipantID": "MY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 181,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 36.4925,
+      "IntensityThreshold": 0.29413545424096327,
+      "ReversalCount": 6,
+      "ReactionTime": 2.0050742626190186
+    },
+    {
+      "ParticipantID": "MY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 177,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 36.4925,
+      "IntensityThreshold": 0.29413545424096327,
+      "ReversalCount": 6,
+      "ReactionTime": 1.469377040863037
+    },
+    {
+      "ParticipantID": "MY",
+      "Condition": "LM_C",
+      "GlobalTrial": 190,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 43.41,
+      "IntensityThreshold": 0.3972224158209856,
+      "ReversalCount": 5,
+      "ReactionTime": 0.6120474338531494
+    },
+    {
+      "ParticipantID": "MY",
+      "Condition": "LM_L",
+      "GlobalTrial": 189,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 42.0725,
+      "IntensityThreshold": 0.3767584269785007,
+      "ReversalCount": 5,
+      "ReactionTime": 0.6018192768096924
+    },
+    {
+      "ParticipantID": "MY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 183,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 26.8475,
+      "IntensityThreshold": 0.16755100461529687,
+      "ReversalCount": 6,
+      "ReactionTime": 0.8455333709716797
+    },
+    {
+      "ParticipantID": "SRQ",
+      "Condition": "DLM_2",
+      "GlobalTrial": 151,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 11.115,
+      "IntensityThreshold": 0.03017458593514853,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5967040061950684
+    },
+    {
+      "ParticipantID": "SRQ",
+      "Condition": "DLM_3",
+      "GlobalTrial": 142,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 33.8375,
+      "IntensityThreshold": 0.25688950012966444,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6419157981872559
+    },
+    {
+      "ParticipantID": "SRQ",
+      "Condition": "LM_C",
+      "GlobalTrial": 158,
+      "TrialInCondition": 39,
+      "ThresholdEstimate": 33.8375,
+      "IntensityThreshold": 0.25688950012966444,
+      "ReversalCount": 6,
+      "ReactionTime": 0.734072208404541
+    },
+    {
+      "ParticipantID": "SRQ",
+      "Condition": "LM_L",
+      "GlobalTrial": 133,
+      "TrialInCondition": 27,
+      "ThresholdEstimate": 36.7625,
+      "IntensityThreshold": 0.2980078005156118,
+      "ReversalCount": 6,
+      "ReactionTime": 0.282207727432251
+    },
+    {
+      "ParticipantID": "SRQ",
+      "Condition": "ULM_L",
+      "GlobalTrial": 144,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 36.7625,
+      "IntensityThreshold": 0.2980078005156118,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2786362171173095
+    },
+    {
+      "ParticipantID": "SWY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 0.7991809844970703
+    },
+    {
+      "ParticipantID": "SWY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 160,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 15.68,
+      "IntensityThreshold": 0.05944728342366172,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3485767841339111
+    },
+    {
+      "ParticipantID": "SWY",
+      "Condition": "LM_C",
+      "GlobalTrial": 149,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 1.0085840225219729
+    },
+    {
+      "ParticipantID": "SWY",
+      "Condition": "LM_L",
+      "GlobalTrial": 166,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5831923484802246
+    },
+    {
+      "ParticipantID": "SWY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 146,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5074622631072998
+    },
+    {
+      "ParticipantID": "WBX",
+      "Condition": "DLM_2",
+      "GlobalTrial": 182,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 39.375,
+      "IntensityThreshold": 0.3361849102191531,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4609944820404053
+    },
+    {
+      "ParticipantID": "WBX",
+      "Condition": "DLM_3",
+      "GlobalTrial": 184,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 44.78,
+      "IntensityThreshold": 0.4183714569432257,
+      "ReversalCount": 6,
+      "ReactionTime": 0.6848158836364746
+    },
+    {
+      "ParticipantID": "WBX",
+      "Condition": "LM_C",
+      "GlobalTrial": 145,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 36.7625,
+      "IntensityThreshold": 0.2980078005156118,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4689795970916748
+    },
+    {
+      "ParticipantID": "WBX",
+      "Condition": "LM_L",
+      "GlobalTrial": 167,
+      "TrialInCondition": 35,
+      "ThresholdEstimate": 48.545,
+      "IntensityThreshold": 0.4771528715925684,
+      "ReversalCount": 6,
+      "ReactionTime": 0.704176664352417
+    },
+    {
+      "ParticipantID": "WBX",
+      "Condition": "ULM_L",
+      "GlobalTrial": 183,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 47.3825,
+      "IntensityThreshold": 0.45893072753875913,
+      "ReversalCount": 5,
+      "ReactionTime": 2.0666608810424805
+    },
+    {
+      "ParticipantID": "WJ",
+      "Condition": "DLM_2",
+      "GlobalTrial": 143,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 33.8375,
+      "IntensityThreshold": 0.25688950012966444,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5800526142120361
+    },
+    {
+      "ParticipantID": "WJ",
+      "Condition": "DLM_3",
+      "GlobalTrial": 129,
+      "TrialInCondition": 26,
+      "ThresholdEstimate": 40.935,
+      "IntensityThreshold": 0.35952426173733315,
+      "ReversalCount": 6,
+      "ReactionTime": 1.8339183330535889
+    },
+    {
+      "ParticipantID": "WJ",
+      "Condition": "LM_C",
+      "GlobalTrial": 149,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1604626178741455
+    },
+    {
+      "ParticipantID": "WJ",
+      "Condition": "LM_L",
+      "GlobalTrial": 162,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 33.18,
+      "IntensityThreshold": 0.24791703935952192,
+      "ReversalCount": 6,
+      "ReactionTime": 2.381047010421753
+    },
+    {
+      "ParticipantID": "WJ",
+      "Condition": "ULM_L",
+      "GlobalTrial": 160,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 23.8275,
+      "IntensityThreshold": 0.1336661824497384,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5310025215148926
+    },
+    {
+      "ParticipantID": "WY",
+      "Condition": "DLM_2",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 33.7425,
+      "IntensityThreshold": 0.25558659751988283,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3206431865692138
+    },
+    {
+      "ParticipantID": "WY",
+      "Condition": "DLM_3",
+      "GlobalTrial": 165,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 15.68,
+      "IntensityThreshold": 0.05944728342366172,
+      "ReversalCount": 6,
+      "ReactionTime": 1.420750856399536
+    },
+    {
+      "ParticipantID": "WY",
+      "Condition": "LM_C",
+      "GlobalTrial": 169,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 92.4933,
+      "IntensityThreshold": 0.9861603808558479,
+      "ReversalCount": 3,
+      "ReactionTime": 0.3128845691680908
+    },
+    {
+      "ParticipantID": "WY",
+      "Condition": "LM_L",
+      "GlobalTrial": 140,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 32.415,
+      "IntensityThreshold": 0.23761322501871973,
+      "ReversalCount": 6,
+      "ReactionTime": 2.5569732189178467
+    },
+    {
+      "ParticipantID": "WY",
+      "Condition": "ULM_L",
+      "GlobalTrial": 158,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 29.395,
+      "IntensityThreshold": 0.19847257424615955,
+      "ReversalCount": 6,
+      "ReactionTime": 4.381068229675293
+    },
+    {
+      "ParticipantID": "WYY1",
+      "Condition": "DLM_2",
+      "GlobalTrial": 155,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 29.395,
+      "IntensityThreshold": 0.19847257424615955,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3559961318969726
+    },
+    {
+      "ParticipantID": "WYY1",
+      "Condition": "DLM_3",
+      "GlobalTrial": 172,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 27.0175,
+      "IntensityThreshold": 0.16955031484901126,
+      "ReversalCount": 5,
+      "ReactionTime": 0.357163667678833
+    },
+    {
+      "ParticipantID": "WYY1",
+      "Condition": "LM_C",
+      "GlobalTrial": 158,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 9.13,
+      "IntensityThreshold": 0.020426869574340627,
+      "ReversalCount": 6,
+      "ReactionTime": 0.0811014175415039
+    },
+    {
+      "ParticipantID": "WYY1",
+      "Condition": "LM_L",
+      "GlobalTrial": 173,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 25.595,
+      "IntensityThreshold": 0.15311677843410992,
+      "ReversalCount": 5,
+      "ReactionTime": 0.5983235836029053
+    },
+    {
+      "ParticipantID": "WYY1",
+      "Condition": "ULM_L",
+      "GlobalTrial": 137,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 0.2765371799468994
+    },
+    {
+      "ParticipantID": "WYY2",
+      "Condition": "DLM_2",
+      "GlobalTrial": 169,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 40.7975,
+      "IntensityThreshold": 0.3574527281419525,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1327762603759766
+    },
+    {
+      "ParticipantID": "WYY2",
+      "Condition": "DLM_3",
+      "GlobalTrial": 190,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 43.035,
+      "IntensityThreshold": 0.39146498339156804,
+      "ReversalCount": 5,
+      "ReactionTime": 0.7119569778442383
+    },
+    {
+      "ParticipantID": "WYY2",
+      "Condition": "LM_C",
+      "GlobalTrial": 189,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 32.91,
+      "IntensityThreshold": 0.24426346574012714,
+      "ReversalCount": 5,
+      "ReactionTime": 0.3476333618164062
+    },
+    {
+      "ParticipantID": "WYY2",
+      "Condition": "LM_L",
+      "GlobalTrial": 179,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 42.0725,
+      "IntensityThreshold": 0.3767584269785007,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4601466655731201
+    },
+    {
+      "ParticipantID": "WYY2",
+      "Condition": "ULM_L",
+      "GlobalTrial": 186,
+      "TrialInCondition": 39,
+      "ThresholdEstimate": 42.0725,
+      "IntensityThreshold": 0.3767584269785007,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4089806079864502
+    },
+    {
+      "ParticipantID": "WZR",
+      "Condition": "DLM_2",
+      "GlobalTrial": 167,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 19.2625,
+      "IntensityThreshold": 0.08879140956041337,
+      "ReversalCount": 6,
+      "ReactionTime": 1.4949917793273926
+    },
+    {
+      "ParticipantID": "WZR",
+      "Condition": "DLM_3",
+      "GlobalTrial": 189,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 15.68,
+      "IntensityThreshold": 0.05944728342366172,
+      "ReversalCount": 6,
+      "ReactionTime": 0.727705717086792
+    },
+    {
+      "ParticipantID": "WZR",
+      "Condition": "LM_C",
+      "GlobalTrial": 191,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 60.44,
+      "IntensityThreshold": 0.6610667574589838,
+      "ReversalCount": 3,
+      "ReactionTime": 3.1657423973083496
+    },
+    {
+      "ParticipantID": "WZR",
+      "Condition": "LM_L",
+      "GlobalTrial": 179,
+      "TrialInCondition": 37,
+      "ThresholdEstimate": 17.665,
+      "IntensityThreshold": 0.07503985841861578,
+      "ReversalCount": 6,
+      "ReactionTime": 1.7165133953094482
+    },
+    {
+      "ParticipantID": "WZR",
+      "Condition": "ULM_L",
+      "GlobalTrial": 190,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 14.135,
+      "IntensityThreshold": 0.04849343685397723,
+      "ReversalCount": 5,
+      "ReactionTime": 0.4773693084716797
+    },
+    {
+      "ParticipantID": "WZT",
+      "Condition": "DLM_2",
+      "GlobalTrial": 115,
+      "TrialInCondition": 27,
+      "ThresholdEstimate": 79.61,
+      "IntensityThreshold": 0.9008773913511369,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3530848026275635
+    },
+    {
+      "ParticipantID": "WZT",
+      "Condition": "DLM_3",
+      "GlobalTrial": 96,
+      "TrialInCondition": 20,
+      "ThresholdEstimate": 78.155,
+      "IntensityThreshold": 0.8868040057698595,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3745801448822021
+    },
+    {
+      "ParticipantID": "WZT",
+      "Condition": "LM_C",
+      "GlobalTrial": 107,
+      "TrialInCondition": 23,
+      "ThresholdEstimate": 61.96,
+      "IntensityThreshold": 0.6834779353708547,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1311419010162354
+    },
+    {
+      "ParticipantID": "WZT",
+      "Condition": "LM_L",
+      "GlobalTrial": 93,
+      "TrialInCondition": 19,
+      "ThresholdEstimate": 69.24,
+      "IntensityThreshold": 0.784151691270158,
+      "ReversalCount": 6,
+      "ReactionTime": 0.7348287105560303
+    },
+    {
+      "ParticipantID": "WZT",
+      "Condition": "ULM_L",
+      "GlobalTrial": 129,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 82.3775,
+      "IntensityThreshold": 0.9253115225778051,
+      "ReversalCount": 6,
+      "ReactionTime": 1.7555184364318848
+    },
+    {
+      "ParticipantID": "YF",
+      "Condition": "DLM_2",
+      "GlobalTrial": 158,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 28.8325,
+      "IntensityThreshold": 0.19147176158000492,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5422635078430176
+    },
+    {
+      "ParticipantID": "YF",
+      "Condition": "DLM_3",
+      "GlobalTrial": 155,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 27.41,
+      "IntensityThreshold": 0.17420227664204518,
+      "ReversalCount": 6,
+      "ReactionTime": 1.5660161972045898
+    },
+    {
+      "ParticipantID": "YF",
+      "Condition": "LM_C",
+      "GlobalTrial": 159,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 25.8125,
+      "IntensityThreshold": 0.15558540767955828,
+      "ReversalCount": 6,
+      "ReactionTime": 1.92466402053833
+    },
+    {
+      "ParticipantID": "YF",
+      "Condition": "LM_L",
+      "GlobalTrial": 175,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 62.8775,
+      "IntensityThreshold": 0.6968065123274194,
+      "ReversalCount": 4,
+      "ReactionTime": 1.0441555976867676
+    },
+    {
+      "ParticipantID": "YF",
+      "Condition": "ULM_L",
+      "GlobalTrial": 174,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 44.34,
+      "IntensityThreshold": 0.41156069650446275,
+      "ReversalCount": 5,
+      "ReactionTime": 0.2640693187713623
+    },
+    {
+      "ParticipantID": "YJN",
+      "Condition": "DLM_2",
+      "GlobalTrial": 149,
+      "TrialInCondition": 30,
+      "ThresholdEstimate": 54.1575,
+      "IntensityThreshold": 0.5651203355940372,
+      "ReversalCount": 6,
+      "ReactionTime": 1.707068920135498
+    },
+    {
+      "ParticipantID": "YJN",
+      "Condition": "DLM_3",
+      "GlobalTrial": 170,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 76.9233,
+      "IntensityThreshold": 0.874257697713932,
+      "ReversalCount": 3,
+      "ReactionTime": 0.6563982963562012
+    },
+    {
+      "ParticipantID": "YJN",
+      "Condition": "LM_C",
+      "GlobalTrial": 167,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 51.1925,
+      "IntensityThreshold": 0.5187273647954725,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3143846988677978
+    },
+    {
+      "ParticipantID": "YJN",
+      "Condition": "LM_L",
+      "GlobalTrial": 141,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 43.495,
+      "IntensityThreshold": 0.398529445593252,
+      "ReversalCount": 6,
+      "ReactionTime": 0.3925330638885498
+    },
+    {
+      "ParticipantID": "YJN",
+      "Condition": "ULM_L",
+      "GlobalTrial": 158,
+      "TrialInCondition": 33,
+      "ThresholdEstimate": 47.4075,
+      "IntensityThreshold": 0.45932211228565134,
+      "ReversalCount": 6,
+      "ReactionTime": 0.9685866832733154
+    },
+    {
+      "ParticipantID": "YST",
+      "Condition": "DLM_2",
+      "GlobalTrial": 141,
+      "TrialInCondition": 31,
+      "ThresholdEstimate": 39.5125,
+      "IntensityThreshold": 0.33822706680999504,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5842251777648926
+    },
+    {
+      "ParticipantID": "YST",
+      "Condition": "DLM_3",
+      "GlobalTrial": 117,
+      "TrialInCondition": 24,
+      "ThresholdEstimate": 46.16,
+      "IntensityThreshold": 0.43982762059514413,
+      "ReversalCount": 6,
+      "ReactionTime": 1.1197032928466797
+    },
+    {
+      "ParticipantID": "YST",
+      "Condition": "LM_C",
+      "GlobalTrial": 134,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 51.295,
+      "IntensityThreshold": 0.5203362014130376,
+      "ReversalCount": 6,
+      "ReactionTime": 5.576984882354736
+    },
+    {
+      "ParticipantID": "YST",
+      "Condition": "LM_L",
+      "GlobalTrial": 151,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 71.795,
+      "IntensityThreshold": 0.8162242477266988,
+      "ReversalCount": 2,
+      "ReactionTime": 0.3166468143463135
+    },
+    {
+      "ParticipantID": "YST",
+      "Condition": "ULM_L",
+      "GlobalTrial": 133,
+      "TrialInCondition": 28,
+      "ThresholdEstimate": 36.7625,
+      "IntensityThreshold": 0.2980078005156118,
+      "ReversalCount": 6,
+      "ReactionTime": 1.36214280128479
+    },
+    {
+      "ParticipantID": "YYX",
+      "Condition": "DLM_2",
+      "GlobalTrial": 179,
+      "TrialInCondition": 38,
+      "ThresholdEstimate": 43.0875,
+      "IntensityThreshold": 0.39227013536423544,
+      "ReversalCount": 6,
+      "ReactionTime": 1.4403884410858154
+    },
+    {
+      "ParticipantID": "YYX",
+      "Condition": "DLM_3",
+      "GlobalTrial": 184,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 46.33,
+      "IntensityThreshold": 0.44247941219239034,
+      "ReversalCount": 4,
+      "ReactionTime": 1.5450737476348877
+    },
+    {
+      "ParticipantID": "YYX",
+      "Condition": "LM_C",
+      "GlobalTrial": 183,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 41.95,
+      "IntensityThreshold": 0.3748944866989532,
+      "ReversalCount": 4,
+      "ReactionTime": 1.1771414279937744
+    },
+    {
+      "ParticipantID": "YYX",
+      "Condition": "LM_L",
+      "GlobalTrial": 157,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 56.605,
+      "IntensityThreshold": 0.6030081606792598,
+      "ReversalCount": 6,
+      "ReactionTime": 0.1298496723175048
+    },
+    {
+      "ParticipantID": "YYX",
+      "Condition": "ULM_L",
+      "GlobalTrial": 165,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 38.0475,
+      "IntensityThreshold": 0.3166316608449725,
+      "ReversalCount": 6,
+      "ReactionTime": 1.3802001476287842
+    },
+    {
+      "ParticipantID": "YZX",
+      "Condition": "DLM_2",
+      "GlobalTrial": 143,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 29.395,
+      "IntensityThreshold": 0.19847257424615955,
+      "ReversalCount": 6,
+      "ReactionTime": 3.123077869415283
+    },
+    {
+      "ParticipantID": "YZX",
+      "Condition": "DLM_3",
+      "GlobalTrial": 167,
+      "TrialInCondition": 36,
+      "ThresholdEstimate": 35.435,
+      "IntensityThreshold": 0.27911397236427865,
+      "ReversalCount": 6,
+      "ReactionTime": 1.4795417785644531
+    },
+    {
+      "ParticipantID": "YZX",
+      "Condition": "LM_C",
+      "GlobalTrial": 171,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 30.16,
+      "IntensityThreshold": 0.2081443595337355,
+      "ReversalCount": 6,
+      "ReactionTime": 2.018712282180786
+    },
+    {
+      "ParticipantID": "YZX",
+      "Condition": "LM_L",
+      "GlobalTrial": 161,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 29.395,
+      "IntensityThreshold": 0.19847257424615955,
+      "ReversalCount": 6,
+      "ReactionTime": 2.364819288253784
+    },
+    {
+      "ParticipantID": "YZX",
+      "Condition": "ULM_L",
+      "GlobalTrial": 154,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 33.8375,
+      "IntensityThreshold": 0.25688950012966444,
+      "ReversalCount": 6,
+      "ReactionTime": 0.9440817832946776
+    },
+    {
+      "ParticipantID": "ZYH",
+      "Condition": "DLM_2",
+      "GlobalTrial": 154,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 11.115,
+      "IntensityThreshold": 0.03017458593514853,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5774333477020264
+    },
+    {
+      "ParticipantID": "ZYH",
+      "Condition": "DLM_3",
+      "GlobalTrial": 141,
+      "TrialInCondition": 29,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 0.8510959148406982
+    },
+    {
+      "ParticipantID": "ZYH",
+      "Condition": "LM_C",
+      "GlobalTrial": 156,
+      "TrialInCondition": 32,
+      "ThresholdEstimate": 22.23,
+      "IntensityThreshold": 0.11705632119516347,
+      "ReversalCount": 6,
+      "ReactionTime": 0.5891988277435303
+    },
+    {
+      "ParticipantID": "ZYH",
+      "Condition": "LM_L",
+      "GlobalTrial": 161,
+      "TrialInCondition": 34,
+      "ThresholdEstimate": 19.2625,
+      "IntensityThreshold": 0.08879140956041337,
+      "ReversalCount": 6,
+      "ReactionTime": 0.4793517589569092
+    },
+    {
+      "ParticipantID": "ZYH",
+      "Condition": "ULM_L",
+      "GlobalTrial": 167,
+      "TrialInCondition": 40,
+      "ThresholdEstimate": 23.61,
+      "IntensityThreshold": 0.13134954054601078,
+      "ReversalCount": 5,
+      "ReactionTime": 1.3914246559143066
+    }
+  ],
+  "output_files": {
+    "threshold_bar_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Thresholds.pdf",
+    "threshold_bar_svg": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Thresholds.svg",
+    "threshold_bar_png": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Thresholds.png",
+    "threshold_box_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Thresholds_Strength_Boxplot.pdf",
+    "psychometric_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Psychometric_Curves.pdf",
+    "staircase_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Staircase_Trajectories.pdf",
+    "rt_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_ReactionTime_Distribution.pdf",
+    "reversal_heatmap_pdf": "d:\\Data\\OneDrive\\Papers\\SWIM\\Codes\\Experiment 2 & Supp-1\\Analysis\\Experiment_2\\Experiment2_Reversal_Heatmap.pdf"
+  }
+}
