@@ -4,11 +4,30 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import json
+import matplotlib.lines as mlines
 
-sns.set_theme(style="whitegrid")
-plt.rcParams['font.sans-serif'] = ['Arial']
-plt.rcParams['axes.unicode_minus'] = False
+# Nature style formatting
+plt.rcParams.update({
+    'font.family': 'sans-serif',
+    'font.sans-serif': ['Arial'],
+    'axes.unicode_minus': False,
+    'axes.labelsize': 8,
+    'axes.titlesize': 8,
+    'xtick.labelsize': 7,
+    'ytick.labelsize': 7,
+    'legend.fontsize': 7,
+    'legend.title_fontsize': 8,
+    'lines.linewidth': 1.0,
+    'axes.linewidth': 0.8,
+    'pdf.fonttype': 42,
+    'ps.fonttype': 42
+})
+
+sns.set_theme(style="ticks", rc={
+    'font.family': 'sans-serif',
+    'font.sans-serif': ['Arial'],
+    'axes.unicode_minus': False,
+})
 
 METHOD_COLORS = {
     'ULM_L': '#443983',
@@ -19,7 +38,7 @@ METHOD_COLORS = {
 }
 
 # 1. Individual Differences Plot (Experiment 1)
-def plot_individual_differences():
+def plot_individual_differences(axes):
     base_dir = r"Codes/Experiment 1/Data"
     all_files = glob.glob(os.path.join(base_dir, "*.csv"))
     
@@ -31,7 +50,13 @@ def plot_individual_differences():
         
         # We look at ULM_L wins vs total ULM_L appearances
         for block in ['Intensity', 'Spatial']:
-            winner_col = f'Chosen_{block}'
+            if block == 'Intensity':
+                winner_col = 'Chosen_Intensity'
+            elif block == 'Spatial':
+                winner_col = 'Chosen_Clarity'
+            else:
+                winner_col = f'Chosen_{block}'
+
             if winner_col not in df.columns:
                 continue
                 
@@ -53,35 +78,31 @@ def plot_individual_differences():
 
     pref_df = pd.DataFrame(preferences)
     
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    
     for i, block in enumerate(['Intensity', 'Spatial']):
         block_df = pref_df[pref_df['Block'] == block].copy()
         # Sort by win ratio
         block_df = block_df.sort_values('WinRatio', ascending=False).reset_index(drop=True)
         
         ax = axes[i]
-        sns.barplot(data=block_df, x=block_df.index, y='WinRatio', ax=ax, color=METHOD_COLORS['ULM_L'])
-        ax.axhline(0.5, color='r', linestyle='--', label='Chance Level (50%)')
-        ax.set_title(f'ULM_L Preference Ratio ({block})', fontweight='bold', fontsize=14)
-        ax.set_ylabel('Win Ratio when ULM_L is present', fontweight='bold', fontsize=12)
-        ax.set_xlabel('Participant (Sorted)', fontweight='bold', fontsize=12)
+        sns.barplot(data=block_df, x=block_df.index, y='WinRatio', ax=ax, color=METHOD_COLORS['ULM_L'], edgecolor='none')
+        ax.axhline(0.5, color='gray', linestyle='--', linewidth=1, label='Chance Level (50%)')
+        
+        ax.set_title(f'ULM$_L$ Preference Ratio ({block})')
+        ax.set_ylabel('Win Ratio when ULM$_L$ is present')
+        ax.set_xlabel('Participant (Sorted)')
         ax.set_xticks([])
         ax.set_ylim(0, 1.05)
+        
+        sns.despine(ax=ax)
+        
         if i == 0:
-            ax.legend()
-            
-    plt.tight_layout()
-    os.makedirs('Image/SI', exist_ok=True)
-    plt.savefig('Image/SI/Figure_Individual_Preferences.pdf', dpi=300)
-    plt.savefig('Image/SI/Figure_Individual_Preferences.png', dpi=300)
-    print("Saved Figure_Individual_Preferences")
+            ax.legend(frameon=False, loc='upper right')
 
 # 2. Staircase Trajectory Plot (Experiment 2)
-def plot_staircase_trajectory():
+def plot_staircase_trajectory(ax):
     base_dir = r"Codes/Experiment 2 & Supp-1/Data/Experiment_2"
-    # Choose a representative participant, e.g., CHY
-    file_path = os.path.join(base_dir, "CHY_experiment2.csv")
+    # Choose a representative participant, e.g., FLH
+    file_path = os.path.join(base_dir, "FLH_experiment2.csv")
     if not os.path.exists(file_path):
         all_files = glob.glob(os.path.join(base_dir, "*.csv"))
         if len(all_files) > 0:
@@ -92,45 +113,59 @@ def plot_staircase_trajectory():
 
     df = pd.read_csv(file_path)
     
-    # We want TrialInCondition and StrengthBefore (or IntensityLevel)
-    fig, ax = plt.subplots(figsize=(10, 6))
-    
     methods = df['Condition'].unique()
     for method in methods:
         method_df = df[df['Condition'] == method].sort_values('TrialInCondition').copy()
         
         # Plot physical intensity (IntensityLevel) or firmware Strength (StrengthBefore)
         ax.plot(method_df['TrialInCondition'], method_df['IntensityLevel'], 
-                marker='o', markersize=5, label=method, 
-                color=METHOD_COLORS.get(method, 'k'), linewidth=1.5)
+                marker='o', markersize=3, label=method, 
+                color=METHOD_COLORS.get(method, 'k'), linewidth=1.0, alpha=0.8)
         
         # Mark reversals
         reversals = method_df[method_df['ReversalHappened'] == 1]
         ax.scatter(reversals['TrialInCondition'], reversals['IntensityLevel'],
-                   color='red', s=60, zorder=5, marker='x')
+                   color='red', s=20, zorder=5, marker='x')
             
-    ax.set_title('Adaptive Staircase Convergence (Participant: CHY)', fontweight='bold', fontsize=16)
-    ax.set_xlabel('Trial Number within Condition', fontweight='bold', fontsize=14)
-    ax.set_ylabel('Stimulus Intensity ($I_{norm}$)', fontweight='bold', fontsize=14)
-    ax.legend(title='Modulation Method')
+    ax.set_title('Adaptive Staircase Convergence (Participant: No 5)')
+    ax.set_xlabel('Trial Number within Condition')
+    ax.set_ylabel('Stimulus Intensity ($I_{norm}$)')
+    
+    sns.despine(ax=ax)
     
     # custom legend for reversal
-    import matplotlib.lines as mlines
     reversal_marker = mlines.Line2D([], [], color='red', marker='x', linestyle='None',
-                              markersize=8, label='Reversal')
+                              markersize=5, label='Reversal')
     handles, labels = ax.get_legend_handles_labels()
     # Remove duplicates from legend (because scatter might add something weird)
     by_label = dict(zip(labels, handles))
     by_label['Reversal'] = reversal_marker
-    ax.legend(by_label.values(), by_label.keys(), title='Modulation Method', loc='upper right')
-    
-    plt.tight_layout()
-    plt.savefig('Image/SI/Figure_Staircase_Trajectory.pdf', dpi=300)
-    plt.savefig('Image/SI/Figure_Staircase_Trajectory.png', dpi=300)
-    print("Saved Figure_Staircase_Trajectory")
+    ax.legend(by_label.values(), by_label.keys(), title='Modulation Method', loc='upper right', frameon=False)
 
+def create_combined_figure():
+    # Nature double column width is ~183 mm (7.2 inches)
+    fig = plt.figure(figsize=(7.2, 6))
+    
+    # Create GridSpec
+    gs = fig.add_gridspec(2, 2, height_ratios=[1, 1.2], hspace=0.35, wspace=0.25, 
+                          left=0.08, right=0.98, top=0.92, bottom=0.08)
+    
+    ax_a1 = fig.add_subplot(gs[0, 0])
+    ax_a2 = fig.add_subplot(gs[0, 1])
+    ax_b = fig.add_subplot(gs[1, :])
+    
+    # Plot data
+    plot_individual_differences([ax_a1, ax_a2])
+    plot_staircase_trajectory(ax_b)
+    
+    # Add panel labels
+    fig.text(0.01, 0.98, 'a', fontsize=20, fontweight='bold', fontfamily='Arial')
+    fig.text(0.01, 0.48, 'b', fontsize=20, fontweight='bold', fontfamily='Arial')
+    
+    os.makedirs('Image/SI', exist_ok=True)
+    plt.savefig('Image/SI/Figure_Supplementary_Behavioral_Consistency.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('Image/SI/Figure_Supplementary_Behavioral_Consistency.png', dpi=300, bbox_inches='tight')
+    print("Saved Figure_Supplementary_Behavioral_Consistency")
 
 if __name__ == '__main__':
-    plot_individual_differences()
-    plot_staircase_trajectory()
-
+    create_combined_figure()

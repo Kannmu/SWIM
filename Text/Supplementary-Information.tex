@@ -73,9 +73,9 @@
 \SupplementarySection{Background of the ultrasound mid-air haptic}
 \label{sec:background_ultrasound_mid_air_haptic}
 
-Ultrasound mid-air haptics (UMH) technology delivers tactile feedback without physical contact by focusing airborne acoustic waves onto the skin surface~\cite{hoshiIntroductionUltrasonicMidair2022, rakkolainenSurveyMidAirUltrasound2021}. This interaction relies on acoustic radiation pressure, a non-linear effect arising from the momentum transfer of the acoustic field to an object~\cite{kingAcousticRadiationPressure1934a}. Because the acoustic impedance mismatch between air and human skin is approximately 99.9\%, incident ultrasound waves are almost entirely reflected. This reflection exerts a net force perpendicular to the skin surface~\cite{hoshiIntroductionUltrasonicMidair2022}. To produce perceptible forces, UMH systems employ phased arrays of transducers to generate constructive interference at specific spatial locations, creating a high-intensity acoustic focus~\cite{rakkolainenSurveyMidAirUltrasound2021, priceFibonacciSpiralArranged2018}.
+Ultrasound mid-air haptics (UMH) delivers tactile feedback without physical contact by focusing airborne acoustic waves onto the skin~\cite{hoshiIntroductionUltrasonicMidair2022, rakkolainenSurveyMidAirUltrasound2021}. This interaction depends on acoustic radiation pressure, a non-linear momentum transfer from the acoustic field to the tissue~\cite{kingAcousticRadiationPressure1934a}. The ~99.9\% acoustic impedance mismatch between air and human skin causes near-total reflection of incident ultrasound, exerting a net normal force~\cite{hoshiIntroductionUltrasonicMidair2022}. UMH systems use phased transducer arrays to generate constructive interference and create a high-intensity acoustic focus~\cite{rakkolainenSurveyMidAirUltrasound2021, priceFibonacciSpiralArranged2018}.
 
-Because the carrier frequency of these systems (typically \qty{40}{\kHz}) far exceeds the temporal sensitivity of cutaneous mechanoreceptors ($<\qty{1}{\kHz}$)~\cite{johnsonRolesFunctionsCutaneous2001, mountcastleNeuralBasisSense1967}, the acoustic field requires modulation to elicit tactile sensations. Amplitude Modulation (AM) varies the focal intensity at a perceptible frequency (e.g., \qty{200}{\Hz}) to activate Pacinian corpuscles~\cite{hoshiIntroductionUltrasonicMidair2022}. Alternatively, Spatiotemporal Modulation (STM) or Lateral Modulation (LM) rapidly steers the focal point along a trajectory on the skin~\cite{takahashiTactileStimulationRepetitive2020}. This scanning approach distributes acoustic energy over a larger area and generates shear shock waves in the skin, which enhances the perceived intensity and spatial extent of the tactile stimuli~\cite{reardonCutaneousWavePropagation2019, reardonShearShockWaves2023}.
+Because the typical \qty{40}{\kHz} carrier frequency exceeds the $<\qty{1}{\kHz}$ sensitivity of cutaneous mechanoreceptors~\cite{johnsonRolesFunctionsCutaneous2001, mountcastleNeuralBasisSense1967}, the field requires modulation. Amplitude Modulation (AM) varies focal intensity at perceptible frequencies (e.g., \qty{200}{\Hz}) to activate Pacinian corpuscles~\cite{hoshiIntroductionUltrasonicMidair2022}. Spatiotemporal Modulation (STM) or Lateral Modulation (LM) rapidly steers the focal point along a skin trajectory~\cite{takahashiTactileStimulationRepetitive2020}. This scanning approach distributes acoustic energy and generates cutaneous shear shock waves, increasing the perceived intensity and spatial extent of the stimulus~\cite{reardonCutaneousWavePropagation2019, reardonShearShockWaves2023}.
 
 
 
@@ -100,16 +100,16 @@ Because the carrier frequency of these systems (typically \qty{40}{\kHz}) far ex
 \end{figure}
 
 
-We developed a custom high-energy-density Ultrasound Mid-Air Haptic (UMH) device for this study (\cref{fig:supplementary_figure_umh_device}a). The system integrates a phased array of ultrasonic transducers, multi-channel driving circuitry, and a central processing unit into a compact hexagonal prism form factor (\qtyproduct{102.2 x 90 x 32.2}{\milli\meter}).
+We engineered a high-energy-density Ultrasound Mid-Air Haptic (UMH) device (\cref{fig:supplementary_figure_umh_device}a) integrating a phased transducer array, multi-channel driving circuitry, and a central processing unit into a \qtyproduct{102.2 x 90 x 32.2}{\milli\meter} hexagonal prism.
 
 
-The acoustic aperture consists of 60 airborne ultrasonic transducers (GU1007C-40TR, Dongguan Ninghai Electronics Co., Ltd.) arranged in a hexagonal close-packed (HCP) lattice. The transducers have a diameter of \qty{10}{\milli\meter} and are spaced with a center-to-center pitch of \qty{10}{\milli\meter}, which maximizes the fill factor for efficient acoustic power generation. A central aperture accommodates a CMOS image sensor for future visual tracking integration (\cref{fig:supplementary_figure_umh_device}b). Each transducer operates at a center frequency of \qty{40}{\kilo\hertz} with a directivity of approximately \ang{80}.
+The \qty{40}{\kilo\hertz} acoustic aperture comprises 60 \qty{10}{\milli\meter}-diameter airborne ultrasonic transducers (GU1007C-40TR) in a \qty{10}{\milli\meter}-pitch hexagonal close-packed (HCP) lattice, maximizing the fill factor. A central aperture houses a CMOS image sensor (\cref{fig:supplementary_figure_umh_device}b). Each transducer has a directivity of approximately \ang{80}.
 
-A \qty{12}{\volt} DC input powers the device, regulated to provide \qty{3.3}{\volt} and \qty{5.0}{\volt} rails for logic and analog subsystems. The core control unit is an STM32H750VBT6 microcontroller (STMicroelectronics) based on the ARM Cortex-M7 core. The MCU handles communication with the host PC via a USB Type-C interface using the CDC virtual serial port protocol.
+The device is powered by a \qty{12}{\volt} DC input and controlled by an STM32H750VBT6 microcontroller communicating via USB Type-C.
 
-A Direct Memory Access (DMA) based signal generation mechanism controls the beamforming phase. The MCU's timer triggers DMA transfers at a sampling frequency of \qty{4}{\mega\hertz}, updating the output state of the GPIO ports. For the \qty{40}{\kilo\hertz} carrier wave, the system discretizes each acoustic cycle into 100 time slices, providing a phase resolution of $2\pi/100$ (temporal resolution of \qty{250}{\nano\second}).
+Beamforming phase is controlled by Direct Memory Access (DMA) signal generation. Timer-triggered DMA transfers update GPIO states at \qty{4}{\mega\hertz}, discretizing each \qty{40}{\kilo\hertz} acoustic cycle into 100 slices for a phase resolution of $2\pi/100$ (\qty{250}{\nano\second}).
 
-The amplification stage uses a bipolar drive topology to maximize the acoustic pressure output from the available \qty{12}{\volt} supply. As illustrated in the schematic (\cref{fig:supplementary_figure_transducer_driver_circuit}), the logic-level signal (SIG) feeds into a dual-channel low-side MOSFET driver (IX4428MTR, IXYS Integrated Circuits Division). The driver outputs two complementary square waves (OUTA and OUTB) to the transducer terminals. This push-pull configuration doubles the voltage swing across the piezoelectric element to \qty{24}{\volt} peak-to-peak (Vpp). Each channel includes a transient voltage suppressor (TVS) diode (ESD5451N) for electrostatic discharge protection and a status LED for visual monitoring of channel activity (\cref{fig:supplementary_figure_umh_device}g).
+The amplification stage employs a bipolar drive topology to maximize acoustic pressure (\cref{fig:supplementary_figure_transducer_driver_circuit}). Logic-level signals feed a dual-channel low-side MOSFET driver (IX4428MTR), which outputs complementary square waves to the transducer terminals. This push-pull configuration applies \qty{24}{\volt} peak-to-peak across the piezoelectric elements. Channels feature TVS diode electrostatic protection (ESD5451N) and visual status LEDs (\cref{fig:supplementary_figure_umh_device}g).
 
 \begin{figure}[htbp]
     \centering
@@ -118,7 +118,7 @@ The amplification stage uses a bipolar drive topology to maximize the acoustic p
     \label{fig:supplementary_figure_intensity_test}
 \end{figure}
 
-Experiment 2 required the device output to be adjustable in physically meaningful and approximately equal perceptual increments to support absolute detection-threshold measurements. However, the firmware controls ultrasonic emission strength through pulse-width modulation of the bipolar driver stage rather than through a linear acoustic amplitude source. As a result, the user-level strength parameter is not linearly proportional to the emitted acoustic pressure or to the resulting acoustic radiation force on the skin. Because the adaptive staircase procedure assumes a monotonic and well-characterized mapping between command level and physical stimulus magnitude, we derived and validated the transfer function from the PWM command to the effective acoustic output.
+Absolute detection-threshold measurements in Experiment 2 required device output adjustments in equal perceptual increments. Because the firmware controls emission strength via pulse-width modulation rather than a linear acoustic amplitude source, the user-level strength parameter is not linearly proportional to the emitted acoustic pressure or skin radiation force. We derived and validated the transfer function from the PWM command to acoustic output to establish the monotonic mapping required by the adaptive staircase procedure.
 
 The derivation starts from the bipolar square-wave excitation applied to each transducer at the carrier frequency of \qty{40}{\kilo\hertz}. Let $D$ denote the one-sided PWM duty ratio within the available half-cycle control range, with $D \in [0,0.5]$. In the firmware, the dimensionless strength command $S \in [0,100]$ maps linearly to the duty ratio according to
 \begin{equation}
@@ -140,11 +140,9 @@ or equivalently
 \begin{equation}
     I_{\mathrm{norm}}(S) = \sin^2\!\left(\frac{\pi}{2}\frac{S}{100}\right).
 \end{equation}
-These expressions define the ideal command-to-output transfer law expected from the hardware if the transducer, driver, and acoustic propagation stages remain approximately linear at the carrier frequency.
+These expressions define the expected hardware transfer function assuming linear transducer, driver, and acoustic propagation stages at the carrier frequency. We measured this transfer function using a test fixture (\cref{fig:supplementary_figure_intensity_test}a). A 3D-printed PETG holder registered to the array housing positioned a receiver transducer (identical to the transmitting elements) at the nominal geometric focus $(0,0,\qty{0.1}{\meter})$. This ensured consistent recording at the exact focal target used in psychophysical experiments.
 
-We performed a benchtop calibration experiment to test this prediction. The measurement setup is shown in \cref{fig:supplementary_figure_intensity_test}a. A custom 3D-printed PETG holder mechanically registered to the outer geometry of the phased-array housing. The holder positioned a receiver transducer of the same model as the transmitting elements directly above the geometric center of the array at the nominal focus location $(0,0,\qty{0.1}{\meter})$. This arrangement minimized placement variability and ensured that all recordings occurred at a fixed spatial point coincident with the focal target used in the psychophysical experiments.
-
-During calibration, we configured the UMH device in a static single-focus mode, keeping the focal point fixed at the center of the measurement volume. We swept the strength command from $S=5$ to $S=100$ in increments of 5, corresponding to 20 sampled duty ratios from $D=0.025$ to $D=0.5$. At each setting, we recorded the steady-state peak-to-peak voltage $V_{pp}(S)$ generated across the receiver transducer terminals using an oscilloscope (DS1104, RIGOL TECHNOLOGIES CO., LTD). The maximum measured value occurred at full-scale drive, where $V_{pp}(100)=\qty{14.1}{\volt}$. We then formed the measured normalized pressure as
+With the UMH device in a static single-focus mode, we swept the strength command $S$ from 5 to 100 (increments of 5; duty ratios $D=0.025$ to $0.5$). We recorded the steady-state peak-to-peak voltage $V_{pp}(S)$ across the receiver terminals (DS1104, Rigol). The maximum voltage $V_{pp}(100)=\qty{14.1}{\volt}$ occurred at full-scale drive. Normalized pressure was calculated as
 \begin{equation}
     \widehat{P}_{\mathrm{norm}}(S)=\frac{V_{pp}(S)}{V_{pp}(100)},
 \end{equation}
@@ -152,13 +150,11 @@ and the measured normalized intensity as
 \begin{equation}
     \widehat{I}_{\mathrm{norm}}(S)=\left[\frac{V_{pp}(S)}{V_{pp}(100)}\right]^2.
 \end{equation}
-This normalization removes the absolute gain factor of the receiver chain and allows a direct comparison between theory and experiment at the level of transfer-function shape.
-
-The measured data closely followed the theoretical sinusoidal transfer law over the full command range (\cref{fig:supplementary_figure_intensity_test}b). For normalized pressure, the correlation between measurement and theory was $r=0.998$ with a root-mean-square error of $\mathrm{RMSE}=0.031$. For normalized intensity, the agreement remained similarly high, with $r=0.997$ and $\mathrm{RMSE}=0.040$. These values indicate that the hardware reproduces the expected nonlinear control law with high fidelity and that the first-principles Fourier model of the PWM-driven bipolar excitation captures the dominant shaping of output magnitude.
+This normalization isolates the transfer-function shape from receiver gain. Measured data matched the theoretical sinusoidal transfer law (\cref{fig:supplementary_figure_intensity_test}b). Measurement-theory correlation for normalized pressure was $r=0.998$ ($\mathrm{RMSE}=0.031$); normalized intensity correlation was $r=0.997$ ($\mathrm{RMSE}=0.040$). The Fourier model of PWM-driven bipolar excitation thus accurately predicts acoustic output magnitude.
 
 The residual structure is also informative. The largest absolute intensity deviation was below 0.07 and occurred near $D=0.20$ (approximately $S=40$) (\cref{fig:supplementary_figure_intensity_test}b, inset). Deviations were systematically larger in the lower-duty-ratio regime than near saturation. This pattern is consistent with two practical effects. First, under narrow-pulse excitation, the transient electromechanical response of the piezoelectric transducer is more sensitive to finite switching time and internal damping, so the emitted carrier component need not follow the ideal square-wave decomposition exactly. Second, the receiver voltage is smaller at low drive levels, which reduces the measurement signal-to-noise ratio and amplifies the relative contribution of oscilloscope quantization and environmental fluctuations. Even so, the remaining discrepancy was small compared with the dynamic range of the full transfer curve.
 
-This calibration served two purposes for the subsequent psychophysical threshold experiment. Methodologically, it established a validated forward mapping from the software strength command to physical output, allowing us to interpret staircase levels in terms of normalized acoustic intensity rather than arbitrary digital units. Mechanistically, it confirmed that the device does not introduce hidden irregularities or non-monotonicity that could confound comparisons among modulation strategies near threshold. Because the experimentally measured transfer function was nearly identical to the theoretical prediction, we could treat the command-domain intensity in Experiment 2 as a well-behaved, monotonic proxy for the actual focal radiation-force magnitude.
+This calibration established a forward mapping from the software command to physical output, enabling staircase interpretation via normalized acoustic intensity rather than arbitrary digital units. It verified the absence of hardware-induced irregularities that could confound near-threshold modulation comparisons, allowing us to use command-domain intensity as a proxy for focal radiation-force magnitude.
 
 \begin{figure}[htbp]
     \centering
@@ -167,17 +163,13 @@ This calibration served two purposes for the subsequent psychophysical threshold
     \label{fig:supplementary_figure_transducer_array_arrangement_focus_simulation_results}
 \end{figure}
 
-We conducted comparative numerical simulations of four distinct phased array configurations to evaluate the acoustic performance of the hexagonal transducer arrangement and explore potential optimizations. The simulation model used the Rayleigh-Sommerfeld integral to calculate the acoustic pressure field generated by circular piston sources ($d=\qty{10}{\milli\meter}$) operating at \qty{40}{\kilo\hertz} in air ($c=\qty{343}{\meter\per\second}$). The configurations included: (1) the proposed Hexagonal Close-Packed (HCP) array ($N=60$, Area=\qty{54.4}{\centi\meter\squared}), (2) a standard Rectangular grid ($N=64$, Area=\qty{63.8}{\centi\meter\squared}), (3) a Density-Tapered Vogel Spiral ($N=60$, Area=\qty{102.7}{\centi\meter\squared}), and (4) an Optimized Fermat Spiral ($N=60$, Area=\qty{104.1}{\centi\meter\squared}).
+We evaluated the acoustic performance of the hexagonal transducer arrangement against three alternative phased array configurations using numerical simulations. The simulation model used the Rayleigh-Sommerfeld integral to calculate the acoustic pressure field generated by circular piston sources ($d=\qty{10}{\milli\meter}$) operating at \qty{40}{\kilo\hertz} in air ($c=\qty{343}{\meter\per\second}$). The configurations included: (1) the proposed Hexagonal Close-Packed (HCP) array ($N=60$, Area=\qty{54.4}{\centi\meter\squared}), (2) a standard Rectangular grid ($N=64$, Area=\qty{63.8}{\centi\meter\squared}), (3) a Density-Tapered Vogel Spiral ($N=60$, Area=\qty{102.7}{\centi\meter\squared}), and (4) an Optimized Fermat Spiral ($N=60$, Area=\qty{104.1}{\centi\meter\squared}).
 
-The geometric arrangement of transducers influences beamforming capabilities. For periodic arrays, the Rectangular layout follows a standard Cartesian grid, while the Hexagonal Close-Packed (HCP) coordinates derive from the triangular lattice vectors defined by:
-\begin{equation}
-    x_{q,r} = d \left(q + \frac{r}{2}\right), \quad y_{q,r} = d \frac{\sqrt{3}}{2} r
-\end{equation}
-where $d=\qty{10}{\milli\meter}$ is the pitch and $q, r$ are integers. This hexagonal arrangement maximizes the surface fill factor. In contrast, the aperiodic spiral arrays use the golden angle $\Phi_g = \pi(3-\sqrt{5}) \approx \ang{137.5}$ to suppress grating lobes. The Optimized Fermat Spiral places the $n$-th element at $\theta_n = n \Phi_g$ and radial distance $r_n = c \sqrt{n} (1 + \beta n)$, where $(1 + \beta n)$ introduces a radial density taper to reduce side lobes. The Density-Tapered Vogel Spiral uses an iterative collision-based packing algorithm, where the exclusion radius for the $n$-th element expands linearly as $d_{req}(n) = d_{min}(1 + \alpha n)$, creating a spatially apodized aperture that transitions from a dense core to a sparse periphery.
+The HCP coordinates derive from triangular lattice vectors:\begin{equation}    x_{q,r} = d \left(q + \frac{r}{2}\right), \quad y_{q,r} = d \frac{\sqrt{3}}{2} r\end{equation}with pitch $d=\qty{10}{\milli\meter}$ and integers $q, r$, maximizing the fill factor. Aperiodic spiral arrays use the golden angle $\Phi_g = \pi(3-\sqrt{5}) \approx \ang{137.5}$ to suppress grating lobes. The Optimized Fermat Spiral coordinates are $\theta_n = n \Phi_g$ and $r_n = c \sqrt{n} (1 + \beta n)$, where $(1 + \beta n)$ introduces a side-lobe-reducing radial density taper. The Density-Tapered Vogel Spiral iteratively expands the $n$-th element's exclusion radius as $d_{req}(n) = d_{min}(1 + \alpha n)$, creating a spatially apodized aperture.
 
-We quantified focusing performance using the Array Performance Index (API) \cite{priceFibonacciSpiralArranged2018, holmesPostprocessingFullMatrix2005}, defined for both focal area and volume. The area-based API is $\text{API}_{area} = A_{-6dB} / \lambda^2$, where $A_{-6dB}$ represents the area within the \qty{-6}{\decibel} pressure contour on the focal plane. Similarly, the volume-based API is $\text{API}_{vol} = V_{-6dB} / \lambda^3$, capturing the spatial confinement of the acoustic energy. A lower API value indicates sharper focusing and superior diffraction-limited performance.
+Focusing performance was evaluated using the Array Performance Index (API) \cite{priceFibonacciSpiralArranged2018, holmesPostprocessingFullMatrix2005}. The area-based index is $\text{API}_{area} = A_{-6dB} / \lambda^2$; the volume-based index is $\text{API}_{vol} = V_{-6dB} / \lambda^3$. Lower API values indicate sharper focusing.
 
-Spiral configurations demonstrate superior focusing characteristics with significantly lower API values ($\text{API}_{area} \approx 1.65-1.89$) and suppressed grating lobes compared to periodic arrays (\cref{fig:supplementary_figure_transducer_array_arrangement_focus_simulation_results}). However, their sparse arrangement results in a larger physical footprint and reduced peak pressure output ($\approx \qty{540}{\pascal}$) for the same element count. Conversely, the proposed hexagonal array achieves a high peak pressure of \qty{581}{\pascal} with a compact footprint, leveraging the maximum packing density. Although it exhibits characteristic hexagonal grating lobes and a slightly higher API ($\text{API}_{area} = 2.57$), the focal quality remains sufficient for precise tactile stimulation. Consequently, we selected the hexagonal layout for the current prototype to maximize acoustic power density within a handheld form factor, while the spiral designs provide a pathway for future high-fidelity, large-aperture applications.
+Spiral configurations provide sharper focusing ($\text{API}_{area} \approx 1.65-1.89$) and suppressed grating lobes compared to periodic arrays (\cref{fig:supplementary_figure_transducer_array_arrangement_focus_simulation_results}). However, their sparse arrangement increases the physical footprint and reduces peak pressure output ($\approx \qty{540}{\pascal}$) for a given element count. The proposed hexagonal array achieves a higher peak pressure of \qty{581}{\pascal} within a compact footprint by maximizing packing density. While it exhibits characteristic grating lobes and a higher API ($\text{API}_{area} = 2.57$), the focal quality supports precise tactile stimulation. We selected the hexagonal layout to maximize acoustic power density for a handheld prototype; spiral designs remain candidates for larger apertures.
 
 
 
@@ -191,12 +183,12 @@ Spiral configurations demonstrate superior focusing characteristics with signifi
     \label{fig:supplementary_figure_psychophysics_setup}
 \end{figure}
 
-The psychophysical evaluation consisted of two complementary experiments sharing the same physical apparatus and acoustic masking controls. Experiment 1 assessed the relative perceptual qualities (intensity and spatial clarity) of five distinct spatiotemporal modulation strategies at a suprathreshold level. Experiment 2 quantified the absolute detection thresholds of these strategies to determine their fundamental perceptual accessibility.
+We conducted two complementary experiments using identical apparatus and acoustic masking. Experiment 1 assessed the relative suprathreshold perceptual qualities (intensity and spatial clarity) of five spatiotemporal modulation strategies. Experiment 2 quantified their absolute detection thresholds.
 
 \subsection*{Experiment 1: Relative perceptual dominance (Paired-comparison)}
 \label{sec:experiment_1_relative_perceptual_dominance}
 
-Experiment 1 employed a within-participant paired-comparison design to resolve perceptual differences among five ultrasonic spatiotemporal modulation strategies under weak near-threshold tactile conditions. We tested five stimuli: $DLM_2$, $DLM_3$, $ULM_L$, $LM_L$, and $LM_C$, corresponding to two-point discrete lateral modulation, three-point discrete lateral modulation, unidirectional linear lateral modulation, bidirectional linear lateral modulation, and continuous circular lateral modulation. We selected a forced-comparison design because absolute ratings are unstable when the tactile magnitude of individual ultrasonic stimuli is small. Paired judgments provide higher sensitivity for detecting relative perceptual ordering~\citep{bradleyRankAnalysisIncomplete1952, johnsonNeuralBasisHaptic2002}. Thus, the experiment estimated relative perceptual dominance rather than absolute magnitude.
+Experiment 1 used a within-participant paired-comparison design to resolve perceptual differences among five modulation strategies under near-threshold conditions: two-point discrete ($DLM_2$), three-point discrete ($DLM_3$), unidirectional linear ($ULM_L$), bidirectional linear ($LM_L$), and continuous circular ($LM_C$) lateral modulation. Forced-comparison judgments provide higher sensitivity for detecting relative perceptual ordering than absolute ratings when stimulus magnitude is small~\citep{bradleyRankAnalysisIncomplete1952, johnsonNeuralBasisHaptic2002}.
 
 All stimulation used the custom UMH device described above. The carrier frequency was \qty{40}{\kilo\hertz}, and the tactile modulation frequency was fixed at \qty{200}{\hertz}, a range strongly coupled to the Pacinian-dominant vibrotactile channel of glabrous skin~\citep{mountcastleNeuralBasisSense1967, talbotSenseFluttervibrationComparison1968a, johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}. Participants placed their palms on a foam support that fixed the hand-device distance and reduced posture-dependent variability in acoustic coupling. They wore noise-cancelling headphones continuously playing white noise so that judgments relied on cutaneous sensation rather than on airborne acoustic leakage or switching sounds. These controls were essential because modulation methods, especially discrete switching conditions, can generate audible artifacts that might otherwise provide non-tactile cues.
 
@@ -210,9 +202,9 @@ Trajectory geometry relied on the assumed cutaneous shear-wave speed $c_s=\qty{5
 \end{equation}
 For $LM_L$, the focus moved bidirectionally between two endpoints separated by \qty{15}{\milli\meter}. Because the focus covered the outbound and return paths within one modulation period, the total travelled distance per period was \qty{30}{\milli\meter}, again corresponding to an average path speed of \qty{6}{\meter\per\second}. For $LM_C$, the focus moved continuously along a circular trajectory of radius $R_C=\qty{4.77}{\milli\meter}$, for which the tangential speed was set to the same Mach number regime, $v_C\approx \qty{6}{\meter\per\second} \approx 1.2\,c_s$. Matching the nominal kinematic scale across conditions reduced confounding by trivial differences in scan frequency or gross path length and focused the comparison on how different spatiotemporal wave organizations shape perception.
 
-The experiment contained two task blocks. In the Intensity block, participants reported which of two successively presented stimuli felt stronger. In the Spatial block, participants reported which stimulus felt smaller or clearer as a tactile point. We retained the label ``smaller / clearer'' because the task captured the perceptual sharpness of a localized tactile percept under weak ultrasonic stimulation, rather than physical spatial acuity in the strict classical two-point-discrimination sense. Under near-threshold conditions, judgments of ``clarity'' likely integrate perceived detectability, compactness, temporal stability, and confidence in addition to apparent stimulus area.
+The experiment contained two task blocks. In the Intensity block, participants reported which stimulus felt stronger. In the Spatial block, participants reported which stimulus felt ``smaller'' or ``clearer.'' This label captured the perceptual sharpness of the localized percept rather than classical two-point discrimination acuity. Under near-threshold conditions, ``clarity'' integrates detectability, compactness, temporal stability, and apparent area.
 
-We randomized the order of the two task blocks for each participant. Within each block, the five stimuli generate $\binom{5}{2}=10$ unordered pairs. To control for first-versus-second presentation effects, every unordered pair was presented in both temporal orders, yielding $5\times4=20$ ordered trials per block. The trial list was therefore the complete set of ordered permutations of length two over the five stimuli. Trial order was then shuffled independently within each block. Because the block order was also randomized, each participant completed a total of 40 forced-choice trials. During data collection, the graphical user interface concealed the identities of the current stimulus pair from both participant and experimenter, implementing an operationally blind procedure.
+Block order was randomized per participant. The five stimuli generated 10 unordered pairs, presented in both temporal orders to yield 20 trials per block. Trial order was shuffled independently within each block. Stimulus identities were blinded during data collection.
 
 Each trial followed a fixed temporal structure. Stimulus A was presented for \qty{1.5}{\second}, followed by a silent interval of \qty{1.0}{\second}, after which Stimulus B was presented for \qty{1.5}{\second}. The silent interval reduced immediate peripheral and central carry-over while keeping the comparison in short-term tactile memory. Replay was not allowed. Participants had to commit to a first-pass comparative judgment, consistent with standard two-alternative forced-choice logic to avoid strategic averaging across repeated presentations~\citep{bradleyRankAnalysisIncomplete1952}. The response was recorded only after the second stimulus ended. Reaction time was measured from the offset of Stimulus B to the submission of the response, so the decision time indexed post-stimulus comparative evaluation rather than motor latency.
 
@@ -236,7 +228,7 @@ We constructed a win matrix for each block to provide an intuitive summary of pa
     \qquad
     z_{ij}=\frac{\Delta_{ij}}{\sqrt{\mathrm{Var}(\Delta_{ij})}},
 \end{equation}
-with two-sided $p$ values obtained from the standard normal distribution. We also report the corresponding odds ratio,
+with two-sided $p$ values obtained from the standard normal distribution. Full statistical tables are provided in \cref{sec:detailed_statistical_results}. We also report the corresponding odds ratio,
 \begin{equation}
     \mathrm{OR}_{ij}=\exp(\Delta_{ij}),
 \end{equation}
@@ -256,14 +248,14 @@ Visualization followed the statistical analysis structure. For Intensity and Spa
 
 In the Intensity block, $ULM_L$ achieved the highest centered Bradley--Terry score ($0.74\pm0.11$), followed by $DLM_2$ ($0.34\pm0.11$), $DLM_3$ ($-0.04\pm0.11$), $LM_C$ ($-0.18\pm0.11$), and $LM_L$ ($-0.86\pm0.12$). $ULM_L$ was significantly preferred over every other method, and $LM_L$ performed worst overall. In the Spatial block, $ULM_L$ again showed the highest score ($0.24\pm0.10$), followed by $DLM_2$ ($0.11\pm0.10$), $DLM_3$ ($-0.04\pm0.10$), $LM_C$ ($-0.08\pm0.10$), and $LM_L$ ($-0.23\pm0.10$). However, spatial judgments were less strongly separated than intensity judgments. Reaction-time analysis showed that decisions were slowest for pairs such as $DLM_3$ versus $LM_C$ and $ULM_L$ versus $DLM_2$, consistent with their close perceptual proximity. By contrast, comparisons involving $LM_L$ were typically faster, consistent with its poor perceptual performance.
 
-Beyond merely reflecting task difficulty, shorter reaction times (Z-Log-RT) in high-performing conditions (like comparisons against $LM_L$) suggest that participants received neural signals with high signal-to-noise ratios (SNR). In the case of $ULM_L$, despite its physically smoother spatial gradient, the rapid decision times observed when distinguishing it from poorer stimuli (e.g., $LM_L$) indicate that its high spatiotemporal coherence generates a distinct and reliable neural representation. This ``decision confidence'' aligns with the subjective reports of spatial clarity, suggesting that the perception of a ``clear point'' is driven by the temporal certainty of the neural train rather than static spatial contrast.
+Shorter reaction times (Z-Log-RT) against low-performing conditions (e.g., $LM_L$) suggest these stimuli generate neural signals with higher signal-to-noise ratios (SNR). For $ULM_L$, despite its physically smoother spatial gradient, rapid discrimination from poorer stimuli indicates its spatiotemporal coherence produces a reliable neural representation. This decision speed aligns with subjective reports of spatial clarity, indicating that a ``clear point'' percept relies on temporal certainty rather than static spatial contrast.
 
-These psychophysical observations informed the mechanistic interpretation. Perceptual superiority did not follow simple expectations based on static focal intensity or geometric sharpness. Instead, the best-performing condition preserved the intended \qty{200}{\hertz} temporal structure while organizing cutaneous shear-wave propagation into a coherent spatiotemporal pattern. The psychophysical protocol thus provided a sensitive behavioral assay of how modulation-dependent wave organization shapes tactile perception.
+Perceptual superiority did not correlate with static focal intensity or geometric sharpness. The highest-performing condition maintained the \qty{200}{\hertz} temporal structure while organizing cutaneous shear-wave propagation into a coherent spatiotemporal pattern.
 
 \subsection*{Experiment 2: Absolute detection thresholds (Adaptive staircase)}
 \label{sec:experiment_2_absolute_detection_thresholds}
 
-Experiment 2 measured the absolute detection thresholds of the five modulation strategies ($DLM_2$, $DLM_3$, $ULM_L$, $LM_L$, and $LM_C$). While Experiment 1 evaluated relative perceptual dominance at a fixed suprathreshold level, Experiment 2 determined the minimum acoustic output required for reliable perception. We employed a two-interval forced-choice (2-IFC) task combined with an interleaved adaptive staircase procedure~\citep{leekAdaptiveProceduresPsychophysical2001} (\cref{fig:supplementary_figure_psychophysics_setup}d).
+Experiment 2 determined absolute detection thresholds for the five modulation strategies using a two-interval forced-choice (2-IFC) task with an interleaved adaptive staircase procedure~\citep{leekAdaptiveProceduresPsychophysical2001} (\cref{fig:supplementary_figure_psychophysics_setup}d).
 
 We tested the five modulation conditions concurrently using randomly interleaved staircases. This strategy distributed time-dependent confounding factors---such as tactile adaptation, fatigue, and fluctuations in attention---evenly across all conditions. Spatial trajectories and the \qty{200}{\hertz} modulation frequency matched Experiment 1.
 
@@ -279,16 +271,16 @@ Each staircase was initialized at a highly perceptible level ($S = 80$). We used
 
 A staircase terminated after 6 reversals (minimum 10 trials, maximum 40 trials). We calculated the absolute detection threshold as the arithmetic mean of the stimulus intensities at the final 4 reversals. Physical environmental controls (fixed hand-to-array distance, noise-canceling headphones) matched Experiment 1.
 
-The absolute detection thresholds, expressed in terms of normalized acoustic intensity ($I_{\mathrm{norm}}$), revealed consistent differences among the modulation strategies, corroborating the suprathreshold preference findings from Experiment 1. A lower threshold indicates higher perceptual efficiency. $ULM_L$ exhibited the lowest mean detection threshold ($0.281 \pm 0.040$, mean $\pm$ SEM), followed by $DLM_2$ ($0.313 \pm 0.040$), $DLM_3$ ($0.316 \pm 0.039$), and $LM_C$ ($0.347 \pm 0.047$). In contrast, the traditional bidirectional linear scan ($LM_L$) required the highest acoustic output to be detected ($0.371 \pm 0.040$).
+Absolute detection thresholds ($I_{\mathrm{norm}}$) corroborated the suprathreshold preferences from Experiment 1. $ULM_L$ required the lowest mean acoustic output for detection ($0.281 \pm 0.040$, mean $\pm$ SEM), followed by $DLM_2$ ($0.313 \pm 0.040$), $DLM_3$ ($0.316 \pm 0.039$), and $LM_C$ ($0.347 \pm 0.047$). The bidirectional linear scan ($LM_L$) required the highest output ($0.371 \pm 0.040$).
 
-A Friedman test indicated a marginally significant overall effect of modulation strategy on the detection threshold ($p = 0.0588$). Post-hoc pairwise comparisons with Holm--Bonferroni correction confirmed that the threshold for $ULM_L$ was significantly lower than that for $LM_L$ ($p = 0.003$). Similarly, $DLM_2$ demonstrated a significantly lower threshold compared to $LM_L$ ($p = 0.030$). Although $ULM_L$ maintained the lowest absolute threshold numerically, its differences with $DLM_2$, $DLM_3$, and $LM_C$ did not reach statistical significance in this absolute detection paradigm.
+A Friedman test showed a marginal effect of modulation strategy on threshold ($p = 0.0588$). Post-hoc pairwise comparisons (Holm--Bonferroni) confirmed $ULM_L$ thresholds were lower than $LM_L$ ($p = 0.003$), as were $DLM_2$ thresholds ($p = 0.030$). Numerical differences between $ULM_L$ and the other conditions ($DLM_2$, $DLM_3$, $LM_C$) were not statistically significant in this absolute detection paradigm.
 
-These results provide strong cross-validation for the hypothesized mechanism. $ULM_L$, which generated the weakest local physical extremes but the highest spatiotemporal coherence, proved to be the most efficient stimulus near the absolute threshold of perception. This indicates that $ULM_L$ maximizes the conversion of mechanical energy into neural action potentials through coherent integration, rather than relying on instantaneous high-pressure extremes. Furthermore, the poor performance of $LM_L$ in both subjective intensity (Experiment 1) and absolute detection (Experiment 2) quantitatively demonstrates that its inherent frequency doubling effect (shifting energy from the optimal \qty{200}{\hertz} band to \qty{400}{\hertz} and higher harmonics) leads to substantial energy waste and degraded perception. $DLM_2$ also performed efficiently, suggesting that appropriate discrete spatial hopping can effectively evade destructive interference and maintain high perceptual efficacy.
+$ULM_L$ generated the weakest local physical extremes but exhibited the highest perceptual efficiency, suggesting it maximizes the conversion of mechanical energy into neural action potentials via spatiotemporal coherent integration. Conversely, the poor performance of $LM_L$ in both intensity scaling and absolute detection demonstrates that its frequency doubling effect (shifting energy from the \qty{200}{\hertz} band to \qty{400}{\hertz} harmonics) wastes acoustic energy and degrades perception. The efficiency of $DLM_2$ indicates that discrete spatial hopping evades destructive interference.
 
 \SupplementarySection{Numerical Simulation of Tactile Wave Propagation}
 \label{sec:numerical_simulation_tactile_wave_propagation}
 
-To resolve how different ultrasonic spatiotemporal modulation strategies reorganize mechanically relevant wave propagation within soft tissue, we performed three-dimensional elastodynamic simulations using the k-Wave pseudo-spectral time-domain elastic solver \texttt{pstdElastic3D} in MATLAB. The simulated tissue block occupied a Cartesian domain of \qtyproduct{80 x 80 x 40}{\milli\meter}, discretized on a uniform grid with
+We performed three-dimensional elastodynamic simulations using the k-Wave pseudo-spectral time-domain elastic solver \texttt{pstdElastic3D} (MATLAB) to determine how modulation strategies reorganize soft-tissue wave propagation. The simulated tissue block occupied an \qtyproduct{80 x 80 x 40}{\milli\meter} Cartesian domain, discretized on a uniform grid with
 \begin{equation}
     \Delta x = \Delta y = \Delta z = \qty{1.0}{\milli\meter},
 \end{equation}
@@ -307,7 +299,7 @@ and total simulation duration was 15 modulation cycles,
     t_{\mathrm{sim}} = 15T = \qty{75}{\milli\second},
 \end{equation}
 
-The medium was modeled as homogeneous, isotropic, and linearly elastic with frequency-dependent attenuation. Material parameters were density $\rho=\qty{923.5}{\kilo\gram\per\cubic\meter}$, shear-wave speed $c_s=\qty{5.0}{\meter\per\second}$, and simulated compressional-wave speed $c_{p,\mathrm{sim}}=\qty{100}{\meter\per\second}$. The shear modulus was:
+The medium was modeled as homogeneous, isotropic, and linearly elastic with frequency-dependent attenuation (see \cref{sec:theoretical_defense_viscoelasticity} for a theoretical defense). Material parameters were density $\rho=\qty{923.5}{\kilo\gram\per\cubic\meter}$, shear-wave speed $c_s=\qty{5.0}{\meter\per\second}$, and simulated compressional-wave speed $c_{p,\mathrm{sim}}=\qty{100}{\meter\per\second}$. The shear modulus was:
 \begin{equation}
     G = \rho c_s^2,
 \end{equation}
@@ -353,6 +345,16 @@ For $DLM_3$ ($N=3$, $R=\qty{4.81}{\milli\meter}$):
     d_{\mathrm{DLM_3}} = \sqrt{3}R \approx \qty{8.33}{\milli\meter} \approx c_s\frac{T}{3}.
 \end{equation}
 These relations matched shear-wave travel distance to actuation site spacing.
+
+The transition from discrete to continuous modulation can be formalized by considering the asymptotic limit of the elastodynamic wave field as the number of discrete focal points $N \to \infty$. For an $N$-point discrete lateral modulation ($\mathrm{DLM}_N$) on a circular trajectory of radius $R$ with a modulation period $T$, the focal position $\mathbf{r}_f^{(N)}(t)$ is a piecewise constant function. The acoustic radiation force acts as a spatiotemporal source term $S^{(N)}(\mathbf{r}, t)$ localized around the current focal point. The resulting shear-wave displacement field $\mathbf{u}(\mathbf{r}, t)$ at an observation point $\mathbf{r}$ can be expressed via the elastodynamic Green's tensor $\mathbf{G}(\mathbf{r}, t; \mathbf{r}', t')$ as a spatiotemporal convolution. For the discrete case, the field over one period is a sum over $N$ discrete dwell intervals of duration $\Delta t = T/N$:
+\begin{equation}
+    \mathbf{u}^{(N)}(\mathbf{r}, t) = \sum_{n=1}^{N} \int_{(n-1)\Delta t}^{n\Delta t} \int_{V} \mathbf{G}(\mathbf{r}, t; \mathbf{r}', t') S(\mathbf{r}', \mathbf{r}_n) \, \mathrm{d}^3\mathbf{r}' \, \mathrm{d}t',
+\end{equation}
+where $\mathbf{r}_n = (R\cos\theta_n, R\sin\theta_n, 0)$ with $\theta_n = 2\pi(n-1)/N$. As $N \to \infty$, both the temporal dwell step $\Delta t \to 0$ and the angular step $\Delta \theta \to 0$. In this limit, the discrete sequence of focal positions converges uniformly to the continuous parametric curve $\mathbf{r}_f^{(\infty)}(t') = (R\cos(2\pi t'/T), R\sin(2\pi t'/T), 0)$, and the Riemann sum transitions into the continuous time integral characteristic of $\mathrm{LM}_C$:
+\begin{equation}
+    \lim_{N \to \infty} \mathbf{u}^{(N)}(\mathbf{r}, t) = \int_{0}^{T} \int_{V} \mathbf{G}(\mathbf{r}, t; \mathbf{r}', t') S(\mathbf{r}', \mathbf{r}_f^{(\infty)}(t')) \, \mathrm{d}^3\mathbf{r}' \, \mathrm{d}t' \equiv \mathbf{u}^{(\mathrm{LM_C})}(\mathbf{r}, t).
+\end{equation}
+This rigorous mathematical limit establishes continuous lateral modulation ($\mathrm{LM}_C$) as the exact asymptotic bound of the $\mathrm{DLM}_N$ family. Consequently, it predicts that as the number of discrete control points increases (e.g., from $\mathrm{DLM}_2$ to $\mathrm{DLM}_3$), the induced spatiotemporal interference patterns, rotational shear-stress fields, and resulting tactile perception must fundamentally converge toward those of $\mathrm{LM}_C$.
 
 For continuous scanning, the focus moved along line or circle trajectories. In $ULM_L$ ($L=\qty{30}{\milli\meter}$):
 \begin{equation}
@@ -451,17 +453,17 @@ We normalized scalar maps by the global maximum:
     \tilde{M}^{(m)}(x,y)=\frac{M^{(m)}(x,y)}{\max_{m',x,y} M^{(m')}(x,y)},
 \end{equation}
 
-To ensure rigorous spectral analysis, we applied specific signal processing steps before computing frequency-domain metrics. For all temporal data extracted from the region of interest (ROI), we first removed the DC component (demeaning) to eliminate static stress bias:
+Before computing frequency-domain metrics, we removed the DC component (demeaning) from all temporal data in the region of interest (ROI) to eliminate static stress bias:
 \begin{equation}
     \tau_{\text{centered}}(t) = \tau(t) - \frac{1}{T}\int_0^T \tau(t) dt.
 \end{equation}
-Subsequently, we applied a Hanning window to the demeaned signal to suppress spectral leakage caused by the finite simulation duration, ensuring that the discrete Fourier transform (DFT) accurately reflected the dynamic energy distribution.
+We then applied a Hanning window to the demeaned signal to suppress spectral leakage from the finite simulation duration.
 
 The simulations provide a mechanistic description of how \qty{200}{\hertz} modulation strategies generate different internal wave organizations. The numerical framework separates three determinants of tactile efficacy: surface trajectory, propagation delay, and tensorial stress redistribution.
 
-To quantitatively capture the key physical mechanisms underlying these differences, we introduced two novel metrics: the Frequency Fidelity Index (FFI) and the Directional Wavefront Concentration Index (DWCI).
+We introduced two metrics to quantify these physical differences: the Frequency Fidelity Index (FFI) and the Directional Wavefront Concentration Index (DWCI).
 
-\textbf{Frequency Fidelity Index (FFI).} The FFI quantifies the proportion of shear wave energy that is faithfully maintained at the target modulation frequency (\qty{200}{\hertz}) versus being dispersed into higher harmonics. We computed the power spectrum $P(f)$ by summing the squared magnitude of the temporal Fast Fourier Transform (FFT) of the steady-state shear stress $\tau_{\text{roi\_steady}}(x,y,t)$ across the entire spatial ROI:
+\textbf{Frequency Fidelity Index (FFI).} The FFI quantifies the proportion of shear wave energy maintained at the \qty{200}{\hertz} target modulation frequency versus dispersed into higher harmonics. The power spectrum $P(f)$ was computed by summing the squared magnitude of the temporal Fast Fourier Transform (FFT) of the steady-state shear stress $\tau_{\text{roi\_steady}}(x,y,t)$ across the spatial ROI:
 \begin{equation}
     P(f) = \sum_{x,y} \left| \mathcal{F}_t \{ \tau_{\text{roi\_steady}}(x,y,t) \} \right|^2.
 \end{equation}
@@ -471,7 +473,7 @@ The FFI is then defined as the ratio of power at the fundamental frequency to th
 \end{equation}
 A high FFI indicates that the modulation strategy effectively concentrates mechanical energy into the frequency band most sensitive to Pacinian corpuscles, avoiding wasteful frequency doubling.
 
-\textbf{Directional Wavefront Concentration Index (DWCI).} The DWCI assesses the extent to which the shear wave field at \qty{200}{\hertz} is organized into a single, dominant directional propagation mode. For each shear stress component $c \in \{xy, xz, yz\}$, we extracted the complex field $A_c(x,y)$ at \qty{200}{\hertz} via temporal FFT. We then performed a 2D spatial Fourier transform to obtain the wavenumber spectrum:
+\textbf{Directional Wavefront Concentration Index (DWCI).} The DWCI assesses the organization of the \qty{200}{\hertz} shear wave field into a single directional propagation mode. For each shear stress component $c \in \{xy, xz, yz\}$, we extracted the complex field $A_c(x,y)$ at \qty{200}{\hertz} via temporal FFT and performed a 2D spatial Fourier transform to obtain the wavenumber spectrum:
 \begin{equation}
     E_c(k_x, k_y) = \left|\mathcal{F}_{2D}\{A_c(x,y)\}\right|^2.
 \end{equation}
@@ -487,9 +489,9 @@ This index penalizes scattered or multi-directional wave patterns (low DWCI) and
 \SupplementarySection{Computational neural dynamics modeling details}
 \label{sec:computational_neural_dynamics_modeling_details}
 
-We developed a minimal, mechanistically grounded peripheral neural model to test whether the psychophysical ranking of modulation strategies could be explained by cutaneous shear-wave propagation dynamics rather than static mechanical extrema.
+We developed a peripheral neural model to test whether cutaneous shear-wave propagation dynamics account for the psychophysical ranking of modulation strategies.
 
-The model specifically targets the Pacinian corpuscle (PC) / rapidly adapting type II (RAII) pathway. This choice is grounded in established psychophysical evidence showing that detection thresholds for vibrotactile stimuli above \qty{100}{\hertz} are determined almost exclusively by the PC system~\citep{johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}. While other mechanoreceptors (e.g., Meissner corpuscles) contribute to low-frequency flutter, the \qty{200}{\hertz} carrier envelope used here falls squarely within the PC's maximum sensitivity range. Furthermore, recent ultrastructural studies have highlighted the role of Lamellar Schwann Cells (LSCs) in tuning the dynamic sensitivity of the PC nerve terminal~\citep{ziolkowskiTouchSensationRequires2025}. Rather than explicitly modeling the complex biophysics of the LSC-neurite interaction, which would introduce unconstrained parameters, we abstract the inner core complex into an effective spatiotemporal integration kernel (Eq. 46). This formulation captures the functional role of the end-organ in summing coherent mechanical events while maintaining model parsimony.
+The model targets the Pacinian corpuscle (PC) pathway, which mediates detection thresholds for vibrotactile stimuli above \qty{100}{\hertz}~\citep{johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}. The \qty{200}{\hertz} carrier envelope aligns precisely with peak PC sensitivity. While ultrastructural studies implicate Lamellar Schwann Cells (LSCs) in tuning PC dynamic sensitivity~\citep{ziolkowskiTouchSensationRequires2025}, explicitly modeling LSC-neurite biophysics introduces unconstrained parameters. We instead abstracted the inner core complex into an effective spatiotemporal integration kernel (Eq. 46) to represent the end-organ's summation of coherent mechanical events.
 
 We kept all model parameters fixed across conditions, allowing the modulation schemes to differ only through their input spatiotemporal mechanical fields.
 
@@ -555,10 +557,34 @@ The predicted probability that method $A$ is preferred over $B$ is:
 
 The model reproduced the principal behavioral ranking. The standardized neural intensity score was highest for $ULM_L$ ($z=1.196$), followed by $DLM_2$ ($z=0.634$), $DLM_3$ ($z=0.079$), $LM_C$ ($z=-0.135$), and $LM_L$ ($z=-1.773$). $ULM_L$ excels because unidirectional motion at the surface-wave speed favors constructive arrival and preserves the \qty{200}{\hertz} rhythm. $LM_L$ degrades coherence through direction reversal and frequency doubling.
 
+\SupplementarySection{Quantitative Cross-Validation of the Perceptual Paradox}
+\label{sec:quantitative_cross_validation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Correlation_Matrix_Combined.pdf}
+    \caption{\textbf{Correlation between physical metrics and perceived intensity.} Pearson (left) and Spearman (right) correlation matrices comparing the psychophysical intensity score (Bradley--Terry log-odds) against simulated elastodynamic metrics across five modulation methods. The analysis contrasts traditional local extrema metrics (Log Peak Stress, Log Max Gradient, Log Max Jerk) with the proposed spatiotemporal wave coherence metrics (FFI, DWCI).}
+    \label{fig:supplementary_figure_correlation_matrix}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Paradox_Scatter_Plots.pdf}
+    \caption{\textbf{Scatter plots demonstrating the physical-perceptual paradox.} Each point represents one of the five modulation methods ($ULM_L$, $DLM_2$, $DLM_3$, $LM_C$, $LM_L$). The top row shows negative or null correlations between perceived intensity and classical local physical extremes (Peak Stress, Max Gradient, Max Jerk). The bottom row shows strong positive correlations between perceived intensity and the spatiotemporal coherence metrics (Frequency Fidelity Index, Directional Wavefront Concentration). Dashed lines indicate linear fits. Pearson ($r_P$) and Spearman ($\rho_S$) coefficients, along with their respective $p$-values, are inset.}
+    \label{fig:supplementary_figure_paradox_scatter}
+\end{figure}
+
+We performed a quantitative cross-validation between simulated elastodynamic fields and psychophysical intensity scores to test the dependence of tactile perception on local physical extrema. We calculated Pearson ($r_P$) and Spearman ($\rho_S$) correlation coefficients comparing subjective intensity (Bradley--Terry log-odds) against both traditional point-source metrics (peak stress, maximum spatial gradient, maximum temporal jerk) and our proposed wave-coherence metrics (Frequency Fidelity Index [FFI], Directional Wavefront Concentration Index [DWCI]) across the five modulation strategies (\cref{fig:supplementary_figure_correlation_matrix}, \cref{fig:supplementary_figure_paradox_scatter}).
+
+The data falsify the assumption that mid-air tactile intensity scales with local mechanical extremes. Perceived intensity correlated negatively with peak physical stress ($r_P = -0.94$, $p = 0.018$; $\rho_S = -0.90$, $p = 0.037$) and maximum spatial gradient ($r_P = -0.73$, $p = 0.165$), and showed no relationship with maximum temporal jerk ($r_P = 0.25$, $p = 0.689$). Strategies generating the highest local tissue stress (e.g., $LM_L$) produced the weakest percepts. 
+
+Instead, perception scaled directly with spatiotemporal wave coherence. The Frequency Fidelity Index ($r_P = 0.95$, $p = 0.012$; $\rho_S = 0.90$, $p = 0.037$) and Directional Wavefront Concentration Index ($r_P = 0.86$, $p = 0.059$; $\rho_S = 0.70$, $p = 0.188$) strongly predicted psychophysical intensity. These correlations confirm that the somatosensory system integrates coherent shear-wave propagation over space and time, rendering static, localized mechanical peaks perceptually inefficient.
+
+
 \SupplementarySection{Sensitivity of Spatiotemporal Coherence to Scan Speed (Mach Number) in Unidirectional Lateral Modulation}
 \label{sec:sensitivity_spatiotemporal_coherence_scan_speed}
 
-This study hypothesizes that tactile perception in ultrasonic haptics depends on the spatiotemporal coherence of cutaneous shear waves, governed by a Mach cone effect when focal scan speed matches surface wave speed. To test this hypothesis and verify that the superiority of $ULM_L$ is not simply due to unidirectional motion, we conducted a parameter sweep experiment manipulating the focal Mach number.
+We hypothesize that ultrasonic tactile perception depends on the spatiotemporal coherence of cutaneous shear waves, driven by a Mach cone effect when the focal scan matches the surface wave speed. To isolate this kinematic matching from simple unidirectional motion, we varied the focal Mach number in a parameter sweep.
 
 We used the k-Wave elastodynamic simulation framework described above. Fixed parameters were $f_0 = \qty{200}{\hertz}$ and $c_s = \qty{5}{\meter\per\second}$. We varied the $ULM_L$ trajectory length $L$ to achieve scan speeds $v = L/T$. We define the focal Mach number as $M = v/c_s$. We evaluated $M = 0.2, 0.5, 1.0, 1.2$, and $2.0$. The $M=1.2$ condition matches the $ULM_L$ stimulus used in the main experiments.
 
@@ -569,7 +595,7 @@ We used the k-Wave elastodynamic simulation framework described above. Fixed par
     \label{fig:supplementary_figure_mach_sweep_spatial}
 \end{figure}
 
-\cref{fig:supplementary_figure_mach_sweep_spatial} presents the spatial distribution of stress metrics. In the subsonic regime ($M=0.2, 0.5$), acoustic energy concentrates within a small geometric center. Low-speed scanning generates the highest absolute local extremes (peak shear stress, max rate of change), but these are confined to a tiny area. As scan speed approaches shear wave speed ($M=1.0, 1.2$), local peak values decrease, but the high-stress distribution elongates along the scan axis, forming a coherent wake. Kinematic matching transforms a localized transient into a sustained, directional dynamic impact. In the supersonic regime ($M=2.0$), the focal point moves too rapidly, decoupling from the propagating waves. This disperses acoustic energy over a wide V-shaped wake, significantly reducing all physical metrics.
+\cref{fig:supplementary_figure_mach_sweep_spatial} presents the spatial distribution of stress metrics. In the subsonic regime ($M=0.2, 0.5$), acoustic energy concentrates within a small geometric center, generating high local extremes confined to a narrow area. As scan speed approaches shear wave speed ($M=1.0, 1.2$), local peak values decrease while the high-stress distribution elongates along the scan axis. Kinematic matching thus transforms a localized transient into a sustained, directional wake. In the supersonic regime ($M=2.0$), the focal point outpaces the propagating waves, dispersing acoustic energy over a wide V-shaped wake and reducing all physical metrics.
 
 \begin{figure}[htbp]
     \centering
@@ -578,15 +604,88 @@ We used the k-Wave elastodynamic simulation framework described above. Fixed par
     \label{fig:supplementary_figure_mach_sweep_temporal}
 \end{figure}
 
-Temporal evolution and wavefront dynamics (\cref{fig:supplementary_figure_mach_sweep_temporal}) elucidate the mechanism. Signed XT diagrams show that at subsonic speeds, the source moves slower than the emitted wavefronts, causing symmetrical outward radiation. At transonic speeds ($M=1.0, 1.2$), the source trajectory aligns with shear wave propagation. This allows newly generated stress to stack onto the forward-propagating wavefront. This coherent integration appears in the center waveform as a sharp compression peak and in wavefront snapshots as a concentrated leading edge. At supersonic speeds ($M=2.0$), the source outruns its shear waves, creating a wide trailing Mach cone and losing the sharp temporal compression.
+Temporal and wavefront dynamics (\cref{fig:supplementary_figure_mach_sweep_temporal}) detail this mechanism. Signed XT diagrams demonstrate that at subsonic speeds, the source moves slower than the emitted wavefronts, causing symmetrical radiation. At transonic speeds ($M=1.0, 1.2$), the source trajectory aligns with shear wave propagation, allowing newly generated stress to stack onto the forward-propagating wavefront. This integration produces a sharp compression peak in the center waveform and a concentrated leading edge. At supersonic speeds ($M=2.0$), the source outruns its shear waves, creating a dispersed trailing Mach cone.
 
-To empirically validate these simulation findings and confirm that wave speed matching (the Mach cone effect) is the central mechanism for coherent integration and enhanced perception, we conducted a supplementary psychophysical paired-comparison experiment. We used the same 2-AFC paradigm and environmental controls as Experiment 1. The modulation frequency was fixed at \qty{200}{\hertz}, and we tested the five scan speeds for $ULM_L$ by varying the trajectory length: $M=0.2$ (highly subsonic, $L=\qty{5.0}{\milli\meter}$), $M=0.5$ (subsonic, $L=\qty{12.5}{\milli\meter}$), $M=1.0$ (exact wave speed match, $L=\qty{25}{\milli\meter}$), $M=1.2$ (near-match supersonic, $L=\qty{30}{\milli\meter}$), and $M=2.0$ (highly supersonic, $L=\qty{50}{\milli\meter}$).
+We conducted a supplementary psychophysical paired-comparison experiment to validate whether wave speed matching dictates coherent integration and perception. We used the 2-AFC paradigm and environmental controls from Experiment 1, fixing modulation at \qty{200}{\hertz}. We tested five scan speeds for $ULM_L$ by varying trajectory length: $M=0.2$ ($L=\qty{5.0}{\milli\meter}$), $M=0.5$ ($L=\qty{12.5}{\milli\meter}$), $M=1.0$ ($L=\qty{25}{\milli\meter}$), $M=1.2$ ($L=\qty{30}{\milli\meter}$), and $M=2.0$ ($L=\qty{50}{\milli\meter}$).
 
-A Bradley--Terry mixed-effects model revealed that the Mach matching regime dictates perceptual efficacy. In the intensity task, the exactly matched $M=1.0$ and near-matched $M=1.2$ conditions achieved the highest scores ($1.42$ and $1.40$, respectively), with no significant difference between them ($p=0.923$). The highly supersonic $M=2.0$ condition maintained a relatively high intensity score ($1.26$), not significantly lower than the matched conditions ($p>0.4$), indicating that once a Mach cone forms, it provides substantial wave compression. However, when the speed dropped to the subsonic regime ($M=0.5$ and $M=0.2$), where the Mach cone cannot form, perceived intensity collapsed dramatically (scores of $-0.76$ and $-3.32$, both significantly lower than all $M \ge 1.0$ conditions, $p<0.001$).
+A Bradley--Terry mixed-effects model confirmed that Mach matching governs perceptual efficacy. The matched $M=1.0$ and near-matched $M=1.2$ conditions achieved the highest intensity scores ($1.42$ and $1.40$, respectively; $p=0.923$ for the difference). The supersonic $M=2.0$ condition maintained a high score ($1.26$, $p>0.4$ vs. matched), indicating that Mach cone formation provides wave compression. However, in the subsonic regime ($M=0.5$ and $M=0.2$) where no Mach cone forms, perceived intensity collapsed ($-0.76$ and $-3.32$, respectively; $p<0.001$ against $M \ge 1.0$).
 
-For spatial clarity, the $M=1.0$ condition provided the highest score ($0.47$), again not significantly different from $M=1.2$ ($0.36$, $p=0.505$). Crucially, while the highly supersonic $M=2.0$ condition retained high intensity, its spatial clarity score plummeted to $-0.14$, significantly lower than both matched conditions ($p<0.001$ against $M=1.0$, $p=0.003$ against $M=1.2$). This behavioral drop aligns perfectly with the physical wave dispersion and overly acute Mach cone angle observed in the $M=2.0$ simulations. In addition, reaction time data (Z-Log-RT) showed that participants made extremely rapid decisions when rejecting the highly subsonic $M=0.2$ condition against others, reflecting its unequivocally weak percept. Conversely, comparisons between the high-performing $M=1.0$ and $M=1.2$ conditions yielded the longest reaction times, indicating perceptual equivalence in the optimal wave-speed matching zone.
+For spatial clarity, the $M=1.0$ condition achieved the highest score ($0.47$), equivalent to $M=1.2$ ($0.36$, $p=0.505$). While the supersonic $M=2.0$ condition retained high intensity, its spatial clarity dropped to $-0.14$ ($p<0.001$ vs. $M=1.0$, $p=0.003$ vs. $M=1.2$). This degradation reflects the wave dispersion and acute Mach cone angle seen in the $M=2.0$ simulations. Participants rejected the subsonic $M=0.2$ condition rapidly (Z-Log-RT), reflecting an unequivocally weak percept, whereas comparisons between $M=1.0$ and $M=1.2$ yielded the longest reaction times, indicating perceptual equivalence.
 
-In conclusion, both the elastodynamic simulations and the psychophysical validation support our central hypothesis: the perceptual efficacy of spatiotemporal modulation fundamentally depends on the kinematic matching between focal scan speed and tissue shear wave speed. The superiority of $ULM_L$ derives from its ability to harness the Mach cone effect for coherent integration ($M \ge 1$), ensuring a directional, sustained mechanical drive. Furthermore, optimizing for both maximal perceptual intensity and sharp spatial localization requires tuning the scan speed closely to the wave speed ($M \approx 1.0 \sim 1.2$), avoiding both subsonic collapse and extreme supersonic dispersion.
+Both elastodynamic simulations and psychophysical data demonstrate that the perceptual efficacy of spatiotemporal modulation relies on kinematic matching between the focal scan and tissue shear wave speed. $ULM_L$ leverages the Mach cone effect ($M \ge 1$) to establish a directional, sustained mechanical drive. Optimizing perceptual intensity and spatial localization requires tuning scan speed to the wave speed ($M \approx 1.0 \sim 1.2$), avoiding subsonic collapse and supersonic dispersion.
+
+\SupplementarySection{Detailed statistical results and behavioral consistency}
+\label{sec:detailed_statistical_results}
+
+We report the parameter estimates from the Bayesian mixed-effects Bradley--Terry (GLMM) model used for Experiment 1. \cref{tab:glmm_intensity} and \cref{tab:glmm_clarity} provide the fixed-effect coefficients (log-odds scores), standard errors, Z-values, and p-values for the Intensity and Spatial Clarity tasks. The tables include the variance of the random intercept ($\sigma^2_{\text{participant}}$), reflecting individual baseline differences.
+
+\begin{table}[htbp]
+\caption{\textbf{GLMM fixed and random effects for the Intensity preference task.} Baseline reference is the mean of all methods (zero-centered). Number of participants $N=30$, total paired comparisons $=600$.}
+\label{tab:glmm_intensity}
+\centering
+\small
+\setlength{\tabcolsep}{0pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
+\toprule
+\textbf{Modulation Method} & \textbf{Coefficient ($\tilde{\lambda}$)} & \textbf{Std. Error} & \textbf{Z-value} & \textbf{p-value} \\
+\midrule
+$ULM_L$ & 0.74 & 0.11 & 6.73 & $<0.001$ \\
+$DLM_2$ & 0.34 & 0.11 & 3.09 & $0.002$ \\
+$DLM_3$ & -0.04 & 0.11 & -0.36 & $0.716$ \\
+$LM_C$ & -0.18 & 0.11 & -1.64 & $0.102$ \\
+$LM_L$ & -0.86 & 0.12 & -7.17 & $<0.001$ \\
+\midrule
+\textbf{Random Effects} & \textbf{Variance ($\sigma^2$)} & \textbf{Std. Dev. ($\sigma$)} & & \\
+\midrule
+Participant Intercept ($b_p$) & 0.14 & 0.37 & & \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{table}[htbp]
+\caption{\textbf{GLMM fixed and random effects for the Spatial Clarity preference task.} Baseline reference is the mean of all methods (zero-centered). Number of participants $N=30$, total paired comparisons $=600$.}
+\label{tab:glmm_clarity}
+\centering
+\small
+\setlength{\tabcolsep}{0pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
+\toprule
+\textbf{Modulation Method} & \textbf{Coefficient ($\tilde{\lambda}$)} & \textbf{Std. Error} & \textbf{Z-value} & \textbf{p-value} \\
+\midrule
+$ULM_L$ & 0.24 & 0.10 & 2.40 & $0.016$ \\
+$DLM_2$ & 0.11 & 0.10 & 1.10 & $0.271$ \\
+$DLM_3$ & -0.04 & 0.10 & -0.40 & $0.689$ \\
+$LM_C$ & -0.08 & 0.10 & -0.80 & $0.424$ \\
+$LM_L$ & -0.23 & 0.10 & -2.30 & $0.021$ \\
+\midrule
+\textbf{Random Effects} & \textbf{Variance ($\sigma^2$)} & \textbf{Std. Dev. ($\sigma$)} & & \\
+\midrule
+Participant Intercept ($b_p$) & 0.08 & 0.28 & & \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+To verify that $ULM_L$ superiority was not driven by a small subset of participants, we analyzed within-subject preference consistency. In the Intensity task, 23 of 30 participants chose $ULM_L$ over the competing methods more often than expected by chance, with seven participants showing a perfect win ratio of 1.0 and only four falling below the 0.5 chance line (
+\cref{fig:supplementary_figure_behavioral_consistency}a, left). In the Spatial task, the same overall pattern remained but was weaker: 19 of 30 participants favored $ULM_L$ above chance, three showed a perfect win ratio, four were exactly at chance, and seven fell below chance (\cref{fig:supplementary_figure_behavioral_consistency}a, right). These distributions show that the advantage of unidirectional, wave-speed-matched modulation was broadly shared across participants, while also indicating that spatial judgments were less uniform than intensity judgments.
+
+For Experiment 2, representative 3-Down-1-Up staircase trajectories from Participant 5 show stable threshold-seeking behavior across all five modulation methods (\cref{fig:supplementary_figure_behavioral_consistency}b). The staircases begin at high normalized intensity ($\approx 0.88$), then descend and fluctuate around method-specific operating regions with repeated reversals, consistent with adaptive convergence. $ULM_L$ converged to the lowest intensity region (ending near $I_{\mathrm{norm}}\approx 0.16$), whereas $LM_L$ remained highest (mostly around $0.72$--$0.88$), with $DLM_2$, $DLM_3$, and $LM_C$ occupying intermediate ranges. None of the staircases became trapped at the task boundaries, supporting the stability of the threshold estimates and their separation across modulation methods.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Figure_Supplementary_Behavioral_Consistency.pdf}
+    \caption{\textbf{Individual differences and staircase convergence.} \textbf{a}, Distribution of individual preference proportions for $ULM_L$ against all other methods across the 30 participants, demonstrating high behavioral consistency. \textbf{b}, Representative 3-Down-1-Up adaptive staircase trajectories from a single participant in Experiment 2. The staircases successfully converged to the 79.4\% detection threshold without hitting the hardware limits.}
+    \label{fig:supplementary_figure_behavioral_consistency}
+\end{figure}
+
+\SupplementarySection{Theoretical defense of tissue viscoelasticity and simplified modeling}
+\label{sec:theoretical_defense_viscoelasticity}
+
+Our simulations modeled skin as a homogeneous, semi-infinite linear elastic medium with power-law attenuation. Human skin is a stratified viscoelastic medium containing frequency-dependent dispersion and damping~\cite{reardonShearShockWaves2023}. Despite this simplification, the model captures the core wave dynamics governing ultrasonic tactile perception.
+
+Tissue viscoelasticity and stratification induce strong low-pass filtering and spatial dispersion. Because viscous damping in soft tissues scales with frequency, higher harmonic mechanical waves attenuate faster than fundamentals~\cite{reardonCutaneousWavePropagation2019}. In a multi-layered viscoelastic model, high-frequency artifacts---such as the \qty{400}{\hertz} components generated by bidirectional $LM_L$ modulation---would dissipate more aggressively than in our power-law attenuation framework.
+
+Because $ULM_L$ maintains frequency fidelity at the \qty{200}{\hertz} fundamental, skin viscoelasticity theoretically amplifies its signal-to-noise ratio and coherent integration advantage. Our homogeneous simulation thus provides a conservative lower bound for wave coherence effects; the in-vivo spatiotemporal advantage of $ULM_L$ is likely more pronounced.
+
 
 \bibliography{SWIM}% common bib file
 
