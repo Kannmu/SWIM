@@ -9,3 +9,5 @@ Reference
 *.bbl
 *.synctex.gz
 *.log
+.kilocode/
+.claude/
