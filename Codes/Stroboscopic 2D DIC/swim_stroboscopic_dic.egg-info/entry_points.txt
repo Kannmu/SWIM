@@ -1,0 +1,2 @@
+[console_scripts]
+swim-dic = dic.cli:main

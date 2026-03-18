@@ -1,0 +1,208 @@
+{
+  "image_size": [
+    1280,
+    720
+  ],
+  "image_count": 20,
+  "valid_image_count": 20,
+  "board": {
+    "inner_corners_rows": 8,
+    "inner_corners_cols": 11,
+    "square_size_mm": 15.0
+  },
+  "rms_reprojection_error_px": 0.3897682584831698,
+  "mean_reprojection_error_px": 0.379873014241457,
+  "camera_matrix": [
+    [
+      1255.3751862176646,
+      0.0,
+      629.8806501382776
+    ],
+    [
+      0.0,
+      1257.7951757108563,
+      365.8961748784831
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "distortion_coefficients": [
+    0.07133669459638901,
+    0.31229292421730176,
+    -0.0033032967258656894,
+    0.0029141500735999637,
+    -1.997418627497621
+  ],
+  "optimal_camera_matrix": [
+    [
+      1219.576785021852,
+      0.0,
+      630.8444080771218
+    ],
+    [
+      0.0,
+      1222.7681068224178,
+      363.9227198556126
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "roi": [
+    20,
+    14,
+    1236,
+    690
+  ],
+  "mean_pixel_size_um": 236.497907222609,
+  "pixel_size_std_um": 23.662106595021534,
+  "mean_pixels_per_mm_x": 4.270121040344238,
+  "mean_pixels_per_mm_y": 4.265790354410807,
+  "image_results": [
+    {
+      "image_path": "calibration_images\\calib_0001.png",
+      "detected": true,
+      "reprojection_error_px": 0.3664044737815857,
+      "pixels_per_square_x": 66.38158416748047,
+      "pixels_per_square_y": 66.23604583740234
+    },
+    {
+      "image_path": "calibration_images\\calib_0002.png",
+      "detected": true,
+      "reprojection_error_px": 0.34677156805992126,
+      "pixels_per_square_x": 67.21452331542969,
+      "pixels_per_square_y": 67.43883514404297
+    },
+    {
+      "image_path": "calibration_images\\calib_0003.png",
+      "detected": true,
+      "reprojection_error_px": 0.3060467541217804,
+      "pixels_per_square_x": 67.92669677734375,
+      "pixels_per_square_y": 67.46810150146484
+    },
+    {
+      "image_path": "calibration_images\\calib_0004.png",
+      "detected": true,
+      "reprojection_error_px": 0.39212313294410706,
+      "pixels_per_square_x": 66.79935455322266,
+      "pixels_per_square_y": 66.8162841796875
+    },
+    {
+      "image_path": "calibration_images\\calib_0005.png",
+      "detected": true,
+      "reprojection_error_px": 0.4645368456840515,
+      "pixels_per_square_x": 67.53917694091797,
+      "pixels_per_square_y": 67.76512145996094
+    },
+    {
+      "image_path": "calibration_images\\calib_0006.png",
+      "detected": true,
+      "reprojection_error_px": 0.38905638456344604,
+      "pixels_per_square_x": 72.09678649902344,
+      "pixels_per_square_y": 71.23147583007812
+    },
+    {
+      "image_path": "calibration_images\\calib_0007.png",
+      "detected": true,
+      "reprojection_error_px": 0.3334631025791168,
+      "pixels_per_square_x": 69.80485534667969,
+      "pixels_per_square_y": 68.88121032714844
+    },
+    {
+      "image_path": "calibration_images\\calib_0008.png",
+      "detected": true,
+      "reprojection_error_px": 0.41833317279815674,
+      "pixels_per_square_x": 68.2476577758789,
+      "pixels_per_square_y": 68.60054779052734
+    },
+    {
+      "image_path": "calibration_images\\calib_0009.png",
+      "detected": true,
+      "reprojection_error_px": 0.3261149823665619,
+      "pixels_per_square_x": 69.56880187988281,
+      "pixels_per_square_y": 69.54193115234375
+    },
+    {
+      "image_path": "calibration_images\\calib_0010.png",
+      "detected": true,
+      "reprojection_error_px": 0.25997194647789,
+      "pixels_per_square_x": 69.64802551269531,
+      "pixels_per_square_y": 69.36951446533203
+    },
+    {
+      "image_path": "calibration_images\\calib_0011.png",
+      "detected": true,
+      "reprojection_error_px": 0.42649558186531067,
+      "pixels_per_square_x": 66.9867172241211,
+      "pixels_per_square_y": 66.65914154052734
+    },
+    {
+      "image_path": "calibration_images\\calib_0012.png",
+      "detected": true,
+      "reprojection_error_px": 0.3071828782558441,
+      "pixels_per_square_x": 68.64017486572266,
+      "pixels_per_square_y": 68.69615173339844
+    },
+    {
+      "image_path": "calibration_images\\calib_0013.png",
+      "detected": true,
+      "reprojection_error_px": 0.296110600233078,
+      "pixels_per_square_x": 54.56046676635742,
+      "pixels_per_square_y": 54.58964538574219
+    },
+    {
+      "image_path": "calibration_images\\calib_0014.png",
+      "detected": true,
+      "reprojection_error_px": 0.37262606620788574,
+      "pixels_per_square_x": 64.78144836425781,
+      "pixels_per_square_y": 64.69126892089844
+    },
+    {
+      "image_path": "calibration_images\\calib_0015.png",
+      "detected": true,
+      "reprojection_error_px": 0.5748671293258667,
+      "pixels_per_square_x": 55.5487060546875,
+      "pixels_per_square_y": 55.18330383300781
+    },
+    {
+      "image_path": "calibration_images\\calib_0016.png",
+      "detected": true,
+      "reprojection_error_px": 0.4145878851413727,
+      "pixels_per_square_x": 58.60014724731445,
+      "pixels_per_square_y": 58.6392936706543
+    },
+    {
+      "image_path": "calibration_images\\calib_0017.png",
+      "detected": true,
+      "reprojection_error_px": 0.5293595790863037,
+      "pixels_per_square_x": 61.75776290893555,
+      "pixels_per_square_y": 62.82331848144531
+    },
+    {
+      "image_path": "calibration_images\\calib_0018.png",
+      "detected": true,
+      "reprojection_error_px": 0.5039805173873901,
+      "pixels_per_square_x": 52.416900634765625,
+      "pixels_per_square_y": 52.72610855102539
+    },
+    {
+      "image_path": "calibration_images\\calib_0019.png",
+      "detected": true,
+      "reprojection_error_px": 0.3466329276561737,
+      "pixels_per_square_x": 53.76227569580078,
+      "pixels_per_square_y": 54.45970153808594
+    },
+    {
+      "image_path": "calibration_images\\calib_0020.png",
+      "detected": true,
+      "reprojection_error_px": 0.22279475629329681,
+      "pixels_per_square_x": 58.754249572753906,
+      "pixels_per_square_y": 57.92010498046875
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+Metadata-Version: 2.4
+Name: swim-stroboscopic-dic
+Version: 0.1.0
+Summary: Stroboscopic 2D DIC pipeline for SWIM skin-surface wave measurements
+Author: SWIM Project
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: scipy>=1.11
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: opencv-python>=4.9
+Requires-Dist: pydantic>=2.6
+Requires-Dist: pydantic-settings>=2.2
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: pandas>=2.1
+Requires-Dist: tqdm>=4.66
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+
+# Stroboscopic 2D DIC
+
+该目录实现了面向 SWIM 项目的频闪二维数字图像相关法（Stroboscopic 2D DIC）Python 工程。代码重点围绕以下目标设计：
+
+- 使用普通工业相机记录与 200 Hz 超声调制严格同步的频闪视频
+- 保存视频、原始帧与采集元数据
+- 通过全局配准、参考区校正、公共模态抑制与局部 DIC，尽量压制手部轻微平移、旋转、姿态漂移与肌肉微颤
+- 在不制作散斑的前提下，优先利用皮肤自然纹理进行相关跟踪
+- 输出适合 SWIM 场景的位移场、应变场、中心位移轨迹、参考区校正轨迹、波幅剖面与叠加可视化视频
+
+## 目录结构
+
+- `dic/config.py`：配置模型与 YAML 加载
+- `dic/capture.py`：视频录制与元数据保存
+- `dic/preprocess.py`：CLAHE、空间带通、全局 ECC 配准、参考区运动估计、公共模态抑制
+- `dic/dic_core.py`：网格化局部相关与亚像素位移估计
+- `dic/analysis.py`：位移场统计、应变估计、中心轨迹、波幅剖面分析
+- `dic/visualization.py`：热图、剖面、中心轨迹、矢量场、叠加视频输出
+- `dic/cli.py`：命令行入口
+
+## 安装
+
+在当前目录下执行：
+
+```bash
+pip install -e .
+```
+
+## 快速开始
+
+### 1. 生成配置模板
+
+```bash
+swim-dic init-config config/example.yaml
+```
+
+### 2. 修改配置
+
+请至少检查：
+
+- `camera.fps` 是否与实际相机输出一致，当前默认 `49.75`
+- `strobe.wave_frequency_hz = 200.0`
+- `strobe.strobe_frequency_hz = 49.75`
+- `strobe.pulse_width_us = 10.0`
+- `analysis.pixel_size_um` 是否匹配你的光学倍率标定
+- `dic.roi` 与 `reference_regions` 是否准确覆盖兴趣区与非兴趣参考区
+
+### 3. 仅录制视频
+
+```bash
+swim-dic capture config/example.yaml --duration 2.0
+```
+
+### 4. 分析已录制视频
+
+```bash
+swim-dic analyze config/example.yaml
+```
+
+### 5. 一步完成录制与分析
+
+```bash
+swim-dic run config/example.yaml --duration 2.0
+```
+
+## 运动伪影抑制策略
+
+针对你提到的 1 秒左右等效采样窗口内手部不可避免的小幅移动、转动与轻微震颤，当前管线采用多层抑制：
+
+1. **全局 Euclidean ECC 配准**
+   - 先对整帧估计刚体近似运动，抑制整体平移与小角度旋转。
+2. **非兴趣区参考块校正**
+   - 在 `reference_regions` 中定义不受焦点表面波影响、但与手部共同运动的皮肤区域。
+   - 使用模板匹配追踪这些参考区，并将其平均运动从每个 DIC 向量中扣除。
+3. **公共模态信号扣除**
+   - 对整帧平均亮度/整体低频漂移做 detrend 与公共模态移除，减小 LED 波动、相机增益波动和大范围背景变化影响。
+4. **局部子区相关 + 亚像素相位细化**
+   - 先做模板相关，再用局部相位相关细化子像素位移。
+5. **时间带通分析**
+   - 在慢时间轴上对位移场做带通，突出 1 Hz 等效拍频附近的结构，压制超慢漂移和高频噪声。
+
+这一组合非常适合你的场景：目标是分离由超声焦点调制产生的微弱皮肤表面波，而不是保留整只手的宏观运动。
+
+## 重点输出内容
+
+输出目录默认在 `outputs/`，包含：
+
+- `reference_frame.png`
+- `amplitude_total.png`
+- `rms_u.png`, `rms_v.png`
+- `temporal_std.png`
+- `phase_map.png`
+- `strain_xx.png`, `strain_yy.png`, `strain_xy.png`
+- `center_trace.png`
+- `center_trace_ref_corrected.png`
+- `wave_profile.png`
+- `vector_field_overlay.png`
+- `dic_overlay.mp4`
+- `center_trace.csv`
+- `dic_results.npz`
+
+这些图覆盖了你最可能关心的内容：
+
+- 表面波在兴趣区的空间幅值分布
+- 水平/垂直位移分量的 RMS
+- 参考校正前后中心点位移对比
+- 波传播方向上的振幅剖面
+- 主相位分布，用于观察传播连贯性
+- 简单应变场估计，用于追踪局部剪切与拉伸模式
+- 原视频叠加的位移箭头场，便于直观核验 DIC 是否工作正常
+
+## 示例配置
+
+```yaml
+camera:
+  camera_index: 0
+  width: 1280
+  height: 800
+  fps: 49.75
+  exposure_us: null
+  gain: null
+  codec: mp4v
+  color: true
+  backend: null
+strobe:
+  wave_frequency_hz: 200.0
+  strobe_frequency_hz: 49.75
+  target_beat_hz: 1.0
+  pulse_width_us: 10.0
+  led_color: green
+dic:
+  roi: [200, 120, 700, 500]
+  subset_size_px: 31
+  step_size_px: 8
+  search_radius_px: 12
+  gaussian_sigma_px: 0.8
+  highpass_sigma_px: 9.0
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: 8
+  bandpass_temporal_hz: [0.2, 5.0]
+  global_motion_model: euclidean
+  outlier_mad_scale: 4.5
+  reference_strategy: median
+  use_reference_region_correction: true
+  use_global_motion_correction: true
+  use_common_mode_subtraction: true
+  median_reference_frame_count: 21
+analysis:
+  expected_wave_frequency_hz: 200.0
+  equivalent_slow_frequency_hz: 1.0
+  pixel_size_um: 10.0
+  beat_cycles_to_analyze: 1
+  smoothing_sigma_frames: 1.0
+  export_video_overlays: true
+  export_field_csv: true
+  export_npz: true
+  visualize_quiver_stride: 3
+  spatial_wave_axis: auto
+paths:
+  project_root: .
+  raw_video: data/raw/capture.mp4
+  frames_dir: data/frames
+  output_dir: outputs
+  metadata_json: data/raw/capture_metadata.json
+reference_regions:
+  - name: ref_left
+    x: 40
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+  - name: ref_right
+    x: 980
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+notes: SWIM stroboscopic DIC measurement
+```
+
+## 当前实现边界
+
+当前版本已经是完整可运行的模块化工程，但它属于高质量研究原型，不是工业封闭式软件。后续你可以继续增强：
+
+- 接入相机厂商 SDK，实现严格硬触发与更稳定的曝光控制
+- 接入 LED 与 UMH 的 TTL 同步控制
+- 用更强的逆组合 Gauss-Newton 或 FFT-DIC 替换当前基础相关器
+- 加入多尺度金字塔、遮挡剔除、鲁棒外点回归
+- 加入时空相位速度估计、波速拟合、群速度/相速度分析
+- 对比兴趣区与非兴趣区的差分传播图，从而更直接验证 SWIM 的局部表面波增强现象

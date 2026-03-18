@@ -92,12 +92,7 @@ Because the typical \qty{40}{\kHz} carrier frequency exceeds the $<\qty{1}{\kHz}
     \label{fig:supplementary_figure_umh_device}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{Figure_Transducer_Driver_Circuit.pdf}
-    \caption{\textbf{Schematic of the single-channel ultrasonic transducer driver circuit.} The digital control signal (SIG) is buffered and inverted by the IX4428MTR driver IC to generate complementary outputs (OUTA and OUTB). This bipolar drive topology applies a \qty{24}{\volt} peak-to-peak square wave across the piezoelectric transducer (GU1007C-40TR) from a single \qty{12}{\volt} supply, maximizing acoustic emission. The circuit includes ESD protection and a visual status indicator.}
-    \label{fig:supplementary_figure_transducer_driver_circuit}
-\end{figure}
+
 
 
 We engineered a high-energy-density Ultrasound Mid-Air Haptic (UMH) device (\cref{fig:supplementary_figure_umh_device}a) integrating a phased transducer array, multi-channel driving circuitry, and a central processing unit into a \qtyproduct{102.2 x 90 x 32.2}{\milli\meter} hexagonal prism.
@@ -108,6 +103,13 @@ The \qty{40}{\kilo\hertz} acoustic aperture comprises 60 \qty{10}{\milli\meter}-
 The device is powered by a \qty{12}{\volt} DC input and controlled by an STM32H750VBT6 microcontroller communicating via USB Type-C.
 
 Beamforming phase is controlled by Direct Memory Access (DMA) signal generation. Timer-triggered DMA transfers update GPIO states at \qty{4}{\mega\hertz}, discretizing each \qty{40}{\kilo\hertz} acoustic cycle into 100 slices for a phase resolution of $2\pi/100$ (\qty{250}{\nano\second}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Figure_Transducer_Driver_Circuit.pdf}
+    \caption{\textbf{Schematic of the single-channel ultrasonic transducer driver circuit.} The digital control signal (SIG) is buffered and inverted by the IX4428MTR driver IC to generate complementary outputs (OUTA and OUTB). This bipolar drive topology applies a \qty{24}{\volt} peak-to-peak square wave across the piezoelectric transducer (GU1007C-40TR) from a single \qty{12}{\volt} supply, maximizing acoustic emission. The circuit includes ESD protection and a visual status indicator.}
+    \label{fig:supplementary_figure_transducer_driver_circuit}
+\end{figure}
 
 The amplification stage employs a bipolar drive topology to maximize acoustic pressure (\cref{fig:supplementary_figure_transducer_driver_circuit}). Logic-level signals feed a dual-channel low-side MOSFET driver (IX4428MTR), which outputs complementary square waves to the transducer terminals. This push-pull configuration applies \qty{24}{\volt} peak-to-peak across the piezoelectric elements. Channels feature TVS diode electrostatic protection (ESD5451N) and visual status LEDs (\cref{fig:supplementary_figure_umh_device}g).
 
@@ -491,7 +493,7 @@ This index penalizes scattered or multi-directional wave patterns (low DWCI) and
 
 We developed a peripheral neural model to test whether cutaneous shear-wave propagation dynamics account for the psychophysical ranking of modulation strategies.
 
-The model targets the Pacinian corpuscle (PC) pathway, which mediates detection thresholds for vibrotactile stimuli above \qty{100}{\hertz}~\citep{johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}. The \qty{200}{\hertz} carrier envelope aligns precisely with peak PC sensitivity. While ultrastructural studies implicate Lamellar Schwann Cells (LSCs) in tuning PC dynamic sensitivity~\citep{ziolkowskiTouchSensationRequires2025}, explicitly modeling LSC-neurite biophysics introduces unconstrained parameters. We instead abstracted the inner core complex into an effective spatiotemporal integration kernel (Eq. 46) to represent the end-organ's summation of coherent mechanical events.
+The model targets the Pacinian corpuscle (PC) pathway, which mediates detection thresholds for vibrotactile stimuli above \qty{100}{\hertz}~\citep{johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}. The \qty{200}{\hertz} carrier envelope aligns precisely with peak PC sensitivity. While ultrastructural studies implicate Lamellar Schwann Cells (LSCs) in tuning PC dynamic sensitivity~\citep{ziolkowskiInnerCoreEnables2025}, explicitly modeling LSC-neurite biophysics introduces unconstrained parameters. We instead abstracted the inner core complex into an effective spatiotemporal integration kernel (\cref{eq:pc_spatiotemporal_integration}) to represent the end-organ's summation of coherent mechanical events.
 
 We kept all model parameters fixed across conditions, allowing the modulation schemes to differ only through their input spatiotemporal mechanical fields.
 
@@ -502,7 +504,7 @@ The model inputs were the steady-state spatiotemporal shear-stress fields ($\tau
 This reflects the Pacinian system's sensitivity to dynamic vibration~\citep{johanssonTactileSensoryCoding1983, johnsonRolesFunctionsCutaneous2001, handlerMechanosensoryNeuronsTouch2021}.
 
 The model's central operation was a causal spatiotemporal integration step representing the summation of cutaneous surface waves. For receptor $i$ and shear component $c$:
-\begin{equation}
+\begin{equation}\label{eq:pc_spatiotemporal_integration}
     m_{c,i}(t)=\sum_{j \in \Omega_i} K(d_{ij})\,\tau^{\mathrm{dyn}}_{c}\!\left(r_j, t-\frac{d_{ij}}{c_s}\right),
 \end{equation}
 with
@@ -673,7 +675,7 @@ For Experiment 2, representative 3-Down-1-Up staircase trajectories from Partici
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{Figure_Supplementary_Behavioral_Consistency.pdf}
-    \caption{\textbf{Individual differences and staircase convergence.} \textbf{a}, Distribution of individual preference proportions for $ULM_L$ against all other methods across the 30 participants, demonstrating high behavioral consistency. \textbf{b}, Representative 3-Down-1-Up adaptive staircase trajectories from a single participant in Experiment 2. The staircases successfully converged to the 79.4\% detection threshold without hitting the hardware limits.}
+    \caption{\textbf{Individual differences and staircase convergence.} \textbf{a}, Distribution of individual preference proportions for $ULM_L$ against all other methods across the 30 participants, demonstrating high behavioral consistency. \textbf{b}, Representative 3-Down-1-Up adaptive staircase trajectories from a single participant in Experiment 2. The staircases successfully converged to the 79.4\% detection threshold without hitting the hardware limits. Participants are sorted independently for each task}
     \label{fig:supplementary_figure_behavioral_consistency}
 \end{figure}
 

@@ -1,0 +1,98 @@
+camera:
+  camera_index: 0
+  width: 1280
+  height: 720
+  fps: 60
+  exposure_us: null
+  gain: null
+  codec: mp4v
+  color: true
+  backend: null
+strobe:
+  wave_frequency_hz: 200.0
+  strobe_frequency_hz: 49.75
+  target_beat_hz: 1.0
+  pulse_width_us: 10.0
+  led_color: green
+dic:
+  roi: null
+  subset_size_px: 31
+  step_size_px: 8
+  search_radius_px: 12
+  gaussian_sigma_px: 0.8
+  highpass_sigma_px: 9.0
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: 8
+  bandpass_temporal_hz:
+  - 0.2
+  - 5.0
+  global_motion_model: euclidean
+  outlier_mad_scale: 4.5
+  reference_strategy: median
+  use_reference_region_correction: true
+  use_global_motion_correction: true
+  use_common_mode_subtraction: true
+  median_reference_frame_count: 21
+analysis:
+  expected_wave_frequency_hz: 200.0
+  equivalent_slow_frequency_hz: 1.0
+  pixel_size_um: 236.497907
+  beat_cycles_to_analyze: 1
+  smoothing_sigma_frames: 1.0
+  export_video_overlays: true
+  export_field_csv: true
+  export_npz: true
+  visualize_quiver_stride: 3
+  spatial_wave_axis: auto
+calibration:
+  enabled: true
+  board:
+    inner_corners_rows: 8
+    inner_corners_cols: 11
+    square_size_mm: 15.0
+  camera_matrix:
+  - - 1255.3751862176646
+    - 0.0
+    - 629.8806501382776
+  - - 0.0
+    - 1257.7951757108563
+    - 365.8961748784831
+  - - 0.0
+    - 0.0
+    - 1.0
+  distortion_coefficients:
+  - 0.07133669459638901
+  - 0.31229292421730176
+  - -0.0033032967258656894
+  - 0.0029141500735999637
+  - -1.997418627497621
+  optimal_camera_matrix:
+  - - 1219.576785021852
+    - 0.0
+    - 630.8444080771218
+  - - 0.0
+    - 1222.7681068224178
+    - 363.9227198556126
+  - - 0.0
+    - 0.0
+    - 1.0
+  roi:
+  - 20
+  - 14
+  - 1236
+  - 690
+  image_size:
+  - 1280
+  - 720
+  mean_reprojection_error_px: 0.379873
+  rms_reprojection_error_px: 0.389768
+  pixel_size_um: 236.497907
+  pixel_size_std_um: 23.662107
+paths:
+  project_root: .
+  raw_video: data\raw\capture.mp4
+  frames_dir: data\frames
+  output_dir: outputs
+  metadata_json: data\raw\capture_metadata.json
+reference_regions: []
+notes: ''

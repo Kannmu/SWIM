@@ -1,0 +1,300 @@
+# Stroboscopic 2D DIC
+
+该目录实现了面向 SWIM 项目的频闪二维数字图像相关法（Stroboscopic 2D DIC）Python 工程。代码重点围绕以下目标设计：
+
+- 使用普通工业相机记录与 200 Hz 超声调制严格同步的频闪视频
+- 保存视频、原始帧与采集元数据
+- 通过全局配准、参考区校正、公共模态抑制与局部 DIC，尽量压制手部轻微平移、旋转、姿态漂移与肌肉微颤
+- 在不制作散斑的前提下，优先利用皮肤自然纹理进行相关跟踪
+- 输出适合 SWIM 场景的位移场、应变场、中心位移轨迹、参考区校正轨迹、波幅剖面与叠加可视化视频
+
+## 目录结构
+
+- `dic/config.py`：配置模型与 YAML 加载
+- `dic/capture.py`：视频录制与元数据保存
+- `dic/preprocess.py`：CLAHE、空间带通、全局 ECC 配准、参考区运动估计、公共模态抑制
+- `dic/dic_core.py`：网格化局部相关与亚像素位移估计
+- `dic/analysis.py`：位移场统计、应变估计、中心轨迹、波幅剖面分析
+- `dic/visualization.py`：热图、剖面、中心轨迹、矢量场、叠加视频输出
+- `dic/cli.py`：命令行入口
+
+## 安装
+
+在当前目录下执行：
+
+```bash
+pip install -e .
+```
+
+## 快速开始
+
+### 1. 生成配置模板
+
+```bash
+swim-dic init-config config/example.yaml
+```
+
+### 2. 修改配置
+
+请至少检查：
+
+- `camera.fps` 是否与实际相机输出一致，当前默认 `60`
+- `strobe.wave_frequency_hz = 200.0`
+- `strobe.strobe_frequency_hz = 49.75`
+- `strobe.pulse_width_us = 10.0`
+- `analysis.pixel_size_um` 是否匹配你的光学倍率标定
+- `dic.roi` 与 `reference_regions` 是否准确覆盖兴趣区与非兴趣参考区
+
+### 2.1 是否需要相机标定
+
+对于你的频闪 2D DIC 场景，建议做两层区分：
+
+1. **如果你只关心像素级相对位移场形状**，并且只在画面中心小视场内工作，严格来说可以先不做完整畸变标定，只做一次平面尺度标定，把 `analysis.pixel_size_um` 设准。
+2. **如果你要报告微米级位移、应变、波幅剖面，或者 ROI 不在光轴中心**，则建议做完整相机标定。原因是镜头畸变会把像素间距变成空间位置相关量，直接影响位移换算、剖面长度和应变估计。
+
+你的 9×12 棋盘格、单格 15 mm 已经足够用于当前系统标定。当前工程已加入 `swim-dic calibrate` 命令，可以同时完成：
+
+- 棋盘格角点检测
+- 相机内参与畸变估计
+- 自动计算平均 `pixel_size_um`
+- 将结果写回 YAML 的 `analysis.pixel_size_um` 与 `calibration` 段
+
+### 2.2 标定图像采集建议
+
+请单独拍摄一组静态棋盘格图像，而不是从手部实验视频里截取。建议：
+
+- 保持与正式实验**相同镜头、相同焦距、相同工作距离、相同分辨率**
+- 如果实验时会固定曝光/增益，标定时也尽量保持一致
+- 采集 `10` 到 `20` 张图像
+- 棋盘格应覆盖画面不同位置，包含中心、四角、边缘
+- 每张图改变一定姿态：平移、轻微旋转、俯仰、远近变化
+- 保证棋盘格清晰对焦，避免运动模糊与过曝
+
+如果你最终只在一个很小的中心 ROI 内做 DIC，像素尺寸也可以用该 ROI 附近的几张正视图交叉验证。
+
+### 2.3 交互式标定图像采集
+
+当前工程已加入一个交互式标定采集窗口。你可以实时看到摄像头画面、棋盘格角点检测结果、覆盖度、清晰度、曝光评分和总分。只有当总分高于阈值时，点击按钮或按空格才会保存图像。
+
+如果你只想先采集图像到 `calibration_images/`：
+
+```bash
+swim-dic capture-calibration config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --min-score 70
+```
+
+窗口使用说明：
+
+- 绿色角点覆盖表示当前已检测到完整棋盘格
+- 界面会实时显示 `Score`，范围为 `0` 到 `100`
+- `Threshold` 是允许保存图像的最低分数
+- 点击窗口中的 `Capture best frame` 按钮，或按空格，可以尝试保存当前帧
+- 当未检测到完整网格，或者评分低于阈值时，程序会拒绝保存并在终端提示原因
+- 按 `Q` 或 `ESC` 退出采集窗口
+
+评分逻辑主要综合：
+
+- 棋盘格在画面中的覆盖范围
+- 图像清晰度
+- 曝光是否过暗、过亮或存在明显饱和
+
+### 2.4 标定命令
+
+假设标定图像放在 `calibration_images/` 中，可执行：
+
+```bash
+swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --output-json outputs/calibration/camera_calibration.json
+```
+
+该命令会：
+
+- 读取棋盘格图像
+- 用 OpenCV 检测 `9 × 12` 内角点
+- 计算内参矩阵和畸变系数
+- 根据相邻角点平均间距自动换算 `mm/pixel` 与 `um/pixel`
+- 将结果写入 `analysis.pixel_size_um` 和 `calibration`
+- 可选输出 `camera_calibration.json` 供后处理复用
+
+如果你想一边采集一边完成标定，可以直接执行：
+
+```bash
+swim-dic calibrate-interactive config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --min-score 70 --output-json outputs/calibration/camera_calibration.json
+```
+
+如果你只想试算，不改 YAML：
+
+```bash
+swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --no-write-config
+```
+
+### 2.5 标定后保存的数据
+
+标定完成后，配置文件会自动保存：
+
+- `analysis.pixel_size_um`
+- `calibration.camera_matrix`
+- `calibration.distortion_coefficients`
+- `calibration.optimal_camera_matrix`
+- `calibration.roi`
+- `calibration.mean_reprojection_error_px`
+- `calibration.pixel_size_std_um`
+
+其中最直接影响后续 DIC 定量分析的是 `analysis.pixel_size_um`。当前 `analysis.py` 会直接使用它把像素位移转换成微米位移，并进一步计算应变和波幅剖面。
+
+### 3. 仅录制视频
+
+```bash
+swim-dic capture config/example.yaml --duration 2.0
+```
+
+### 4. 分析已录制视频
+
+```bash
+swim-dic analyze config/example.yaml
+```
+
+### 5. 一步完成录制与分析
+
+```bash
+swim-dic run config/example.yaml --duration 2.0
+```
+
+## 运动伪影抑制策略
+
+针对你提到的 1 秒左右等效采样窗口内手部不可避免的小幅移动、转动与轻微震颤，当前管线采用多层抑制：
+
+1. **全局 Euclidean ECC 配准**
+   - 先对整帧估计刚体近似运动，抑制整体平移与小角度旋转。
+2. **非兴趣区参考块校正**
+   - 在 `reference_regions` 中定义不受焦点表面波影响、但与手部共同运动的皮肤区域。
+   - 使用模板匹配追踪这些参考区，并将其平均运动从每个 DIC 向量中扣除。
+3. **公共模态信号扣除**
+   - 对整帧平均亮度/整体低频漂移做 detrend 与公共模态移除，减小 LED 波动、相机增益波动和大范围背景变化影响。
+4. **局部子区相关 + 亚像素相位细化**
+   - 先做模板相关，再用局部相位相关细化子像素位移。
+5. **时间带通分析**
+   - 在慢时间轴上对位移场做带通，突出 1 Hz 等效拍频附近的结构，压制超慢漂移和高频噪声。
+
+这一组合非常适合你的场景：目标是分离由超声焦点调制产生的微弱皮肤表面波，而不是保留整只手的宏观运动。
+
+## 重点输出内容
+
+输出目录默认在 `outputs/`，包含：
+
+- `reference_frame.png`
+- `amplitude_total.png`
+- `rms_u.png`, `rms_v.png`
+- `temporal_std.png`
+- `phase_map.png`
+- `strain_xx.png`, `strain_yy.png`, `strain_xy.png`
+- `center_trace.png`
+- `center_trace_ref_corrected.png`
+- `wave_profile.png`
+- `vector_field_overlay.png`
+- `dic_overlay.mp4`
+- `center_trace.csv`
+- `dic_results.npz`
+
+这些图覆盖了你最可能关心的内容：
+
+- 表面波在兴趣区的空间幅值分布
+- 水平/垂直位移分量的 RMS
+- 参考校正前后中心点位移对比
+- 波传播方向上的振幅剖面
+- 主相位分布，用于观察传播连贯性
+- 简单应变场估计，用于追踪局部剪切与拉伸模式
+- 原视频叠加的位移箭头场，便于直观核验 DIC 是否工作正常
+
+## 示例配置
+
+```yaml
+camera:
+  camera_index: 0
+  width: 1280
+  height: 800
+  fps: 49.75
+  exposure_us: null
+  gain: null
+  codec: mp4v
+  color: true
+  backend: null
+strobe:
+  wave_frequency_hz: 200.0
+  strobe_frequency_hz: 49.75
+  target_beat_hz: 1.0
+  pulse_width_us: 10.0
+  led_color: green
+dic:
+  roi: [200, 120, 700, 500]
+  subset_size_px: 31
+  step_size_px: 8
+  search_radius_px: 12
+  gaussian_sigma_px: 0.8
+  highpass_sigma_px: 9.0
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: 8
+  bandpass_temporal_hz: [0.2, 5.0]
+  global_motion_model: euclidean
+  outlier_mad_scale: 4.5
+  reference_strategy: median
+  use_reference_region_correction: true
+  use_global_motion_correction: true
+  use_common_mode_subtraction: true
+  median_reference_frame_count: 21
+analysis:
+  expected_wave_frequency_hz: 200.0
+  equivalent_slow_frequency_hz: 1.0
+  pixel_size_um: 10.0
+  beat_cycles_to_analyze: 1
+  smoothing_sigma_frames: 1.0
+  export_video_overlays: true
+  export_field_csv: true
+  export_npz: true
+  visualize_quiver_stride: 3
+  spatial_wave_axis: auto
+calibration:
+  enabled: false
+  board:
+    inner_corners_rows: 9
+    inner_corners_cols: 12
+    square_size_mm: 15.0
+  camera_matrix: []
+  distortion_coefficients: []
+  optimal_camera_matrix: []
+  roi: []
+  image_size: []
+  mean_reprojection_error_px: null
+  rms_reprojection_error_px: null
+  pixel_size_um: null
+  pixel_size_std_um: null
+paths:
+  project_root: .
+  raw_video: data/raw/capture.mp4
+  frames_dir: data/frames
+  output_dir: outputs
+  metadata_json: data/raw/capture_metadata.json
+reference_regions:
+  - name: ref_left
+    x: 40
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+  - name: ref_right
+    x: 980
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+notes: SWIM stroboscopic DIC measurement
+```
+
+## 当前实现边界
+
+当前版本已经是完整可运行的模块化工程，但它属于高质量研究原型，不是工业封闭式软件。后续你可以继续增强：
+
+- 接入相机厂商 SDK，实现严格硬触发与更稳定的曝光控制
+- 接入 LED 与 UMH 的 TTL 同步控制
+- 用更强的逆组合 Gauss-Newton 或 FFT-DIC 替换当前基础相关器
+- 加入多尺度金字塔、遮挡剔除、鲁棒外点回归
+- 加入时空相位速度估计、波速拟合、群速度/相速度分析
+- 对比兴趣区与非兴趣区的差分传播图，从而更直接验证 SWIM 的局部表面波增强现象
