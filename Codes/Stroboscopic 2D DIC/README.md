@@ -79,7 +79,7 @@ swim-dic init-config config/example.yaml
 如果你只想先采集图像到 `calibration_images/`：
 
 ```bash
-swim-dic capture-calibration config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --min-score 70
+swim-dic capture-calibration config/example.yaml calibration_images --rows 8 --cols 11 --square-mm 15.0 --min-score 70
 ```
 
 窗口使用说明：
@@ -102,13 +102,13 @@ swim-dic capture-calibration config/example.yaml calibration_images --rows 9 --c
 假设标定图像放在 `calibration_images/` 中，可执行：
 
 ```bash
-swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --output-json outputs/calibration/camera_calibration.json
+swim-dic calibrate config/example.yaml calibration_images --rows 8 --cols 11 --square-mm 15.0 --output-json outputs/calibration/camera_calibration.json
 ```
 
 该命令会：
 
 - 读取棋盘格图像
-- 用 OpenCV 检测 `9 × 12` 内角点
+- 用 OpenCV 检测 `8 × 11` 内角点
 - 计算内参矩阵和畸变系数
 - 根据相邻角点平均间距自动换算 `mm/pixel` 与 `um/pixel`
 - 将结果写入 `analysis.pixel_size_um` 和 `calibration`
@@ -117,13 +117,13 @@ swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --s
 如果你想一边采集一边完成标定，可以直接执行：
 
 ```bash
-swim-dic calibrate-interactive config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --min-score 70 --output-json outputs/calibration/camera_calibration.json
+swim-dic calibrate-interactive config/example.yaml calibration_images --rows 8 --cols 11 --square-mm 15.0 --min-score 70 --output-json outputs/calibration/camera_calibration.json
 ```
 
 如果你只想试算，不改 YAML：
 
 ```bash
-swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --square-mm 15.0 --no-write-config
+swim-dic calibrate config/example.yaml calibration_images --rows 8 --cols 11 --square-mm 15.0 --no-write-config
 ```
 
 ### 2.5 标定后保存的数据

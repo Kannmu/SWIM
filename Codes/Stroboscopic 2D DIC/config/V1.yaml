@@ -1,0 +1,114 @@
+camera:
+  camera_index: 0
+  width: 640
+  height: 480
+  fps: 60.0
+  exposure_us: null
+  gain: null
+  codec: mp4v
+  color: true
+  backend: null
+strobe:
+  wave_frequency_hz: 200.0
+  strobe_frequency_hz: 49.75
+  target_beat_hz: 1.0
+  pulse_width_us: 10.0
+  led_color: green
+dic:
+  roi: null
+  subset_size_px: 31
+  step_size_px: 8
+  search_radius_px: 12
+  gaussian_sigma_px: 0.8
+  highpass_sigma_px: 9.0
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: 8
+  bandpass_temporal_hz:
+  - 0.2
+  - 5.0
+  global_motion_model: euclidean
+  outlier_mad_scale: 4.5
+  reference_strategy: median
+  use_reference_region_correction: true
+  use_global_motion_correction: true
+  use_common_mode_subtraction: true
+  median_reference_frame_count: 21
+  enable_gpu: true
+  gpu_backend: auto
+  gpu_batch_size: 8
+  numba_parallel: true
+analysis:
+  expected_wave_frequency_hz: 200.0
+  equivalent_slow_frequency_hz: 1.0
+  pixel_size_um: 447.835166
+  beat_cycles_to_analyze: 1
+  smoothing_sigma_frames: 1.0
+  export_video_overlays: true
+  export_field_csv: true
+  export_npz: true
+  visualize_quiver_stride: 3
+  spatial_wave_axis: auto
+calibration:
+  enabled: true
+  board:
+    inner_corners_rows: 8
+    inner_corners_cols: 11
+    square_size_mm: 15.0
+  camera_matrix:
+  - - 679.7194792328959
+    - 0.0
+    - 296.2355110036843
+  - - 0.0
+    - 681.4446748463132
+    - 256.2501192651559
+  - - 0.0
+    - 0.0
+    - 1.0
+  distortion_coefficients:
+  - -0.061953298216769113
+  - 0.10511273827832045
+  - 0.00093006265478916
+  - 0.0014111976385801142
+  - -0.06852836766002478
+  optimal_camera_matrix:
+  - - 671.2473777025167
+    - 0.0
+    - 296.89882684881087
+  - - 0.0
+    - 672.7588746123178
+    - 256.68363308679915
+  - - 0.0
+    - 0.0
+    - 1.0
+  roi:
+  - 1
+  - 2
+  - 637
+  - 476
+  image_size:
+  - 640
+  - 480
+  mean_reprojection_error_px: 0.157167
+  rms_reprojection_error_px: 0.159115
+  pixel_size_um: 447.835166
+  pixel_size_std_um: 33.637122
+paths:
+  project_root: .
+  raw_video: data\raw\v1_capture.mp4
+  frames_dir: data\v1_frames
+  output_dir: v1_outputs
+  metadata_json: data\raw\v1_capture_metadata.json
+reference_regions:
+- name: ref_left
+  x: 50
+  y: 160
+  width: 80
+  height: 80
+  weight: 1.0
+- name: ref_right
+  x: 350
+  y: 160
+  width: 80
+  height: 80
+  weight: 1.0
+notes: ''
