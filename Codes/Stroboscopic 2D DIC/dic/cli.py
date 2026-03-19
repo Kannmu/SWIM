@@ -12,6 +12,7 @@ from .calibration import (
 from .capture import VideoCaptureSession
 from .config import load_config, save_config_template
 from .pipeline import run_analysis_pipeline
+from .roi_configurator import ROIConfiguratorError, configure_roi_interactively
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -58,6 +59,10 @@ def build_parser() -> argparse.ArgumentParser:
     calib_interactive_cmd.add_argument("--output-json", type=Path, default=None, help="标定结果 JSON 输出路径")
     calib_interactive_cmd.add_argument("--no-write-config", action="store_true", help="仅计算标定，不写回 YAML 配置")
     calib_interactive_cmd.add_argument("--min-score", type=float, default=70.0, help="允许保存图像的最低质量分数")
+
+    roi_cmd = sub.add_parser("configure-roi", help="交互式选择 ROI 与 reference_regions，并写回 YAML")
+    roi_cmd.add_argument("config", type=Path, help="YAML 配置路径")
+    roi_cmd.add_argument("--frame-index", type=int, default=None, help="从视频中读取指定帧作为预览")
     return parser
 
 
@@ -105,6 +110,20 @@ def main() -> None:
             f"pixel_size_um={result.mean_pixel_size_um:.6f}, "
             f"rms_reprojection_error_px={result.rms_reprojection_error_px:.6f}, "
             f"valid_images={result.valid_image_count}/{result.image_count}"
+        )
+        return
+
+    if args.command == "configure-roi":
+        try:
+            result = configure_roi_interactively(args.config, frame_index=args.frame_index)
+        except ROIConfiguratorError as exc:
+            parser.error(str(exc))
+        print(
+            "ROI/reference_regions 配置完成: "
+            f"frame_source={result.frame_source}, "
+            f"frame_index={result.frame_index}, "
+            f"roi={result.roi}, "
+            f"reference_regions={len(result.reference_regions)}"
         )
         return
 

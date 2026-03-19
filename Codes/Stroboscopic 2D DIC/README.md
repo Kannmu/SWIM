@@ -140,19 +140,55 @@ swim-dic calibrate config/example.yaml calibration_images --rows 8 --cols 11 --s
 
 其中最直接影响后续 DIC 定量分析的是 `analysis.pixel_size_um`。当前 [`analysis.py`](Codes/Stroboscopic 2D DIC/dic/analysis.py) 会直接使用它把像素位移转换成微米位移，并进一步计算应变和波幅剖面。现在只要 `calibration.enabled: true` 且配置中存在 `camera_matrix` 与 `distortion_coefficients`，[`preprocess.py`](Codes/Stroboscopic 2D DIC/dic/preprocess.py) 会在进入 ROI 与 DIC 之前自动执行逐帧去畸变。
 
-### 3. 仅录制视频
+### 3. 交互式配置 ROI 与参考区
+
+当前工程已加入一个交互式 ROI 配置窗口。它会优先读取 `paths.raw_video` 指向的视频，并显示其中一帧；如果视频不存在，则退回到实时相机预览。你可以直接在图像上拖拽矩形，完成 `dic.roi` 和 `reference_regions` 的可视化配置，并将结果直接写回 YAML。
+
+```bash
+swim-dic configure-roi config/example.yaml
+```
+
+如果你想使用视频中的特定帧作为配置底图，可以额外指定：
+
+```bash
+swim-dic configure-roi config/example.yaml --frame-index 10
+```
+
+这个配置器至少包含以下关键功能：
+
+- 单帧可视化预览，优先使用实验视频帧，避免盲填像素坐标
+- ROI 与多个 `reference_regions` 的分色叠加显示，降低配错风险
+- 鼠标直接拖拽移动和缩放矩形框，适合快速微调
+- 支持连续添加、删除、清空参考区，便于尝试不同整体运动校正方案
+- 实时显示 ROI 坐标、参考区数量与当前选中对象信息，便于核查
+- 一键保存回 YAML，保持分析流程仍然使用现有 `dic.roi` 和 `reference_regions` 字段
+
+窗口操作说明：
+
+- 鼠标拖动矩形内部可移动当前 ROI 或参考区
+- 拖动白色控制点可缩放当前矩形
+- 按 `A` 新增参考区，按 `TAB` 在 ROI 与参考区之间切换选中对象
+- 按 `R` 选中 ROI
+- 按 `D` 或 `Delete` 删除当前选中的参考区
+- 按 `C` 清空所有参考区
+- 按 `I/J/K/L` 微调当前选中区域的位置
+- 按 `Shift+I/J/K/L` 微调当前选中区域的尺寸
+- 按 `S` 或回车保存配置并写回 YAML
+- 按 `Q` 或 `ESC` 退出且不保存
+
+### 4. 仅录制视频
 
 ```bash
 swim-dic capture config/example.yaml --duration 2.0
 ```
 
-### 4. 分析已录制视频
+### 5. 分析已录制视频
 
 ```bash
 swim-dic analyze config/example.yaml
 ```
 
-### 5. 一步完成录制与分析
+### 6. 一步完成录制与分析
 
 ```bash
 swim-dic run config/example.yaml --duration 2.0
