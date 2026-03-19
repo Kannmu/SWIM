@@ -19,7 +19,7 @@ class ReferenceRegion(BaseModel):
 class CameraConfig(BaseModel):
     camera_index: int = 0
     width: int = 1280
-    height: int = 800
+    height: int = 720
     fps: float = 60
     exposure_us: float | None = None
     gain: float | None = None
@@ -53,6 +53,10 @@ class DICConfig(BaseModel):
     use_global_motion_correction: bool = True
     use_common_mode_subtraction: bool = True
     median_reference_frame_count: int = Field(default=21, ge=3)
+    enable_gpu: bool = True
+    gpu_backend: Literal["auto", "cupy"] = "auto"
+    gpu_batch_size: int = Field(default=8, ge=1)
+    numba_parallel: bool = True
 
     @model_validator(mode="after")
     def validate_sizes(self) -> "DICConfig":

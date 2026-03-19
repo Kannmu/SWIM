@@ -12,10 +12,10 @@
 
 - `dic/config.py`：配置模型与 YAML 加载
 - `dic/capture.py`：视频录制与元数据保存
-- `dic/preprocess.py`：CLAHE、空间带通、全局 ECC 配准、参考区运动估计、公共模态抑制
-- `dic/dic_core.py`：网格化局部相关与亚像素位移估计
-- `dic/analysis.py`：位移场统计、应变估计、中心轨迹、波幅剖面分析
-- `dic/visualization.py`：热图、剖面、中心轨迹、矢量场、叠加视频输出
+- `dic/preprocess.py`：去畸变、CLAHE、空间带通、全局 ECC 配准、参考区运动估计、公共模态抑制
+- `dic/dic_core.py`：网格化局部相关、GPU/CPU 加速、亚像素位移估计与运行诊断
+- `dic/analysis.py`：位移场统计、动态剪切应变、中心轨迹、XT 时空图与波前快照分析
+- `dic/visualization.py`：热图、剖面、中心轨迹、XT 图、波前快照、矢量场与叠加视频输出
 - `dic/cli.py`：命令行入口
 
 ## 安装
@@ -138,7 +138,7 @@ swim-dic calibrate config/example.yaml calibration_images --rows 9 --cols 12 --s
 - `calibration.mean_reprojection_error_px`
 - `calibration.pixel_size_std_um`
 
-其中最直接影响后续 DIC 定量分析的是 `analysis.pixel_size_um`。当前 `analysis.py` 会直接使用它把像素位移转换成微米位移，并进一步计算应变和波幅剖面。
+其中最直接影响后续 DIC 定量分析的是 `analysis.pixel_size_um`。当前 [`analysis.py`](Codes/Stroboscopic 2D DIC/dic/analysis.py) 会直接使用它把像素位移转换成微米位移，并进一步计算应变和波幅剖面。现在只要 `calibration.enabled: true` 且配置中存在 `camera_matrix` 与 `distortion_coefficients`，[`preprocess.py`](Codes/Stroboscopic 2D DIC/dic/preprocess.py) 会在进入 ROI 与 DIC 之前自动执行逐帧去畸变。
 
 ### 3. 仅录制视频
 
@@ -204,6 +204,23 @@ swim-dic run config/example.yaml --duration 2.0
 - 简单应变场估计，用于追踪局部剪切与拉伸模式
 - 原视频叠加的位移箭头场，便于直观核验 DIC 是否工作正常
 
+当前版本另外新增：
+
+- `reference_regions_overlay.png`：把参考区直接标在参考帧上，避免参考区配置错位
+- `xt_displacement.png`：沿主传播轴的位移时空图，用于观察慢动作表面波条纹
+- `xt_strain_xy.png`：沿主传播轴的剪切应变时空图，更适合看 SWIM 的传播方向与相位连续性
+- `wavefront_displacement_snapshots.png`：单个慢时间周期内若干关键相位的位移场快照
+- `wavefront_strain_xy_snapshots.png`：单个慢时间周期内若干关键相位的剪切应变场快照
+- `strain_overlay.mp4`：将动态剪切应变场叠加到原始视频上的补充视频版本
+- `runtime_diagnostics.csv`：记录网格点数、总匹配次数、GPU 是否实际启用、batch size 等耗时评估信息
+
+如果你的目标是比较 SWIM 的五种激励方式，这一组新增输出比单纯的振幅热图更有判别力，因为它们能直接显示：
+
+- 波前是否连续单向推进
+- 是否存在明显的传播斜率
+- 是否存在方向翻转后的结构重置
+- 剪切应变是否集中在传播前沿而不是仅仅停留在局部幅值热点
+
 ## 示例配置
 
 ```yaml
@@ -240,6 +257,10 @@ dic:
   use_global_motion_correction: true
   use_common_mode_subtraction: true
   median_reference_frame_count: 21
+  enable_gpu: true
+  gpu_backend: auto
+  gpu_batch_size: 64
+  numba_parallel: true
 analysis:
   expected_wave_frequency_hz: 200.0
   equivalent_slow_frequency_hz: 1.0
@@ -287,6 +308,56 @@ reference_regions:
     weight: 1.0
 notes: SWIM stroboscopic DIC measurement
 ```
+
+## 参考区域配置与使用
+
+`reference_regions` 是定义在原始相机图像坐标系中的矩形区域列表，而不是 ROI 内部坐标。也就是说，`dic.roi` 只负责告诉系统在哪里做 DIC 网格计算，而 `reference_regions` 负责告诉系统去哪里估计整只手的共同运动。
+
+推荐规则：
+
+- 参考区应放在与 ROI 相邻、同属手掌皮肤、但尽量不被超声焦点直接激励的位置
+- 尽量放两个或以上参考区，分布在 ROI 左右或上下两侧
+- 参考区内要有自然纹理，避免纯亮斑、反光区、阴影边缘
+- 不要把参考区画到背景或 ROI 内强响应区域上
+
+例如：
+
+```yaml
+reference_regions:
+  - name: ref_left
+    x: 40
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+  - name: ref_right
+    x: 980
+    y: 160
+    width: 80
+    height: 80
+    weight: 1.0
+```
+
+分析阶段的使用方式如下：
+
+1. [`preprocess.py`](Codes/Stroboscopic 2D DIC/dic/preprocess.py) 先对每帧追踪各个参考区位移。
+2. 然后按照 `reference_strategy` 聚合成整帧参考运动轨迹。
+3. [`dic_core.py`](Codes/Stroboscopic 2D DIC/dic/dic_core.py) 在每个网格点的局部位移估计完成后，会把该参考运动从 DIC 位移中扣除。
+4. [`analysis.py`](Codes/Stroboscopic 2D DIC/dic/analysis.py) 同时导出 `center_trace_ref_corrected.png`、`center_trace.csv` 与 `reference_regions_overlay.png`，用于检查参考区是否配置合理。
+
+如果你想临时关闭参考区校正，只需把 `dic.use_reference_region_correction` 设为 `false`。
+
+## 长耗时分析的日志与时间评估
+
+当前版本已经为 `swim-dic analyze` 增加了面向长任务的详细日志，重点包括：
+
+- 视频帧数、帧率、图像尺寸
+- DIC 网格维度、总网格点数、subset 大小、search window 大小
+- `total_matches`、每点候选搜索位置数、预计 FFT 细化次数
+- GPU 是否真正启用、后端名称、batch size、Numba 并行状态
+- 每帧完成时间、累计耗时、平均单帧耗时、剩余 ETA
+
+其中 `runtime_diagnostics.csv` 会把最关键的诊断量保存下来，便于你不同配置之间横向比较。这个文件特别适合回答：为什么某次分析很慢、GPU 是否真的被启用、网格密度是否过高。
 
 ## 当前实现边界
 

@@ -2,7 +2,7 @@ camera:
   camera_index: 0
   width: 1280
   height: 720
-  fps: 60
+  fps: 60.0
   exposure_us: null
   gain: null
   codec: mp4v
@@ -33,6 +33,10 @@ dic:
   use_global_motion_correction: true
   use_common_mode_subtraction: true
   median_reference_frame_count: 21
+  enable_gpu: true
+  gpu_backend: auto
+  gpu_batch_size: 8
+  numba_parallel: true
 analysis:
   expected_wave_frequency_hz: 200.0
   equivalent_slow_frequency_hz: 1.0
@@ -94,5 +98,17 @@ paths:
   frames_dir: data\frames
   output_dir: outputs
   metadata_json: data\raw\capture_metadata.json
-reference_regions: []
-notes: ''
+reference_regions:
+- name: ref_left
+  x: 40
+  y: 160
+  width: 80
+  height: 80
+  weight: 1.0
+- name: ref_right
+  x: 980
+  y: 160
+  width: 80
+  height: 80
+  weight: 1.0
+notes: SWIM stroboscopic DIC measurement
