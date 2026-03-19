@@ -11,3 +11,4 @@ Reference
 *.log
 .kilocode/
 .claude/
+*.pyc
