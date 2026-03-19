@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Literal
 
 import yaml
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, field_validator, field_validator
 
 
 class ReferenceRegion(BaseModel):
@@ -109,6 +109,20 @@ class PathsConfig(BaseModel):
     frames_dir: Path = Path("data/frames")
     output_dir: Path = Path("outputs")
     metadata_json: Path = Path("data/raw/capture_metadata.json")
+
+    @field_validator("project_root", "raw_video", "frames_dir", "output_dir", "metadata_json", mode="before")
+    @classmethod
+    def normalize_paths(cls, v):
+        if isinstance(v, str):
+            return v.replace("\\", "/")
+        return v
+
+    @field_validator("project_root", "raw_video", "frames_dir", "output_dir", "metadata_json", mode="before")
+    @classmethod
+    def normalize_paths(cls, v):
+        if isinstance(v, str):
+            return v.replace("\\", "/")
+        return v
 
 
 class ProjectConfig(BaseModel):

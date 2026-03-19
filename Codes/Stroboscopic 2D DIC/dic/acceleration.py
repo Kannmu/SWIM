@@ -361,19 +361,26 @@ def _phase_refine_single_gpu(template_gpu, target_gpu, upsample_factor: int = 8)
     corr = cp.fft.ifft2(cps)
     corr_abs = cp.abs(corr)
     peak = cp.unravel_index(cp.argmax(corr_abs), corr_abs.shape)
-    py = int(peak[0].item())
-    px = int(peak[1].item())
+    peak_y = int(peak[0].item())
+    peak_x = int(peak[1].item())
     h, w = corr_abs.shape
+    py = peak_y
+    px = peak_x
     if py > h // 2:
         py -= h
     if px > w // 2:
         px -= w
-    y0 = max(py - 1, 0)
-    y1 = min(py + 2, h)
-    x0 = max(px - 1, 0)
-    x1 = min(px + 2, w)
+    y0 = max(peak_y - 1, 0)
+    y1 = min(peak_y + 2, h)
+    x0 = max(peak_x - 1, 0)
+    x1 = min(peak_x + 2, w)
     patch = corr_abs[y0:y1, x0:x1]
-    zoomed = cupy_ndimage.zoom(patch, upsample_factor, order=3)
+    if patch.size == 0 or patch.shape[0] == 0 or patch.shape[1] == 0:
+        return cp.asarray([float(px), float(py)], dtype=cp.float32)
+    zoom_order = 3 if patch.shape[0] > 3 and patch.shape[1] > 3 else 1
+    zoomed = cupy_ndimage.zoom(patch, upsample_factor, order=zoom_order)
+    if zoomed.size == 0 or zoomed.shape[0] == 0 or zoomed.shape[1] == 0:
+        return cp.asarray([float(px), float(py)], dtype=cp.float32)
     peak_zoom = cp.unravel_index(cp.argmax(zoomed), zoomed.shape)
     sub_y = y0 + float(peak_zoom[0].item()) / upsample_factor
     sub_x = x0 + float(peak_zoom[1].item()) / upsample_factor
