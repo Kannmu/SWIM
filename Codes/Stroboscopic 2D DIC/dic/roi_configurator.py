@@ -2,31 +2,34 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
+import customtkinter as ctk
 import cv2
 import numpy as np
 import yaml
+from tkinter import messagebox
 
 from .config import ProjectConfig, ReferenceRegion, load_config
+from .gui_common import (
+    CTkImageCanvas,
+    ThemeColors,
+    draw_labeled_rect,
+    fit_rect_to_bounds,
+    hit_test_rect,
+    image_to_screen,
+    move_or_resize_rect,
+    resize_to_fit,
+    screen_to_image,
+    set_widget_text,
+)
 from .io_utils import load_video_gray
 
 
-_CONFIG_WINDOW_NAME = "SWIM ROI Configurator"
-_PANEL_WIDTH = 420
-_MAX_PREVIEW_WIDTH = 1400
-_STATUS_HEIGHT = 190
-_TEXT_COLOR = (235, 235, 235)
-_PANEL_BG = (26, 26, 26)
-_PANEL_ACCENT = (55, 145, 255)
-_ROI_COLOR = (0, 220, 0)
-_REF_COLOR = (255, 180, 0)
-_ACTIVE_COLOR = (0, 90, 255)
-_HOVER_COLOR = (255, 255, 255)
-_HANDLE_HALF_SIZE = 5
 _MIN_REGION_SIZE = 8
 _DEFAULT_REF_SIZE = 96
-_DOUBLE_CLICK_INTERVAL_MS = 350
+_PREVIEW_MAX_WIDTH = 1280
+_PREVIEW_MAX_HEIGHT = 860
+_THEME = ThemeColors()
 
 
 class ROIConfiguratorError(RuntimeError):
@@ -34,70 +37,10 @@ class ROIConfiguratorError(RuntimeError):
 
 
 @dataclass(slots=True)
-class RectRegion:
-    x: int
-    y: int
-    width: int
-    height: int
-
-    @property
-    def x1(self) -> int:
-        return self.x + self.width
-
-    @property
-    def y1(self) -> int:
-        return self.y + self.height
-
-    def normalized(self) -> "RectRegion":
-        x0 = min(self.x, self.x1)
-        y0 = min(self.y, self.y1)
-        x1 = max(self.x, self.x1)
-        y1 = max(self.y, self.y1)
-        return RectRegion(x=x0, y=y0, width=max(0, x1 - x0), height=max(0, y1 - y0))
-
-    def clip(self, image_width: int, image_height: int, min_size: int = _MIN_REGION_SIZE) -> "RectRegion":
-        rect = self.normalized()
-        x0 = int(np.clip(rect.x, 0, max(image_width - 1, 0)))
-        y0 = int(np.clip(rect.y, 0, max(image_height - 1, 0)))
-        x1 = int(np.clip(rect.x1, x0 + 1, image_width))
-        y1 = int(np.clip(rect.y1, y0 + 1, image_height))
-        if x1 - x0 < min_size:
-            x1 = min(image_width, x0 + min_size)
-            x0 = max(0, x1 - min_size)
-        if y1 - y0 < min_size:
-            y1 = min(image_height, y0 + min_size)
-            y0 = max(0, y1 - min_size)
-        return RectRegion(x=x0, y=y0, width=max(1, x1 - x0), height=max(1, y1 - y0))
-
-    def contains(self, px: int, py: int) -> bool:
-        rect = self.normalized()
-        return rect.x <= px <= rect.x1 and rect.y <= py <= rect.y1
-
-
-@dataclass(slots=True)
 class ReferenceRegionState:
     name: str
-    rect: RectRegion
+    rect: tuple[int, int, int, int]
     weight: float = 1.0
-
-
-@dataclass(slots=True)
-class ROISelectionState:
-    frame_bgr: np.ndarray
-    frame_gray: np.ndarray
-    display_scale: float
-    image_width: int
-    image_height: int
-    roi: RectRegion | None
-    references: list[ReferenceRegionState]
-    active_type: str
-    active_index: int
-    drag_mode: str | None
-    drag_anchor: tuple[int, int] | None
-    drag_start_rect: RectRegion | None
-    is_dirty: bool
-    last_click_time_ms: int
-    pending_single_click: bool
 
 
 @dataclass(slots=True)
@@ -115,27 +58,6 @@ class FramePreview:
     frame_gray: np.ndarray
     frame_source: str
     frame_index: int
-
-
-_HANDLE_KEYS = {
-    "tl",
-    "tr",
-    "bl",
-    "br",
-    "l",
-    "r",
-    "t",
-    "b",
-}
-
-
-def _resize_for_preview(frame: np.ndarray) -> tuple[np.ndarray, float]:
-    height, width = frame.shape[:2]
-    if width <= _MAX_PREVIEW_WIDTH:
-        return frame.copy(), 1.0
-    scale = _MAX_PREVIEW_WIDTH / float(width)
-    resized = cv2.resize(frame, (int(round(width * scale)), int(round(height * scale))), interpolation=cv2.INTER_AREA)
-    return resized, scale
 
 
 def _load_frame_preview(config: ProjectConfig, frame_index: int | None = None) -> FramePreview:
@@ -176,15 +98,10 @@ def _load_frame_preview(config: ProjectConfig, frame_index: int | None = None) -
     )
 
 
-def _clip_rect(rect: RectRegion, width: int, height: int) -> RectRegion:
-    return rect.clip(width, height, min_size=_MIN_REGION_SIZE)
-
-
-def _rect_from_tuple(values: tuple[int, int, int, int] | None) -> RectRegion | None:
+def _rect_from_tuple(values: tuple[int, int, int, int] | None) -> tuple[int, int, int, int] | None:
     if values is None:
         return None
-    x, y, w, h = values
-    return RectRegion(int(x), int(y), int(w), int(h)).normalized()
+    return fit_rect_to_bounds(tuple(int(v) for v in values), 100000, 100000, min_size=_MIN_REGION_SIZE)
 
 
 def _reference_states_from_config(config: ProjectConfig) -> list[ReferenceRegionState]:
@@ -193,22 +110,22 @@ def _reference_states_from_config(config: ProjectConfig) -> list[ReferenceRegion
         refs.append(
             ReferenceRegionState(
                 name=region.name,
-                rect=RectRegion(region.x, region.y, region.width, region.height).normalized(),
+                rect=(region.x, region.y, region.width, region.height),
                 weight=region.weight,
             )
         )
     return refs
 
 
-def _make_default_roi(image_width: int, image_height: int) -> RectRegion:
+def _make_default_roi(image_width: int, image_height: int) -> tuple[int, int, int, int]:
     width = max(_MIN_REGION_SIZE, int(round(image_width * 0.45)))
     height = max(_MIN_REGION_SIZE, int(round(image_height * 0.45)))
     x = max(0, (image_width - width) // 2)
     y = max(0, (image_height - height) // 2)
-    return RectRegion(x, y, width, height)
+    return x, y, width, height
 
 
-def _make_default_reference(image_width: int, image_height: int, count: int) -> RectRegion:
+def _make_default_reference(image_width: int, image_height: int, count: int) -> tuple[int, int, int, int]:
     size = min(_DEFAULT_REF_SIZE, max(_MIN_REGION_SIZE, min(image_width, image_height) // 5))
     margin = max(10, size // 3)
     columns = max(1, (image_width - margin) // max(size + margin, 1))
@@ -216,9 +133,7 @@ def _make_default_reference(image_width: int, image_height: int, count: int) -> 
     row = count // columns
     x = margin + col * (size + margin)
     y = margin + row * (size + margin)
-    x = min(max(0, x), max(0, image_width - size))
-    y = min(max(0, y), max(0, image_height - size))
-    return RectRegion(x, y, size, size)
+    return fit_rect_to_bounds((x, y, size, size), image_width, image_height, min_size=_MIN_REGION_SIZE)
 
 
 def _generate_reference_name(existing: list[ReferenceRegionState]) -> str:
@@ -231,307 +146,407 @@ def _generate_reference_name(existing: list[ReferenceRegionState]) -> str:
         index += 1
 
 
-def _image_to_screen(point: tuple[int, int], scale: float) -> tuple[int, int]:
-    return int(round(point[0] * scale)), int(round(point[1] * scale))
-
-
-def _screen_to_image(point: tuple[int, int], scale: float, image_width: int, image_height: int) -> tuple[int, int]:
-    inv = 1.0 / max(scale, 1e-6)
-    x = int(round(point[0] * inv))
-    y = int(round(point[1] * inv))
-    x = int(np.clip(x, 0, max(0, image_width - 1)))
-    y = int(np.clip(y, 0, max(0, image_height - 1)))
-    return x, y
-
-
-def _panel_x_offset(state: ROISelectionState) -> int:
-    return int(round(state.image_width * state.display_scale))
-
-
-def _rect_screen_bounds(rect: RectRegion, scale: float) -> tuple[int, int, int, int]:
-    x0, y0 = _image_to_screen((rect.x, rect.y), scale)
-    x1, y1 = _image_to_screen((rect.x1, rect.y1), scale)
-    return x0, y0, x1, y1
-
-
-def _handle_positions(rect: RectRegion) -> dict[str, tuple[int, int]]:
-    return {
-        "tl": (rect.x, rect.y),
-        "tr": (rect.x1, rect.y),
-        "bl": (rect.x, rect.y1),
-        "br": (rect.x1, rect.y1),
-        "l": (rect.x, rect.y + rect.height // 2),
-        "r": (rect.x1, rect.y + rect.height // 2),
-        "t": (rect.x + rect.width // 2, rect.y),
-        "b": (rect.x + rect.width // 2, rect.y1),
-    }
-
-
-def _hit_test_rect(rect: RectRegion, px: int, py: int, scale: float) -> str | None:
-    handle_radius = max(8, int(round(10 / max(scale, 1e-6))))
-    for key, (hx, hy) in _handle_positions(rect).items():
-        if abs(px - hx) <= handle_radius and abs(py - hy) <= handle_radius:
-            return key
-    if rect.contains(px, py):
-        return "move"
-    return None
-
-
-def _hit_test(state: ROISelectionState, px: int, py: int) -> tuple[str | None, int, str | None]:
-    if state.roi is not None:
-        roi_mode = _hit_test_rect(state.roi, px, py, state.display_scale)
-        if roi_mode is not None:
-            return "roi", -1, roi_mode
-    for idx in range(len(state.references) - 1, -1, -1):
-        mode = _hit_test_rect(state.references[idx].rect, px, py, state.display_scale)
-        if mode is not None:
-            return "ref", idx, mode
-    return None, -1, None
-
-
-def _set_active(state: ROISelectionState, active_type: str | None, active_index: int = -1) -> None:
-    state.active_type = active_type or "none"
-    state.active_index = active_index
-
-
-def _draw_handles(canvas: np.ndarray, rect: RectRegion, scale: float, color: tuple[int, int, int]) -> None:
-    for point in _handle_positions(rect).values():
-        sx, sy = _image_to_screen(point, scale)
-        cv2.rectangle(
-            canvas,
-            (sx - _HANDLE_HALF_SIZE, sy - _HANDLE_HALF_SIZE),
-            (sx + _HANDLE_HALF_SIZE, sy + _HANDLE_HALF_SIZE),
-            color,
-            -1,
-        )
-        cv2.rectangle(
-            canvas,
-            (sx - _HANDLE_HALF_SIZE, sy - _HANDLE_HALF_SIZE),
-            (sx + _HANDLE_HALF_SIZE, sy + _HANDLE_HALF_SIZE),
-            (0, 0, 0),
-            1,
-        )
-
-
-def _draw_region(
-    canvas: np.ndarray,
-    rect: RectRegion,
-    scale: float,
-    color: tuple[int, int, int],
-    label: str,
-    selected: bool,
+def _write_config_regions(
+    config_path: Path,
+    roi: tuple[int, int, int, int] | None,
+    references: list[ReferenceRegionState],
 ) -> None:
-    x0, y0, x1, y1 = _rect_screen_bounds(rect, scale)
-    overlay = canvas.copy()
-    cv2.rectangle(overlay, (x0, y0), (x1, y1), color, -1)
-    alpha = 0.18 if selected else 0.12
-    cv2.addWeighted(overlay, alpha, canvas, 1.0 - alpha, 0.0, canvas)
-    cv2.rectangle(canvas, (x0, y0), (x1, y1), color, 3 if selected else 2)
-    cv2.putText(canvas, label, (x0 + 6, max(20, y0 + 22)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 0), 4, cv2.LINE_AA)
-    cv2.putText(canvas, label, (x0 + 6, max(20, y0 + 22)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, color, 2, cv2.LINE_AA)
-    if selected:
-        _draw_handles(canvas, rect, scale, _HOVER_COLOR)
-
-
-def _draw_status_panel(canvas: np.ndarray, state: ROISelectionState, frame_source: str, frame_index: int) -> None:
-    image_screen_width = int(round(state.image_width * state.display_scale))
-    panel_left = image_screen_width
-    cv2.rectangle(canvas, (panel_left, 0), (canvas.shape[1], canvas.shape[0]), _PANEL_BG, -1)
-    cv2.line(canvas, (panel_left, 0), (panel_left, canvas.shape[0]), (70, 70, 70), 1)
-
-    lines = [
-        "Interactive ROI & Reference Configurator",
-        f"Frame source: {frame_source}",
-        f"Frame index: {frame_index}",
-        "",
-    ]
-    if state.roi is not None:
-        lines.append(f"ROI: x={state.roi.x}, y={state.roi.y}, w={state.roi.width}, h={state.roi.height}")
-    else:
-        lines.append("ROI: not set")
-    lines.append(f"Reference regions: {len(state.references)}")
-    if state.active_type == "ref" and 0 <= state.active_index < len(state.references):
-        ref = state.references[state.active_index]
-        lines.append(
-            f"Selected ref: {ref.name} x={ref.rect.x}, y={ref.rect.y}, w={ref.rect.width}, h={ref.rect.height}, weight={ref.weight:.2f}"
-        )
-    elif state.active_type == "roi" and state.roi is not None:
-        lines.append("Selected: ROI")
-    else:
-        lines.append("Selected: none")
-    lines.extend(
-        [
-            "",
-            "Mouse:",
-            "- Drag ROI/ref rectangle to move",
-            "- Drag white handles to resize",
-            "- Double click image blank area to create ROI if missing",
-            "",
-            "Keyboard:",
-            "- A: add reference region",
-            "- TAB: cycle selection",
-            "- R: select ROI",
-            "- D/Delete: delete selected reference",
-            "- C: clear all references",
-            "- I/K/J/L: nudge selected region",
-            "- Shift + I/K/J/L: resize selected region",
-            "- S/Enter: save to YAML",
-            "- Esc/Q: quit without saving",
-        ]
-    )
-    y = 32
-    for line in lines:
-        color = _PANEL_ACCENT if line.startswith("Interactive") else _TEXT_COLOR
-        cv2.putText(canvas, line, (panel_left + 16, y), cv2.FONT_HERSHEY_SIMPLEX, 0.57, (0, 0, 0), 3, cv2.LINE_AA)
-        cv2.putText(canvas, line, (panel_left + 16, y), cv2.FONT_HERSHEY_SIMPLEX, 0.57, color, 1, cv2.LINE_AA)
-        y += 24
-
-    dirty_text = "Modified" if state.is_dirty else "Synced"
-    dirty_color = (0, 210, 255) if state.is_dirty else (0, 220, 0)
-    footer_y = canvas.shape[0] - 24
-    cv2.putText(canvas, dirty_text, (panel_left + 16, footer_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3, cv2.LINE_AA)
-    cv2.putText(canvas, dirty_text, (panel_left + 16, footer_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, dirty_color, 2, cv2.LINE_AA)
-
-
-def _render_configurator(state: ROISelectionState, frame_source: str, frame_index: int) -> np.ndarray:
-    preview, _ = _resize_for_preview(state.frame_bgr)
-    canvas = np.zeros((preview.shape[0], preview.shape[1] + _PANEL_WIDTH, 3), dtype=np.uint8)
-    canvas[:, : preview.shape[1]] = preview
-    if state.roi is not None:
-        _draw_region(canvas, state.roi, state.display_scale, _ROI_COLOR, "ROI", state.active_type == "roi")
-    for idx, ref in enumerate(state.references):
-        selected = state.active_type == "ref" and idx == state.active_index
-        _draw_region(canvas, ref.rect, state.display_scale, _REF_COLOR if not selected else _ACTIVE_COLOR, ref.name, selected)
-    _draw_status_panel(canvas, state, frame_source, frame_index)
-    return canvas
-
-
-def _apply_drag(rect: RectRegion, drag_mode: str, start_rect: RectRegion, start_point: tuple[int, int], point: tuple[int, int]) -> RectRegion:
-    dx = point[0] - start_point[0]
-    dy = point[1] - start_point[1]
-    x0 = start_rect.x
-    y0 = start_rect.y
-    x1 = start_rect.x1
-    y1 = start_rect.y1
-
-    if drag_mode == "move":
-        return RectRegion(x0 + dx, y0 + dy, start_rect.width, start_rect.height)
-    if drag_mode == "tl":
-        return RectRegion(x0 + dx, y0 + dy, x1 - (x0 + dx), y1 - (y0 + dy))
-    if drag_mode == "tr":
-        return RectRegion(x0, y0 + dy, (x1 + dx) - x0, y1 - (y0 + dy))
-    if drag_mode == "bl":
-        return RectRegion(x0 + dx, y0, x1 - (x0 + dx), (y1 + dy) - y0)
-    if drag_mode == "br":
-        return RectRegion(x0, y0, (x1 + dx) - x0, (y1 + dy) - y0)
-    if drag_mode == "l":
-        return RectRegion(x0 + dx, y0, x1 - (x0 + dx), start_rect.height)
-    if drag_mode == "r":
-        return RectRegion(x0, y0, (x1 + dx) - x0, start_rect.height)
-    if drag_mode == "t":
-        return RectRegion(x0, y0 + dy, start_rect.width, y1 - (y0 + dy))
-    if drag_mode == "b":
-        return RectRegion(x0, y0, start_rect.width, (y1 + dy) - y0)
-    return start_rect
-
-
-def _selected_rect(state: ROISelectionState) -> RectRegion | None:
-    if state.active_type == "roi":
-        return state.roi
-    if state.active_type == "ref" and 0 <= state.active_index < len(state.references):
-        return state.references[state.active_index].rect
-    return None
-
-
-def _set_selected_rect(state: ROISelectionState, rect: RectRegion) -> None:
-    clipped = _clip_rect(rect, state.image_width, state.image_height)
-    if state.active_type == "roi":
-        state.roi = clipped
-        state.is_dirty = True
-        return
-    if state.active_type == "ref" and 0 <= state.active_index < len(state.references):
-        state.references[state.active_index].rect = clipped
-        state.is_dirty = True
-
-
-def _cycle_selection(state: ROISelectionState) -> None:
-    order: list[tuple[str, int]] = []
-    if state.roi is not None:
-        order.append(("roi", -1))
-    order.extend(("ref", idx) for idx in range(len(state.references)))
-    if not order:
-        _set_active(state, None, -1)
-        return
-    current = (state.active_type, state.active_index)
-    if current not in order:
-        _set_active(state, order[0][0], order[0][1])
-        return
-    idx = (order.index(current) + 1) % len(order)
-    _set_active(state, order[idx][0], order[idx][1])
-
-
-def _add_reference_region(state: ROISelectionState) -> None:
-    name = _generate_reference_name(state.references)
-    rect = _make_default_reference(state.image_width, state.image_height, len(state.references))
-    state.references.append(ReferenceRegionState(name=name, rect=rect, weight=1.0))
-    _set_active(state, "ref", len(state.references) - 1)
-    state.is_dirty = True
-
-
-def _delete_selected_reference(state: ROISelectionState) -> None:
-    if state.active_type != "ref" or not (0 <= state.active_index < len(state.references)):
-        return
-    del state.references[state.active_index]
-    if state.references:
-        next_index = min(state.active_index, len(state.references) - 1)
-        _set_active(state, "ref", next_index)
-    elif state.roi is not None:
-        _set_active(state, "roi", -1)
-    else:
-        _set_active(state, None, -1)
-    state.is_dirty = True
-
-
-def _clear_references(state: ROISelectionState) -> None:
-    if not state.references:
-        return
-    state.references.clear()
-    if state.roi is not None:
-        _set_active(state, "roi", -1)
-    else:
-        _set_active(state, None, -1)
-    state.is_dirty = True
-
-
-def _nudge_selected(state: ROISelectionState, dx: int, dy: int, resize: bool) -> None:
-    rect = _selected_rect(state)
-    if rect is None:
-        return
-    if resize:
-        updated = RectRegion(rect.x, rect.y, rect.width + dx, rect.height + dy)
-    else:
-        updated = RectRegion(rect.x + dx, rect.y + dy, rect.width, rect.height)
-    _set_selected_rect(state, updated)
-
-
-def _write_config_regions(config_path: Path, state: ROISelectionState) -> None:
-    if state.roi is None:
+    if roi is None:
         raise ROIConfiguratorError("保存前必须先定义 ROI")
     payload = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     payload.setdefault("dic", {})
-    payload["dic"]["roi"] = [int(state.roi.x), int(state.roi.y), int(state.roi.width), int(state.roi.height)]
+    payload["dic"]["roi"] = [int(v) for v in roi]
     payload["reference_regions"] = [
         {
             "name": ref.name,
-            "x": int(ref.rect.x),
-            "y": int(ref.rect.y),
-            "width": int(ref.rect.width),
-            "height": int(ref.rect.height),
+            "x": int(ref.rect[0]),
+            "y": int(ref.rect[1]),
+            "width": int(ref.rect[2]),
+            "height": int(ref.rect[3]),
             "weight": float(ref.weight),
         }
-        for ref in state.references
+        for ref in references
     ]
     config_path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=True), encoding="utf-8")
+
+
+class ROIConfiguratorApp(ctk.CTk):
+    def __init__(self, config_path: Path, preview: FramePreview, config: ProjectConfig):
+        super().__init__()
+        self.config_path = config_path
+        self.preview = preview
+        self.image_height, self.image_width = preview.frame_bgr.shape[:2]
+        self.display_frame, self.display_scale = resize_to_fit(preview.frame_bgr, _PREVIEW_MAX_WIDTH, _PREVIEW_MAX_HEIGHT)
+        self.preview_height, self.preview_width = self.display_frame.shape[:2]
+
+        self.roi = _rect_from_tuple(config.dic.roi) or _make_default_roi(self.image_width, self.image_height)
+        self.references = _reference_states_from_config(config)
+        self.active_type = "roi"
+        self.active_index = -1
+        self.drag_mode: str | None = None
+        self.drag_start_point: tuple[int, int] | None = None
+        self.drag_start_rect: tuple[int, int, int, int] | None = None
+        self.is_dirty = False
+        self.saved = False
+        self.result: ROIConfiguratorResult | None = None
+
+        self.title("SWIM ROI Configurator")
+        self.geometry(f"{self.preview_width + 430}x{max(self.preview_height + 80, 860)}")
+        self.minsize(1180, 820)
+        self.configure(fg_color=_THEME.background)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=0)
+        self.grid_rowconfigure(0, weight=1)
+
+        self.bind("<Escape>", lambda _event: self.cancel())
+        self.bind("<KeyPress-q>", lambda _event: self.cancel())
+        self.bind("<KeyPress-Q>", lambda _event: self.cancel())
+        self.bind("<KeyPress-s>", lambda _event: self.save())
+        self.bind("<Return>", lambda _event: self.save())
+        self.bind("<Tab>", self._on_tab_key)
+        self.bind("<KeyPress-a>", lambda _event: self.add_reference())
+        self.bind("<KeyPress-A>", lambda _event: self.add_reference())
+        self.bind("<KeyPress-r>", lambda _event: self.select_roi())
+        self.bind("<KeyPress-R>", lambda _event: self.select_roi())
+        self.bind("<KeyPress-c>", lambda _event: self.clear_references())
+        self.bind("<KeyPress-C>", lambda _event: self.clear_references())
+        self.bind("<Delete>", lambda _event: self.delete_selected_reference())
+        self.bind("<BackSpace>", lambda _event: self.delete_selected_reference())
+        self.bind("<KeyPress-d>", lambda _event: self.delete_selected_reference())
+        self.bind("<KeyPress-D>", lambda _event: self.delete_selected_reference())
+        self.bind("<KeyPress-i>", lambda _event: self.nudge_selected(0, -1, False))
+        self.bind("<KeyPress-k>", lambda _event: self.nudge_selected(0, 1, False))
+        self.bind("<KeyPress-j>", lambda _event: self.nudge_selected(-1, 0, False))
+        self.bind("<KeyPress-l>", lambda _event: self.nudge_selected(1, 0, False))
+        self.bind("<KeyPress-I>", lambda _event: self.nudge_selected(0, -1, True))
+        self.bind("<KeyPress-K>", lambda _event: self.nudge_selected(0, 1, True))
+        self.bind("<KeyPress-J>", lambda _event: self.nudge_selected(-1, 0, True))
+        self.bind("<KeyPress-L>", lambda _event: self.nudge_selected(1, 0, True))
+
+        self._build_layout()
+        self.refresh_view()
+
+    def _build_layout(self) -> None:
+        viewer_card = ctk.CTkFrame(self, corner_radius=18, fg_color=_THEME.surface, border_width=1, border_color=_THEME.border)
+        viewer_card.grid(row=0, column=0, sticky="nsew", padx=(18, 10), pady=18)
+        viewer_card.grid_rowconfigure(1, weight=1)
+        viewer_card.grid_columnconfigure(0, weight=1)
+
+        header = ctk.CTkFrame(viewer_card, fg_color="transparent")
+        header.grid(row=0, column=0, sticky="ew", padx=18, pady=(16, 10))
+        header.grid_columnconfigure(0, weight=1)
+
+        ctk.CTkLabel(
+            header,
+            text="ROI 与参考区域配置器",
+            font=ctk.CTkFont(size=22, weight="bold"),
+            text_color=_THEME.text,
+        ).grid(row=0, column=0, sticky="w")
+        ctk.CTkLabel(
+            header,
+            text="拖拽矩形或控制点完成交互式配置，并直接写回 YAML",
+            font=ctk.CTkFont(size=13),
+            text_color=_THEME.muted_text,
+        ).grid(row=1, column=0, sticky="w", pady=(4, 0))
+
+        self.canvas = CTkImageCanvas(viewer_card, width=self.preview_width, height=self.preview_height, drag_callback=self._handle_canvas_event)
+        self.canvas.grid(row=1, column=0, sticky="nsew", padx=18, pady=(0, 18))
+
+        side = ctk.CTkFrame(self, width=390, corner_radius=18, fg_color=_THEME.panel, border_width=1, border_color=_THEME.border)
+        side.grid(row=0, column=1, sticky="ns", padx=(10, 18), pady=18)
+        side.grid_propagate(False)
+
+        ctk.CTkLabel(side, text="控制面板", font=ctk.CTkFont(size=20, weight="bold"), text_color=_THEME.text).pack(anchor="w", padx=18, pady=(18, 6))
+        ctk.CTkLabel(side, text="适用于拍摄预览图、ROI 选区与 reference_regions 配置", font=ctk.CTkFont(size=12), text_color=_THEME.muted_text, justify="left").pack(anchor="w", padx=18)
+
+        meta_card = ctk.CTkFrame(side, corner_radius=14, fg_color=_THEME.surface_alt)
+        meta_card.pack(fill="x", padx=18, pady=(16, 12))
+        self.meta_label = ctk.CTkLabel(meta_card, text="", justify="left", anchor="w", font=ctk.CTkFont(size=13), text_color=_THEME.text)
+        self.meta_label.pack(fill="x", padx=14, pady=14)
+
+        action_row = ctk.CTkFrame(side, fg_color="transparent")
+        action_row.pack(fill="x", padx=18, pady=(0, 12))
+        action_row.grid_columnconfigure((0, 1), weight=1)
+        ctk.CTkButton(action_row, text="新增参考区 (A)", command=self.add_reference, fg_color=_THEME.accent, hover_color=_THEME.accent_hover).grid(row=0, column=0, padx=(0, 6), sticky="ew")
+        ctk.CTkButton(action_row, text="选择 ROI (R)", command=self.select_roi, fg_color="#16a34a", hover_color="#15803d").grid(row=0, column=1, padx=(6, 0), sticky="ew")
+
+        action_row2 = ctk.CTkFrame(side, fg_color="transparent")
+        action_row2.pack(fill="x", padx=18, pady=(0, 12))
+        action_row2.grid_columnconfigure((0, 1), weight=1)
+        ctk.CTkButton(action_row2, text="删除选中参考区", command=self.delete_selected_reference, fg_color="#dc2626", hover_color="#b91c1c").grid(row=0, column=0, padx=(0, 6), sticky="ew")
+        ctk.CTkButton(action_row2, text="清空参考区 (C)", command=self.clear_references, fg_color="#f59e0b", hover_color="#d97706").grid(row=0, column=1, padx=(6, 0), sticky="ew")
+
+        refs_card = ctk.CTkFrame(side, corner_radius=14, fg_color=_THEME.surface_alt)
+        refs_card.pack(fill="both", expand=True, padx=18, pady=(0, 12))
+        ctk.CTkLabel(refs_card, text="参考区列表", font=ctk.CTkFont(size=16, weight="bold"), text_color=_THEME.text).pack(anchor="w", padx=14, pady=(12, 6))
+        self.refs_text = ctk.CTkTextbox(refs_card, height=220, font=ctk.CTkFont(family="Consolas", size=12), activate_scrollbars=True)
+        self.refs_text.pack(fill="both", expand=True, padx=14, pady=(0, 14))
+        self.refs_text.configure(state="disabled")
+
+        help_card = ctk.CTkFrame(side, corner_radius=14, fg_color=_THEME.surface_alt)
+        help_card.pack(fill="x", padx=18, pady=(0, 12))
+        ctk.CTkLabel(help_card, text="操作说明", font=ctk.CTkFont(size=16, weight="bold"), text_color=_THEME.text).pack(anchor="w", padx=14, pady=(12, 6))
+        self.help_text = ctk.CTkTextbox(help_card, height=180, font=ctk.CTkFont(size=12), activate_scrollbars=True)
+        self.help_text.pack(fill="x", padx=14, pady=(0, 14))
+        set_widget_text(
+            self.help_text,
+            "鼠标：\n"
+            "- 拖动 ROI 或参考区内部可移动\n"
+            "- 拖动白色控制点可缩放\n"
+            "- 双击空白区域可在该位置快速生成 ROI\n\n"
+            "键盘：\n"
+            "- A 新增参考区，Tab 轮换选中对象\n"
+            "- R 选中 ROI\n"
+            "- D/Delete 删除当前参考区\n"
+            "- C 清空所有参考区\n"
+            "- I/J/K/L 微调位置\n"
+            "- Shift+I/J/K/L 微调尺寸\n"
+            "- S 或 Enter 保存，Q 或 Esc 取消"
+        )
+
+        footer = ctk.CTkFrame(side, fg_color="transparent")
+        footer.pack(fill="x", padx=18, pady=(0, 18))
+        footer.grid_columnconfigure((0, 1), weight=1)
+        self.status_label = ctk.CTkLabel(footer, text="状态：已同步", text_color=_THEME.success, anchor="w")
+        self.status_label.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 10))
+        ctk.CTkButton(footer, text="取消", command=self.cancel, fg_color="transparent", border_width=1, border_color=_THEME.border, hover_color="#1e293b").grid(row=1, column=0, padx=(0, 6), sticky="ew")
+        ctk.CTkButton(footer, text="保存到 YAML", command=self.save, fg_color=_THEME.accent, hover_color=_THEME.accent_hover).grid(row=1, column=1, padx=(6, 0), sticky="ew")
+
+    def _on_tab_key(self, _event) -> str:
+        self.cycle_selection()
+        return "break"
+
+    def _selected_rect(self) -> tuple[int, int, int, int] | None:
+        if self.active_type == "roi":
+            return self.roi
+        if self.active_type == "ref" and 0 <= self.active_index < len(self.references):
+            return self.references[self.active_index].rect
+        return None
+
+    def _set_selected_rect(self, rect: tuple[int, int, int, int]) -> None:
+        clipped = fit_rect_to_bounds(rect, self.image_width, self.image_height, min_size=_MIN_REGION_SIZE)
+        if self.active_type == "roi":
+            self.roi = clipped
+        elif self.active_type == "ref" and 0 <= self.active_index < len(self.references):
+            self.references[self.active_index].rect = clipped
+        else:
+            return
+        self.mark_dirty()
+        self.refresh_view()
+
+    def _render_frame(self) -> np.ndarray:
+        frame = self.display_frame.copy()
+        if self.roi is not None:
+            draw_labeled_rect(
+                frame,
+                self.roi,
+                self.display_scale,
+                (34, 197, 94),
+                "ROI",
+                self.active_type == "roi",
+            )
+        for idx, ref in enumerate(self.references):
+            selected = self.active_type == "ref" and idx == self.active_index
+            color = (96, 165, 250) if selected else (245, 158, 11)
+            draw_labeled_rect(frame, ref.rect, self.display_scale, color, ref.name, selected)
+        return frame
+
+    def refresh_view(self) -> None:
+        self.canvas.set_image(self._render_frame())
+        selected_text = "none"
+        if self.active_type == "roi" and self.roi is not None:
+            x, y, width, height = self.roi
+            selected_text = f"ROI ({x}, {y}, {width}, {height})"
+        elif self.active_type == "ref" and 0 <= self.active_index < len(self.references):
+            ref = self.references[self.active_index]
+            x, y, width, height = ref.rect
+            selected_text = f"{ref.name} ({x}, {y}, {width}, {height})"
+
+        roi_text = "未设置"
+        if self.roi is not None:
+            roi_text = f"x={self.roi[0]}, y={self.roi[1]}, w={self.roi[2]}, h={self.roi[3]}"
+        self.meta_label.configure(
+            text=(
+                f"预览源：{self.preview.frame_source}\n"
+                f"帧序号：{self.preview.frame_index}\n"
+                f"原始尺寸：{self.image_width} × {self.image_height}\n"
+                f"显示缩放：{self.display_scale:.3f}\n"
+                f"ROI：{roi_text}\n"
+                f"参考区数量：{len(self.references)}\n"
+                f"当前选中：{selected_text}"
+            )
+        )
+
+        if not self.references:
+            refs_text = "暂无参考区。点击“新增参考区”或按 A 键创建。"
+        else:
+            lines = []
+            for idx, ref in enumerate(self.references, start=1):
+                x, y, width, height = ref.rect
+                prefix = "* " if self.active_type == "ref" and self.active_index == idx - 1 else "  "
+                lines.append(
+                    f"{prefix}{idx:02d}. {ref.name:<10} x={x:<4d} y={y:<4d} w={width:<4d} h={height:<4d} weight={ref.weight:.2f}"
+                )
+            refs_text = "\n".join(lines)
+        set_widget_text(self.refs_text, refs_text)
+        self.status_label.configure(
+            text="状态：已修改" if self.is_dirty else "状态：已同步",
+            text_color=_THEME.warning if self.is_dirty else _THEME.success,
+        )
+
+    def mark_dirty(self) -> None:
+        self.is_dirty = True
+
+    def cycle_selection(self) -> None:
+        order: list[tuple[str, int]] = []
+        if self.roi is not None:
+            order.append(("roi", -1))
+        order.extend(("ref", idx) for idx in range(len(self.references)))
+        if not order:
+            self.active_type = "none"
+            self.active_index = -1
+            self.refresh_view()
+            return
+        current = (self.active_type, self.active_index)
+        if current not in order:
+            self.active_type, self.active_index = order[0]
+        else:
+            next_idx = (order.index(current) + 1) % len(order)
+            self.active_type, self.active_index = order[next_idx]
+        self.refresh_view()
+
+    def select_roi(self) -> None:
+        if self.roi is None:
+            self.roi = _make_default_roi(self.image_width, self.image_height)
+            self.mark_dirty()
+        self.active_type = "roi"
+        self.active_index = -1
+        self.refresh_view()
+
+    def add_reference(self) -> None:
+        name = _generate_reference_name(self.references)
+        rect = _make_default_reference(self.image_width, self.image_height, len(self.references))
+        self.references.append(ReferenceRegionState(name=name, rect=rect, weight=1.0))
+        self.active_type = "ref"
+        self.active_index = len(self.references) - 1
+        self.mark_dirty()
+        self.refresh_view()
+
+    def delete_selected_reference(self) -> None:
+        if self.active_type != "ref" or not (0 <= self.active_index < len(self.references)):
+            return
+        del self.references[self.active_index]
+        if self.references:
+            self.active_index = min(self.active_index, len(self.references) - 1)
+            self.active_type = "ref"
+        else:
+            self.active_type = "roi" if self.roi is not None else "none"
+            self.active_index = -1
+        self.mark_dirty()
+        self.refresh_view()
+
+    def clear_references(self) -> None:
+        if not self.references:
+            return
+        self.references.clear()
+        self.active_type = "roi" if self.roi is not None else "none"
+        self.active_index = -1
+        self.mark_dirty()
+        self.refresh_view()
+
+    def nudge_selected(self, dx: int, dy: int, resize: bool) -> None:
+        rect = self._selected_rect()
+        if rect is None:
+            return
+        x, y, width, height = rect
+        updated = (x, y, width + dx, height + dy) if resize else (x + dx, y + dy, width, height)
+        self._set_selected_rect(updated)
+
+    def _handle_canvas_event(self, action: str, sx: int, sy: int) -> None:
+        point = screen_to_image((sx, sy), self.display_scale, self.image_width, self.image_height)
+        if action == "double":
+            self.roi = fit_rect_to_bounds((point[0] - 80, point[1] - 80, 160, 160), self.image_width, self.image_height, min_size=_MIN_REGION_SIZE)
+            self.active_type = "roi"
+            self.active_index = -1
+            self.mark_dirty()
+            self.refresh_view()
+            return
+
+        if action == "press":
+            if self.roi is not None:
+                mode = hit_test_rect(self.roi, point, self.display_scale)
+                if mode is not None:
+                    self.active_type = "roi"
+                    self.active_index = -1
+                    self.drag_mode = mode
+                    self.drag_start_point = point
+                    self.drag_start_rect = self.roi
+                    self.refresh_view()
+                    return
+            for idx in range(len(self.references) - 1, -1, -1):
+                mode = hit_test_rect(self.references[idx].rect, point, self.display_scale)
+                if mode is not None:
+                    self.active_type = "ref"
+                    self.active_index = idx
+                    self.drag_mode = mode
+                    self.drag_start_point = point
+                    self.drag_start_rect = self.references[idx].rect
+                    self.refresh_view()
+                    return
+            self.active_type = "none"
+            self.active_index = -1
+            self.refresh_view()
+            return
+
+        if action == "move":
+            if self.drag_mode is None or self.drag_start_point is None or self.drag_start_rect is None:
+                return
+            updated = move_or_resize_rect(self.drag_start_rect, self.drag_mode, self.drag_start_point, point)
+            self._set_selected_rect(updated)
+            return
+
+        if action == "release":
+            self.drag_mode = None
+            self.drag_start_point = None
+            self.drag_start_rect = None
+
+    def cancel(self) -> None:
+        if self.is_dirty:
+            if not messagebox.askyesno("取消配置", "当前修改尚未保存，确定要退出吗？", parent=self):
+                return
+        self.destroy()
+
+    def save(self) -> None:
+        if self.roi is None:
+            messagebox.showerror("无法保存", "必须先定义 ROI。", parent=self)
+            return
+        try:
+            _write_config_regions(self.config_path, self.roi, self.references)
+        except Exception as exc:
+            messagebox.showerror("保存失败", str(exc), parent=self)
+            return
+
+        reference_regions = [
+            ReferenceRegion(
+                name=ref.name,
+                x=ref.rect[0],
+                y=ref.rect[1],
+                width=ref.rect[2],
+                height=ref.rect[3],
+                weight=ref.weight,
+            )
+            for ref in self.references
+        ]
+        self.result = ROIConfiguratorResult(
+            frame_source=self.preview.frame_source,
+            frame_index=self.preview.frame_index,
+            roi=self.roi,
+            reference_regions=reference_regions,
+            config_path=self.config_path,
+        )
+        self.saved = True
+        self.is_dirty = False
+        self.destroy()
 
 
 def configure_roi_interactively(
@@ -541,146 +556,8 @@ def configure_roi_interactively(
     path = Path(config_path)
     config = load_config(path)
     preview = _load_frame_preview(config, frame_index=frame_index)
-    preview_resized, scale = _resize_for_preview(preview.frame_bgr)
-    image_height, image_width = preview.frame_gray.shape[:2]
-
-    state = ROISelectionState(
-        frame_bgr=preview.frame_bgr,
-        frame_gray=preview.frame_gray,
-        display_scale=scale,
-        image_width=image_width,
-        image_height=image_height,
-        roi=_rect_from_tuple(config.dic.roi) or _make_default_roi(image_width, image_height),
-        references=_reference_states_from_config(config),
-        active_type="roi",
-        active_index=-1,
-        drag_mode=None,
-        drag_anchor=None,
-        drag_start_rect=None,
-        is_dirty=False,
-        last_click_time_ms=0,
-        pending_single_click=False,
-    )
-    if state.references and config.dic.roi is None:
-        _set_active(state, "ref", 0)
-
-    def on_mouse(event: int, x: int, y: int, flags: int, *_: Any) -> None:
-        nonlocal state
-        image_screen_width = preview_resized.shape[1]
-        if x >= image_screen_width or y >= preview_resized.shape[0]:
-            return
-        image_point = _screen_to_image((x, y), state.display_scale, state.image_width, state.image_height)
-
-        if event == cv2.EVENT_LBUTTONDOWN:
-            active_type, active_index, drag_mode = _hit_test(state, image_point[0], image_point[1])
-            now_ms = cv2.getTickCount() * 1000 // cv2.getTickFrequency()
-            is_double_click = (now_ms - state.last_click_time_ms) <= _DOUBLE_CLICK_INTERVAL_MS
-            state.last_click_time_ms = int(now_ms)
-            if active_type is None:
-                if is_double_click:
-                    state.roi = _clip_rect(
-                        RectRegion(image_point[0] - 80, image_point[1] - 80, 160, 160),
-                        state.image_width,
-                        state.image_height,
-                    )
-                    _set_active(state, "roi", -1)
-                    state.is_dirty = True
-                else:
-                    _set_active(state, None, -1)
-                return
-            _set_active(state, active_type, active_index)
-            state.drag_mode = drag_mode
-            state.drag_anchor = image_point
-            state.drag_start_rect = _selected_rect(state)
-            return
-
-        if event == cv2.EVENT_MOUSEMOVE and (flags & cv2.EVENT_FLAG_LBUTTON):
-            if state.drag_mode is None or state.drag_anchor is None or state.drag_start_rect is None:
-                return
-            updated = _apply_drag(state.drag_start_rect, state.drag_mode, state.drag_start_rect, state.drag_anchor, image_point)
-            _set_selected_rect(state, updated)
-            return
-
-        if event == cv2.EVENT_LBUTTONUP:
-            state.drag_mode = None
-            state.drag_anchor = None
-            state.drag_start_rect = None
-
-    cv2.namedWindow(_CONFIG_WINDOW_NAME, cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
-    cv2.resizeWindow(_CONFIG_WINDOW_NAME, min(preview_resized.shape[1] + _PANEL_WIDTH, 1800), min(preview_resized.shape[0] + 80, 1100))
-    cv2.setMouseCallback(_CONFIG_WINDOW_NAME, on_mouse)
-
-    saved = False
-    try:
-        while True:
-            canvas = _render_configurator(state, preview.frame_source, preview.frame_index)
-            cv2.imshow(_CONFIG_WINDOW_NAME, canvas)
-            key = cv2.waitKey(20) & 0xFF
-            if key in (27, ord("q")):
-                break
-            if key in (13, ord("s")):
-                _write_config_regions(path, state)
-                state.is_dirty = False
-                saved = True
-                break
-            if key == ord("a"):
-                _add_reference_region(state)
-                continue
-            if key == 9:
-                _cycle_selection(state)
-                continue
-            if key == ord("r"):
-                if state.roi is None:
-                    state.roi = _make_default_roi(state.image_width, state.image_height)
-                    state.is_dirty = True
-                _set_active(state, "roi", -1)
-                continue
-            if key in (ord("d"), 127):
-                _delete_selected_reference(state)
-                continue
-            if key == ord("c"):
-                _clear_references(state)
-                continue
-            if key == ord("j"):
-                _nudge_selected(state, dx=-1, dy=0, resize=False)
-                continue
-            if key == ord("l"):
-                _nudge_selected(state, dx=1, dy=0, resize=False)
-                continue
-            if key == ord("i"):
-                _nudge_selected(state, dx=0, dy=-1, resize=False)
-                continue
-            if key == ord("k"):
-                _nudge_selected(state, dx=0, dy=1, resize=False)
-                continue
-            if key == ord("J"):
-                _nudge_selected(state, dx=-1, dy=0, resize=True)
-                continue
-            if key == ord("L"):
-                _nudge_selected(state, dx=1, dy=0, resize=True)
-                continue
-            if key == ord("I"):
-                _nudge_selected(state, dx=0, dy=-1, resize=True)
-                continue
-            if key == ord("K"):
-                _nudge_selected(state, dx=0, dy=1, resize=True)
-                continue
-        if not saved:
-            raise ROIConfiguratorError("用户取消了 ROI/reference_regions 配置，未写入 YAML")
-    finally:
-        cv2.destroyAllWindows()
-
-    if state.roi is None:
-        raise ROIConfiguratorError("未定义 ROI，无法生成配置结果")
-
-    references = [
-        ReferenceRegion(name=ref.name, x=ref.rect.x, y=ref.rect.y, width=ref.rect.width, height=ref.rect.height, weight=ref.weight)
-        for ref in state.references
-    ]
-    return ROIConfiguratorResult(
-        frame_source=preview.frame_source,
-        frame_index=preview.frame_index,
-        roi=(state.roi.x, state.roi.y, state.roi.width, state.roi.height),
-        reference_regions=references,
-        config_path=path,
-    )
+    app = ROIConfiguratorApp(path, preview, config)
+    app.mainloop()
+    if not app.saved or app.result is None:
+        raise ROIConfiguratorError("用户取消了 ROI/reference_regions 配置，未写入 YAML")
+    return app.result

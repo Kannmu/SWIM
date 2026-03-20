@@ -16,10 +16,10 @@ strobe:
   led_color: green
 dic:
   roi:
-  - 214
-  - 109
-  - 286
-  - 236
+  - 191
+  - 105
+  - 248
+  - 231
   subset_size_px: 31
   step_size_px: 8
   search_radius_px: 12
@@ -104,15 +104,21 @@ paths:
   metadata_json: data\raw\v1_capture_metadata.json
 reference_regions:
 - name: ref_left
-  x: 76
-  y: 112
+  x: 61
+  y: 105
   width: 80
-  height: 80
+  height: 228
   weight: 1.0
 - name: ref_right
-  x: 77
-  y: 264
+  x: 494
+  y: 114
   width: 80
-  height: 80
+  height: 222
+  weight: 1.0
+- name: ref_1
+  x: 59
+  y: 366
+  width: 517
+  height: 74
   weight: 1.0
 notes: ''

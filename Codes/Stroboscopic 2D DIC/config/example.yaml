@@ -40,7 +40,7 @@ dic:
 analysis:
   expected_wave_frequency_hz: 200.0
   equivalent_slow_frequency_hz: 1.0
-  pixel_size_um: 236.497907
+  pixel_size_um: 447.835166
   beat_cycles_to_analyze: 1
   smoothing_sigma_frames: 1.0
   export_video_overlays: true
@@ -55,43 +55,43 @@ calibration:
     inner_corners_cols: 11
     square_size_mm: 15.0
   camera_matrix:
-  - - 1255.3751862176646
+  - - 679.7194792328959
     - 0.0
-    - 629.8806501382776
+    - 296.2355110036843
   - - 0.0
-    - 1257.7951757108563
-    - 365.8961748784831
+    - 681.4446748463132
+    - 256.2501192651559
   - - 0.0
     - 0.0
     - 1.0
   distortion_coefficients:
-  - 0.07133669459638901
-  - 0.31229292421730176
-  - -0.0033032967258656894
-  - 0.0029141500735999637
-  - -1.997418627497621
+  - -0.061953298216769113
+  - 0.10511273827832045
+  - 0.00093006265478916
+  - 0.0014111976385801142
+  - -0.06852836766002478
   optimal_camera_matrix:
-  - - 1219.576785021852
+  - - 671.2473777025167
     - 0.0
-    - 630.8444080771218
+    - 296.89882684881087
   - - 0.0
-    - 1222.7681068224178
-    - 363.9227198556126
+    - 672.7588746123178
+    - 256.68363308679915
   - - 0.0
     - 0.0
     - 1.0
   roi:
-  - 20
-  - 14
-  - 1236
-  - 690
+  - 1
+  - 2
+  - 637
+  - 476
   image_size:
-  - 1280
-  - 720
-  mean_reprojection_error_px: 0.379873
-  rms_reprojection_error_px: 0.389768
-  pixel_size_um: 236.497907
-  pixel_size_std_um: 23.662107
+  - 640
+  - 480
+  mean_reprojection_error_px: 0.157167
+  rms_reprojection_error_px: 0.159115
+  pixel_size_um: 447.835166
+  pixel_size_std_um: 33.637122
 paths:
   project_root: .
   raw_video: data\raw\capture.mp4

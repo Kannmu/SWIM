@@ -3,6 +3,8 @@ from .config import AnalysisConfig, CalibrationConfig, CameraConfig, DICConfig, 
 from .pipeline import run_analysis_pipeline
 from .roi_configurator import configure_roi_interactively
 
+__version__ = "0.1.0"
+
 __all__ = [
     "AnalysisConfig",
     "CalibrationConfig",
