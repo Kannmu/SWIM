@@ -109,10 +109,4 @@ reference_regions:
   width: 155
   height: 156
   weight: 1.0
-- name: ref_right
-  x: 980
-  y: 160
-  width: 80
-  height: 80
-  weight: 1.0
 notes: SWIM stroboscopic DIC measurement
