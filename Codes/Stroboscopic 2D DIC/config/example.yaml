@@ -3,7 +3,8 @@ camera:
   width: 1280
   height: 720
   fps: 60.0
-  exposure_us: null
+  disable_auto_exposure: true
+  exposure_us: 15500.0
   gain: null
   codec: mp4v
   color: true
@@ -44,6 +45,8 @@ dic:
 analysis:
   expected_wave_frequency_hz: 200.0
   equivalent_slow_frequency_hz: 1.0
+  pure_bright_video_fps: 49.75
+  export_pure_bright_video: true
   pixel_size_um: 447.835166
   beat_cycles_to_analyze: 1
   smoothing_sigma_frames: 1.0
@@ -99,6 +102,7 @@ calibration:
 paths:
   project_root: .
   raw_video: data\raw\capture.mp4
+  bright_video: data\derived\bright_only.mp4
   frames_dir: data\frames
   output_dir: outputs
   metadata_json: data\raw\capture_metadata.json

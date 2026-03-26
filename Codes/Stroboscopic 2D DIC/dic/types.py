@@ -22,6 +22,9 @@ class CaptureMetadata:
     pulse_width_us: float
     notes: str
     video_path: Path
+    bright_video_path: Path | None = None
+    bright_frame_count: int | None = None
+    bright_video_fps: float | None = None
 
 
 @dataclass(slots=True)

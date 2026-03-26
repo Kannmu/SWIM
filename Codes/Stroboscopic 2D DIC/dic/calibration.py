@@ -333,6 +333,8 @@ def _configure_camera(cap: cv2.VideoCapture, config: ProjectConfig) -> None:
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_cfg.height)
     cap.set(cv2.CAP_PROP_FPS, camera_cfg.fps)
     cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+    if camera_cfg.disable_auto_exposure:
+        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
     if camera_cfg.exposure_us is not None:
         cap.set(cv2.CAP_PROP_EXPOSURE, float(camera_cfg.exposure_us))
     if camera_cfg.gain is not None:

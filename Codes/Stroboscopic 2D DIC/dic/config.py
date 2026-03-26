@@ -21,6 +21,7 @@ class CameraConfig(BaseModel):
     width: int = 1280
     height: int = 720
     fps: float = 60
+    disable_auto_exposure: bool = True
     exposure_us: float | None = None
     gain: float | None = None
     codec: str = "mp4v"
@@ -73,6 +74,8 @@ class DICConfig(BaseModel):
 class AnalysisConfig(BaseModel):
     expected_wave_frequency_hz: float = 200.0
     equivalent_slow_frequency_hz: float = 1.0
+    pure_bright_video_fps: float | None = None
+    export_pure_bright_video: bool = True
     pixel_size_um: float = Field(default=10.0, gt=0)
     beat_cycles_to_analyze: int = Field(default=1, ge=1)
     smoothing_sigma_frames: float = Field(default=1.0, ge=0.0)
@@ -106,18 +109,19 @@ class CalibrationConfig(BaseModel):
 class PathsConfig(BaseModel):
     project_root: Path = Path(".")
     raw_video: Path = Path("data/raw/capture.mp4")
+    bright_video: Path = Path("data/derived/bright_only.mp4")
     frames_dir: Path = Path("data/frames")
     output_dir: Path = Path("outputs")
     metadata_json: Path = Path("data/raw/capture_metadata.json")
 
-    @field_validator("project_root", "raw_video", "frames_dir", "output_dir", "metadata_json", mode="before")
+    @field_validator("project_root", "raw_video", "bright_video", "frames_dir", "output_dir", "metadata_json", mode="before")
     @classmethod
     def normalize_paths(cls, v):
         if isinstance(v, str):
             return v.replace("\\", "/")
         return v
 
-    @field_validator("project_root", "raw_video", "frames_dir", "output_dir", "metadata_json", mode="before")
+    @field_validator("project_root", "raw_video", "bright_video", "frames_dir", "output_dir", "metadata_json", mode="before")
     @classmethod
     def normalize_paths(cls, v):
         if isinstance(v, str):
@@ -139,7 +143,7 @@ class ProjectConfig(BaseModel):
         base = config_path.parent if config_path else Path.cwd()
         if not self.paths.project_root.is_absolute():
             self.paths.project_root = (base / self.paths.project_root).resolve()
-        for attr in ["raw_video", "frames_dir", "output_dir", "metadata_json"]:
+        for attr in ["raw_video", "bright_video", "frames_dir", "output_dir", "metadata_json"]:
             value = getattr(self.paths, attr)
             if not value.is_absolute():
                 setattr(self.paths, attr, (self.paths.project_root / value).resolve())

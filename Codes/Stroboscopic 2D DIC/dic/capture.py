@@ -29,6 +29,8 @@ class VideoCaptureSession:
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, camera_cfg.width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_cfg.height)
         cap.set(cv2.CAP_PROP_FPS, camera_cfg.fps)
+        if camera_cfg.disable_auto_exposure:
+            cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
         if camera_cfg.exposure_us is not None:
             cap.set(cv2.CAP_PROP_EXPOSURE, float(camera_cfg.exposure_us))
         if camera_cfg.gain is not None:
@@ -74,6 +76,9 @@ class VideoCaptureSession:
             pulse_width_us=strobe_cfg.pulse_width_us,
             notes=self.config.notes,
             video_path=video_path,
+            bright_video_path=None,
+            bright_frame_count=None,
+            bright_video_fps=None,
         )
         save_metadata(metadata, self.config.paths.metadata_json)
         return metadata

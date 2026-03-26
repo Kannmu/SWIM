@@ -40,9 +40,11 @@ swim-dic init-config config/example.yaml
 请至少检查：
 
 - `camera.fps` 是否与实际相机输出一致，当前默认 `60`
+- `camera.disable_auto_exposure` 建议保持 `true`，并将 `camera.exposure_us` 设为接近单帧时长上限的手动曝光值，例如 `15500`
 - `strobe.wave_frequency_hz = 200.0`
 - `strobe.strobe_frequency_hz = 49.75`
 - `strobe.pulse_width_us = 10.0`
+- `analysis.pure_bright_video_fps` 建议设为 `49.75`，让亮帧拼接后的视频时间轴与闪光频率一致
 - `analysis.pixel_size_um` 是否匹配你的光学倍率标定
 - `dic.roi` 与 `reference_regions` 是否准确覆盖兴趣区与非兴趣参考区
 
@@ -192,6 +194,8 @@ swim-dic capture config/example.yaml --duration 2.0
 swim-dic analyze config/example.yaml
 ```
 
+执行分析时，当前版本会先自动读取 `paths.raw_video` 指向的原始 60 Hz 视频，基于逐帧平均亮度自动筛选亮帧，拼接并写出 `paths.bright_video` 指向的纯亮视频，然后再将这个纯亮视频对应的帧序列送入后续去畸变、ROI、DIC、分析和可视化流程。默认情况下，纯亮视频帧率取 `analysis.pure_bright_video_fps`；若未显式设置，则回退到 `strobe.strobe_frequency_hz`。
+
 ### 6. 一步完成录制与分析
 
 ```bash
@@ -269,7 +273,8 @@ camera:
   width: 1280
   height: 800
   fps: 49.75
-  exposure_us: null
+  disable_auto_exposure: true
+  exposure_us: 15500.0
   gain: null
   codec: mp4v
   color: true
@@ -304,6 +309,8 @@ dic:
 analysis:
   expected_wave_frequency_hz: 200.0
   equivalent_slow_frequency_hz: 1.0
+  pure_bright_video_fps: 49.75
+  export_pure_bright_video: true
   pixel_size_um: 10.0
   beat_cycles_to_analyze: 1
   smoothing_sigma_frames: 1.0
@@ -330,6 +337,7 @@ calibration:
 paths:
   project_root: .
   raw_video: data/raw/capture.mp4
+  bright_video: data/derived/bright_only.mp4
   frames_dir: data/frames
   output_dir: outputs
   metadata_json: data/raw/capture_metadata.json

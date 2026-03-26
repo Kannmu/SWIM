@@ -45,6 +45,23 @@ def load_video_gray(video_path: Path) -> FrameSequence:
     return FrameSequence(frames=array, fps=float(fps), timestamps_s=timestamps)
 
 
+def save_gray_video(frames: np.ndarray, path: Path, fps: float, codec: str = "mp4v") -> None:
+    if frames.ndim != 3:
+        raise ValueError("保存视频要求 frames 形状为 (n, h, w)")
+    if frames.shape[0] == 0:
+        raise ValueError("保存视频失败：没有可写入的帧")
+    ensure_parent(path)
+    height, width = int(frames.shape[1]), int(frames.shape[2])
+    writer = cv2.VideoWriter(str(path), cv2.VideoWriter_fourcc(*codec), float(fps), (width, height), False)
+    if not writer.isOpened():
+        raise RuntimeError(f"无法写入视频文件: {path}")
+    try:
+        for frame in frames:
+            writer.write(np.clip(frame, 0, 255).astype(np.uint8))
+    finally:
+        writer.release()
+
+
 def save_frames_png(sequence: FrameSequence, frames_dir: Path) -> None:
     frames_dir.mkdir(parents=True, exist_ok=True)
     for idx, frame in enumerate(sequence.frames):
