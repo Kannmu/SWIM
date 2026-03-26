@@ -44,12 +44,12 @@ def _apply_warp(frame: np.ndarray, warp: np.ndarray) -> np.ndarray:
     )
 
 
-def _clip_region_to_shape(region: ReferenceRegion, shape: tuple[int, int]) -> tuple[int, int, int, int]:
+def _clip_region_to_shape(x: int, y: int, width: int, height: int, shape: tuple[int, int]) -> tuple[int, int, int, int]:
     h, w = shape
-    x0 = int(np.clip(region.x, 0, max(0, w - 1)))
-    y0 = int(np.clip(region.y, 0, max(0, h - 1)))
-    x1 = int(np.clip(region.x + region.width, x0 + 1, w))
-    y1 = int(np.clip(region.y + region.height, y0 + 1, h))
+    x0 = int(np.clip(x, 0, max(0, w - 1)))
+    y0 = int(np.clip(y, 0, max(0, h - 1)))
+    x1 = int(np.clip(x + width, x0 + 1, w))
+    y1 = int(np.clip(y + height, y0 + 1, h))
     return x0, y0, x1 - x0, y1 - y0
 
 
@@ -61,15 +61,10 @@ def _region_mean_motion(frames: np.ndarray, regions: list[ReferenceRegion], roi_
     ref = frames[0]
     offset_x, offset_y = roi_offset_xy
     for region in regions:
-        local_region = ReferenceRegion(
-            name=region.name,
-            x=region.x - offset_x,
-            y=region.y - offset_y,
-            width=region.width,
-            height=region.height,
-            weight=region.weight,
-        )
-        x, y, w, h = _clip_region_to_shape(local_region, ref.shape)
+        local_x = region.x - offset_x
+        local_y = region.y - offset_y
+        
+        x, y, w, h = _clip_region_to_shape(local_x, local_y, region.width, region.height, ref.shape)
         tpl = ref[y:y + h, x:x + w]
         center = np.array([x + 0.5 * w, y + 0.5 * h], dtype=np.float32)
         track = []
