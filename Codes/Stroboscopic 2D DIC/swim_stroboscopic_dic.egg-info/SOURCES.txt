@@ -8,9 +8,11 @@ pyproject.toml
 ./dic/cli.py
 ./dic/config.py
 ./dic/dic_core.py
+./dic/gui_common.py
 ./dic/io_utils.py
 ./dic/pipeline.py
 ./dic/preprocess.py
+./dic/roi_configurator.py
 ./dic/types.py
 ./dic/visualization.py
 dic/__init__.py
@@ -21,9 +23,11 @@ dic/capture.py
 dic/cli.py
 dic/config.py
 dic/dic_core.py
+dic/gui_common.py
 dic/io_utils.py
 dic/pipeline.py
 dic/preprocess.py
+dic/roi_configurator.py
 dic/types.py
 dic/visualization.py
 swim_stroboscopic_dic.egg-info/PKG-INFO

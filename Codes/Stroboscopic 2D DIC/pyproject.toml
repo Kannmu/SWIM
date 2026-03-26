@@ -24,7 +24,7 @@ dependencies = [
   "pandas>=2.1",
   "tqdm>=4.66",
   "numba>=0.59",
-  "cupy>=13.0",
+  #"cupy>=13.0",
 
 ]
 

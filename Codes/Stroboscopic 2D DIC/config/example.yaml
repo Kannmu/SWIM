@@ -15,7 +15,11 @@ strobe:
   pulse_width_us: 10.0
   led_color: green
 dic:
-  roi: null
+  roi:
+  - 449
+  - 165
+  - 390
+  - 374
   subset_size_px: 31
   step_size_px: 8
   search_radius_px: 12
@@ -100,10 +104,10 @@ paths:
   metadata_json: data\raw\capture_metadata.json
 reference_regions:
 - name: ref_left
-  x: 40
-  y: 160
-  width: 80
-  height: 80
+  x: 97
+  y: 260
+  width: 155
+  height: 156
   weight: 1.0
 - name: ref_right
   x: 980
